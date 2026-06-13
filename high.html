@@ -130,6 +130,12 @@ li{margin-bottom:4px;}
 .discuss-num{font-size:.78rem;font-weight:700;color:var(--purple);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px;}
 .discuss-q{font-size:.97rem;font-weight:700;margin-bottom:8px;}
 .discuss-hint{font-size:.85rem;color:var(--muted);line-height:1.6;}
+.ref-group{margin-bottom:22px;}
+.ref-group-title{font-size:.78rem;font-weight:700;color:var(--primary);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--primary-xlight);}
+.ref-item{font-size:.875rem;line-height:1.75;padding:7px 0;border-bottom:1px solid #f0f0f0;display:flex;gap:8px;}
+.ref-item:last-child{border-bottom:none;}
+.ref-num{font-weight:800;color:var(--primary);min-width:22px;display:inline-block;flex-shrink:0;}
+.ref-warning{background:var(--gold-light);border:1px solid var(--gold);border-radius:var(--radius);padding:14px 18px;font-size:.85rem;color:#6b4c1a;margin-top:20px;line-height:1.6;}
 
 /* ── Quiz ── */
 .quiz-wrap{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;}
@@ -180,6 +186,7 @@ footer a{color:rgba(255,255,255,.9);}
     <a href="#s10" onclick="setActive(this)">주요 학자</a>
     <a href="#s11" onclick="setActive(this)">용어 사전</a>
     <a href="#s12" onclick="setActive(this)">토론 논제</a>
+    <a href="#s13" onclick="setActive(this)">레퍼런스</a>
     <a href="#quiz" onclick="setActive(this)">심화 퀴즈</a>
   </div>
 </nav>
@@ -1008,6 +1015,68 @@ footer a{color:rgba(255,255,255,.9);}
     <div class="discuss-num">논제 06</div>
     <div class="discuss-q">Imago Dei의 기능적 해석(왕적 대리)은 생태 위기 시대에 어떤 윤리적 함의를 가지는가?</div>
     <div class="discuss-hint">힌트: '다스림'(창 1:28)을 착취로 읽을 것인가, 청지기직으로 읽을 것인가? 기후 변화, 생태 보전 문제와 연결하여 논하세요.</div>
+  </div>
+</section>
+
+<!-- ══════════════ S13 레퍼런스 ══════════════ -->
+<section id="s13">
+  <div class="section-title">📎 학술 레퍼런스</div>
+  <div class="section-subtitle">이 자료에서 참고한 주요 문헌</div>
+
+  <div class="ref-group">
+    <div class="ref-group-title">창세기 해석 &amp; 고대근동</div>
+    <div class="ref-item"><span class="ref-num">1.</span> Walton, John H. <em>The Lost World of Genesis One: Ancient Cosmology and the Origins Debate</em>. Downers Grove: IVP Academic, 2009. [창세기 1장을 물질적 기원이 아닌 기능적 기원 서술로 읽는 획기적 연구. EC와 무오성 논의의 필독서.]</div>
+    <div class="ref-item"><span class="ref-num">2.</span> Wenham, Gordon J. <em>Genesis 1–15</em>. Word Biblical Commentary 1. Waco: Word Books, 1987. [창세기 주석의 표준 학술 문헌. 히브리어 원문 분석과 고대근동 문맥 포함.]</div>
+    <div class="ref-item"><span class="ref-num">3.</span> Augustine of Hippo. <em>The Literal Meaning of Genesis</em> (<em>De Genesi ad Litteram</em>). Trans. John Hammond Taylor. 2 vols. Ancient Christian Writers 41–42. New York: Newman Press, 1982. [과학과 성경이 충돌할 때 문자적 해석을 고집하지 말라는 아우구스티누스의 경고.]</div>
+    <div class="ref-item"><span class="ref-num">4.</span> Calvin, John. <em>Commentary on the First Book of Moses Called Genesis</em>. Trans. John King. Grand Rapids: Baker Books, 2003. [창세기 1장 주석에서 조절 원리(accommodation)를 적용한 고전적 예시.]</div>
+  </div>
+
+  <div class="ref-group">
+    <div class="ref-group-title">진화적 창조 &amp; 신학적 통합</div>
+    <div class="ref-item"><span class="ref-num">5.</span> Lamoureux, Denis O. <em>Evolutionary Creation: A Christian Approach to Evolution</em>. Eugene, OR: Wipf &amp; Stock, 2008. [진화적 창조론(EC)이라는 용어를 체계화한 신학자-생물학자의 핵심 저작.]</div>
+    <div class="ref-item"><span class="ref-num">6.</span> Collins, Francis S. <em>The Language of God: A Scientist Presents Evidence for Belief</em>. New York: Free Press, 2006. [인간 게놈 프로젝트를 이끈 과학자의 신앙 여정. BioLogos 설립의 계기가 된 책.]</div>
+    <div class="ref-item"><span class="ref-num">7.</span> Giberson, Karl W., and Francis S. Collins. <em>The Language of Science and Faith: Straight Answers to Genuine Questions</em>. Downers Grove: IVP Books, 2011. [신앙과 과학의 충돌에 대한 일반 독자용 Q&amp;A 형식의 응답집.]</div>
+    <div class="ref-item"><span class="ref-num">8.</span> Stump, J. B., ed. <em>Four Views on Creation, Evolution, and Intelligent Design</em>. Grand Rapids: Zondervan, 2017. [젊은 지구 창조론·날-시대론·ID·EC 네 입장의 대표 학자들이 직접 논쟁하는 형식.]</div>
+  </div>
+
+  <div class="ref-group">
+    <div class="ref-group-title">아담과 하와 &amp; 인구유전학</div>
+    <div class="ref-item"><span class="ref-num">9.</span> Enns, Peter. <em>The Evolution of Adam: What the Bible Does and Doesn't Say about Human Origins</em>. Grand Rapids: Brazos Press, 2012. [인구유전학 데이터를 신학적으로 어떻게 수용할지 탐구. 보수 진영에서 논쟁적 반응을 이끈 저작.]</div>
+    <div class="ref-item"><span class="ref-num">10.</span> Swamidass, S. Joshua. <em>The Genealogical Adam and Eve: The Surprising Science of Universal Ancestry</em>. Downers Grove: IVP Academic, 2019. [계보적 아담 모델을 제안. 6,000년 전 아담과 현대 인구유전학의 양립 가능성을 논증.]</div>
+  </div>
+
+  <div class="ref-group">
+    <div class="ref-group-title">Imago Dei</div>
+    <div class="ref-item"><span class="ref-num">11.</span> Middleton, J. Richard. <em>The Liberating Image: The Imago Dei in Genesis 1</em>. Grand Rapids: Brazos Press, 2005. [Imago Dei의 왕적-기능적 해석을 고대근동 문헌을 통해 체계적으로 논증.]</div>
+    <div class="ref-item"><span class="ref-num">12.</span> Wright, N. T. <em>Surprised by Scripture: Engaging Contemporary Issues</em>. New York: HarperOne, 2014. [진화와 인간 고유성을 포함한 현대 문제들에 대한 성경신학적 응답.]</div>
+  </div>
+
+  <div class="ref-group">
+    <div class="ref-group-title">창조과학 역사 비판</div>
+    <div class="ref-item"><span class="ref-num">13.</span> Numbers, Ronald L. <em>The Creationists: From Scientific Creationism to Intelligent Design</em>. Expanded ed. Cambridge: Harvard University Press, 2006. [창조과학 운동의 역사적 기원과 발전을 세속 역사학자가 추적한 권위 있는 연구.]</div>
+    <div class="ref-item"><span class="ref-num">14.</span> Numbers, Ronald L., ed. <em>Galileo Goes to Jail and Other Myths about Science and Religion</em>. Cambridge: Harvard University Press, 2009. [드레이퍼-화이트 갈등론 테제를 포함한 25가지 신화를 역사학자들이 반박.]</div>
+  </div>
+
+  <div class="ref-group">
+    <div class="ref-group-title">과학-종교 관계 모델</div>
+    <div class="ref-item"><span class="ref-num">15.</span> Barbour, Ian G. <em>When Science Meets Religion: Enemies, Strangers, or Partners?</em> San Francisco: HarperSanFrancisco, 2000. [바버의 네 가지 과학-종교 관계 모델(갈등·독립·대화·통합)의 대중서 요약.]</div>
+    <div class="ref-item"><span class="ref-num">16.</span> Polkinghorne, John. <em>Science and Theology: An Introduction</em>. Minneapolis: Fortress Press, 1998. [물리학자이자 성공회 사제인 폴킹혼의 과학-신학 입문서. 케노시스 신학 포함.]</div>
+    <div class="ref-item"><span class="ref-num">17.</span> Gould, Stephen Jay. <em>Rocks of Ages: Science and Religion in the Fullness of Life</em>. New York: Ballantine Books, 1999. [NOMA(Non-Overlapping Magisteria) 이론을 제안한 고생물학자의 독립 모델 주장.]</div>
+    <div class="ref-item"><span class="ref-num">18.</span> McGrath, Alister E. <em>Science and Religion: A New Introduction</em>. 2nd ed. Oxford: Wiley-Blackwell, 2010. [과학-종교 관계의 역사·철학·신학을 포괄하는 표준 입문 교재.]</div>
+  </div>
+
+  <div class="ref-group">
+    <div class="ref-group-title">죽음과 고통 — 신정론</div>
+    <div class="ref-item"><span class="ref-num">19.</span> van Inwagen, Peter. "The Problem of Evil, the Problem of Air, and the Problem of Silence." <em>Philosophical Perspectives</em> 5 (1991): 135–165. [자유의지 변신론과 자연악 문제를 철학적으로 정밀하게 다룬 논문.]</div>
+  </div>
+
+  <div class="ref-group">
+    <div class="ref-group-title">온라인 자료</div>
+    <div class="ref-item"><span class="ref-num">20.</span> BioLogos Foundation. <em>biologos.org</em>. [EC를 지지하는 신학자·과학자들의 아티클·영상·Q&amp;A 아카이브. 성경 해석, 인구유전학, 아담 모델 등 다수 수록.]</div>
+  </div>
+
+  <div class="ref-warning">
+    <strong>⚠️ 레퍼런스 사용 안내:</strong> 모든 서지사항은 직접 확인된 출판물입니다. 논문·발표 작성 시 해당 판본의 쪽수를 직접 확인하시기 바랍니다. 고전 문헌(아우구스티누스, 칼빈)은 영어 번역본 기준으로 표기했습니다.
   </div>
 </section>
 
