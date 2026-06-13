@@ -75,8 +75,9 @@
   .accordion .acc-body { padding: 16px 18px; border-top: 1px solid var(--border); background: #fafafa; font-size: .93rem; }
 
   /* TABS */
-  .tab-bar { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 16px; }
-  .tab-btn { padding: 8px 18px; border: 2px solid var(--border); border-radius: 20px; background: var(--card); font-size: .85rem; font-weight: 600; cursor: pointer; color: var(--muted); transition: all .2s; }
+  .tab-bar { display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 16px; padding-bottom: 4px; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn { padding: 8px 16px; border: 2px solid var(--border); border-radius: 20px; background: var(--card); font-size: .85rem; font-weight: 600; cursor: pointer; color: var(--muted); transition: all .2s; white-space: nowrap; flex-shrink: 0; }
   .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
@@ -121,13 +122,14 @@
   .debate-for h4 { color: var(--primary); font-size: .88rem; margin-bottom: 8px; }
 
   /* FLIP CARD */
-  .flip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin: 12px 0; }
-  .flip-card { height: 140px; cursor: pointer; perspective: 1000px; }
+  .flip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin: 12px 0; }
+  .flip-card { height: 190px; cursor: pointer; perspective: 1000px; }
   .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform .5s; transform-style: preserve-3d; }
   .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
-  .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; text-align: center; padding: 14px; font-size: .88rem; }
-  .flip-front { background: var(--primary); color: #fff; font-weight: 700; }
-  .flip-back { background: var(--primary-xlight); color: var(--text); transform: rotateY(180deg); border: 2px solid var(--primary-light); }
+  .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: var(--radius); display: flex; flex-direction: column; justify-content: center; padding: 18px 16px; font-size: .88rem; overflow: hidden; }
+  .flip-front { background: var(--primary); color: #fff; font-weight: 700; align-items: center; text-align: center; }
+  .flip-front::after { content: '↩ 탭해서 확인'; font-size: .72rem; opacity: .7; font-weight: 400; margin-top: 8px; }
+  .flip-back { background: var(--primary-xlight); color: var(--text); transform: rotateY(180deg); border: 2px solid var(--primary-light); align-items: flex-start; text-align: left; line-height: 1.6; }
 
   /* PROGRESS BAR */
   .progress-section { background: var(--card); border-radius: var(--radius); padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 16px; }
@@ -148,6 +150,23 @@
   .emoji-big { font-size: 2rem; display: block; margin-bottom: 8px; }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } header h1 { font-size: 1.5rem; } }
+  @media (max-width: 480px) {
+    header { padding: 28px 16px 24px; }
+    header h1 { font-size: 1.35rem; }
+    main { padding: 20px 14px 60px; }
+    section { margin-bottom: 40px; }
+    section h2 { font-size: 1.25rem; }
+    .card { padding: 16px; }
+    .highlight { padding: 12px 14px; }
+    .quiz-card { padding: 16px; }
+    .quiz-card .q-text { font-size: .95rem; }
+    .accordion summary { padding: 12px 14px; font-size: .9rem; }
+    .accordion .acc-body { padding: 12px 14px; }
+    .tab-btn { font-size: .8rem; padding: 7px 12px; }
+    .person-card { padding: 14px; }
+    .gloss-item { padding: 12px; }
+    .flip-card { height: 160px; }
+  }
   .mt { margin-top: 16px; }
   strong.tag { display: inline-block; background: var(--primary-xlight); color: var(--primary); border-radius: 4px; padding: 1px 7px; font-size: .8rem; margin-right: 4px; }
   .scripture { font-style: italic; color: var(--muted); font-size: .9rem; border-left: 3px solid var(--gold); padding-left: 12px; margin: 10px 0; }
