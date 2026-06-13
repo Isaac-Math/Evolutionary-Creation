@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>진화적 창조 — 중학생을 위한 인터랙티브 교육자료</title>
+<style>
+  :root {
+    --primary: #2d6a4f;
+    --primary-light: #52b788;
+    --primary-xlight: #d8f3dc;
+    --accent: #e76f51;
+    --accent-light: #fcd5c7;
+    --sky: #4895ef;
+    --sky-light: #cce5ff;
+    --gold: #f4a261;
+    --gold-light: #fde9d4;
+    --purple: #7b2d8b;
+    --purple-light: #e8d5ed;
+    --bg: #f9fafb;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --muted: #6c757d;
+    --border: #dee2e6;
+    --radius: 12px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+  /* HEADER */
+  header { background: linear-gradient(135deg, var(--primary) 0%, #1b4332 100%); color: #fff; padding: 48px 24px 36px; text-align: center; }
+  header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+  header p { opacity: .85; font-size: 1rem; }
+  .badge-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
+  .badge { background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3); border-radius: 20px; padding: 4px 14px; font-size: .8rem; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: var(--card); border-bottom: 1px solid var(--border); overflow-x: auto; white-space: nowrap; }
+  nav ul { list-style: none; display: flex; padding: 0 12px; }
+  nav ul li a { display: block; padding: 14px 16px; font-size: .85rem; font-weight: 600; color: var(--muted); text-decoration: none; border-bottom: 3px solid transparent; transition: all .2s; }
+  nav ul li a:hover, nav ul li a.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+  /* LAYOUT */
+  main { max-width: 860px; margin: 0 auto; padding: 32px 16px 80px; }
+  section { margin-bottom: 56px; scroll-margin-top: 60px; }
+  section h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  section h2 .sec-num { background: var(--primary); color: #fff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .85rem; flex-shrink: 0; }
+
+  /* CARD */
+  .card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; margin-bottom: 16px; border-left: 4px solid var(--primary); }
+  .card.accent { border-left-color: var(--accent); }
+  .card.sky { border-left-color: var(--sky); }
+  .card.gold { border-left-color: var(--gold); }
+  .card.purple { border-left-color: var(--purple); }
+  .card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+  .card p, .card li { font-size: .95rem; }
+  .card ul, .card ol { padding-left: 20px; margin-top: 6px; }
+  .card li { margin-bottom: 6px; }
+
+  /* HIGHLIGHT BOX */
+  .highlight { border-radius: var(--radius); padding: 16px 20px; margin: 12px 0; font-size: .93rem; }
+  .hl-green { background: var(--primary-xlight); border-left: 4px solid var(--primary-light); }
+  .hl-orange { background: var(--accent-light); border-left: 4px solid var(--accent); }
+  .hl-blue { background: var(--sky-light); border-left: 4px solid var(--sky); }
+  .hl-gold { background: var(--gold-light); border-left: 4px solid var(--gold); }
+  .hl-purple { background: var(--purple-light); border-left: 4px solid var(--purple); }
+
+  /* ACCORDION */
+  .accordion { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 12px; }
+  .accordion summary { cursor: pointer; padding: 14px 18px; font-weight: 600; font-size: .95rem; background: var(--card); list-style: none; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .accordion summary::after { content: '＋'; font-size: 1.1rem; color: var(--muted); transition: transform .2s; }
+  .accordion[open] summary::after { content: '－'; }
+  .accordion summary::-webkit-details-marker { display: none; }
+  .accordion .acc-body { padding: 16px 18px; border-top: 1px solid var(--border); background: #fafafa; font-size: .93rem; }
+
+  /* TABS */
+  .tab-bar { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 16px; }
+  .tab-btn { padding: 8px 18px; border: 2px solid var(--border); border-radius: 20px; background: var(--card); font-size: .85rem; font-weight: 600; cursor: pointer; color: var(--muted); transition: all .2s; }
+  .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* COMPARE TABLE */
+  .compare-table { width: 100%; border-collapse: collapse; font-size: .88rem; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+  .compare-table th { background: var(--primary); color: #fff; padding: 12px 14px; text-align: left; }
+  .compare-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .compare-table tr:nth-child(even) td { background: #f8f9fa; }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .ok { color: var(--primary); font-weight: 700; }
+  .no { color: var(--accent); font-weight: 700; }
+
+  /* QUIZ */
+  .quiz-card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; margin-bottom: 16px; }
+  .quiz-card .q-text { font-size: 1rem; font-weight: 700; margin-bottom: 14px; }
+  .quiz-card .q-num { display: inline-block; background: var(--primary); color: #fff; border-radius: 50%; width: 26px; height: 26px; text-align: center; line-height: 26px; font-size: .8rem; margin-right: 8px; }
+  .quiz-opts { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-opt { padding: 10px 16px; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; font-size: .92rem; transition: all .18s; background: var(--card); text-align: left; }
+  .quiz-opt:hover { border-color: var(--primary-light); background: var(--primary-xlight); }
+  .quiz-opt.correct { background: #d4edda; border-color: #28a745; color: #155724; font-weight: 600; }
+  .quiz-opt.wrong { background: #f8d7da; border-color: #dc3545; color: #721c24; }
+  .quiz-feedback { margin-top: 12px; padding: 12px 16px; border-radius: 8px; font-size: .9rem; display: none; }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+  .quiz-feedback.wrong { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: var(--primary-light); }
+  .tl-item { position: relative; margin-bottom: 20px; }
+  .tl-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 14px; height: 14px; border-radius: 50%; background: var(--primary); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--primary-light); }
+  .tl-item .tl-year { font-size: .78rem; font-weight: 700; color: var(--primary); letter-spacing: .5px; margin-bottom: 2px; }
+  .tl-item .tl-content { background: var(--card); border-radius: 8px; padding: 10px 14px; box-shadow: var(--shadow); font-size: .9rem; }
+
+  /* DEBATE BOX */
+  .debate-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  @media (max-width: 600px) { .debate-pair { grid-template-columns: 1fr; } }
+  .debate-against { background: #fff5f5; border: 1px solid #ffc0c0; border-radius: var(--radius); padding: 16px; }
+  .debate-for { background: #f0fdf4; border: 1px solid #a7f3d0; border-radius: var(--radius); padding: 16px; }
+  .debate-against h4 { color: #c0392b; font-size: .88rem; margin-bottom: 8px; }
+  .debate-for h4 { color: var(--primary); font-size: .88rem; margin-bottom: 8px; }
+
+  /* FLIP CARD */
+  .flip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin: 12px 0; }
+  .flip-card { height: 140px; cursor: pointer; perspective: 1000px; }
+  .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform .5s; transform-style: preserve-3d; }
+  .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+  .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; text-align: center; padding: 14px; font-size: .88rem; }
+  .flip-front { background: var(--primary); color: #fff; font-weight: 700; }
+  .flip-back { background: var(--primary-xlight); color: var(--text); transform: rotateY(180deg); border: 2px solid var(--primary-light); }
+
+  /* PROGRESS BAR */
+  .progress-section { background: var(--card); border-radius: var(--radius); padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 16px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: .82rem; color: var(--muted); margin-bottom: 4px; }
+  .progress-bar { height: 10px; background: var(--border); border-radius: 5px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--primary-light), var(--primary)); transition: width 1s ease; }
+
+  /* SCORE */
+  #quiz-score-box { display: none; background: var(--primary); color: #fff; border-radius: var(--radius); padding: 24px; text-align: center; margin-top: 24px; }
+  #quiz-score-box h3 { font-size: 1.4rem; margin-bottom: 8px; }
+  #quiz-score-box p { opacity: .85; }
+
+  /* FOOTER */
+  footer { background: var(--primary); color: rgba(255,255,255,.8); text-align: center; padding: 24px; font-size: .82rem; }
+  footer a { color: rgba(255,255,255,.9); }
+
+  /* UTIL */
+  .emoji-big { font-size: 2rem; display: block; margin-bottom: 8px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } header h1 { font-size: 1.5rem; } }
+  .mt { margin-top: 16px; }
+  strong.tag { display: inline-block; background: var(--primary-xlight); color: var(--primary); border-radius: 4px; padding: 1px 7px; font-size: .8rem; margin-right: 4px; }
+  .scripture { font-style: italic; color: var(--muted); font-size: .9rem; border-left: 3px solid var(--gold); padding-left: 12px; margin: 10px 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🌿 진화적 창조</h1>
+  <p>성경과 과학, 함께 읽을 수 있을까? — 중학생을 위한 탐구 여행</p>
+  <div class="badge-row">
+    <span class="badge">📖 창세기</span>
+    <span class="badge">🔬 진화론</span>
+    <span class="badge">✝️ 신학</span>
+    <span class="badge">🌍 고대근동</span>
+    <span class="badge">❓ 퀴즈 포함</span>
+  </div>
+</header>
+
+<nav id="main-nav">
+  <ul>
+    <li><a href="#s0" onclick="setActive(this)">🗺️ 개요</a></li>
+    <li><a href="#s1" onclick="setActive(this)">📖 창세기 해석</a></li>
+    <li><a href="#s2" onclick="setActive(this)">🏗️ 창조과학</a></li>
+    <li><a href="#s3" onclick="setActive(this)">🧬 진화론</a></li>
+    <li><a href="#s4" onclick="setActive(this)">🌿 진화적 창조</a></li>
+    <li><a href="#s5" onclick="setActive(this)">⚖️ 반론과 반박</a></li>
+    <li><a href="#s6" onclick="setActive(this)">🌏 고대근동</a></li>
+    <li><a href="#s7" onclick="setActive(this)">❓ 퀴즈</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ========== S0: 개요 ========== -->
+<section id="s0">
+  <h2><span class="sec-num">0</span> 이 자료를 시작하기 전에</h2>
+
+  <div class="card">
+    <h3>🤔 우리가 던지는 질문들</h3>
+    <p>많은 기독교인 학생들이 이런 질문으로 혼란스러워합니다.</p>
+    <div class="highlight hl-orange mt">
+      "창세기는 6일 만에 창조했다고 하는데, 학교에서는 수십억 년이라고 해요. 둘 다 믿을 수 없잖아요?"
+    </div>
+    <div class="highlight hl-orange">
+      "진화론을 믿으면 하나님이 필요 없는 거 아닌가요?"
+    </div>
+    <div class="highlight hl-orange">
+      "창조과학이 진짜 과학 아닌가요? 교회에서 그렇게 배웠어요."
+    </div>
+    <p class="mt">이 자료는 이 질문들에 정직하게 답하려 합니다. 성경을 더 깊이, 과학을 더 정확하게 이해하면 갈등이 사라집니다.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card sky">
+      <span class="emoji-big">🎯</span>
+      <h3>목표</h3>
+      <ul>
+        <li>창세기의 <strong>진짜 의미</strong>를 파악한다</li>
+        <li>창조과학의 <strong>문제점</strong>을 논리적으로 이해한다</li>
+        <li>진화론의 <strong>핵심 원리</strong>를 배운다</li>
+        <li>진화적 창조가 <strong>왜 설득력 있는지</strong> 검토한다</li>
+      </ul>
+    </div>
+    <div class="card gold">
+      <span class="emoji-big">⚠️</span>
+      <h3>먼저 정리할 것</h3>
+      <ul>
+        <li>"과학 vs 신앙" — <strong>잘못된 대립 구도</strong></li>
+        <li>성경은 <strong>과학 교과서가 아니다</strong></li>
+        <li>진화론은 <strong>무신론이 아니다</strong></li>
+        <li>질문하는 것은 <strong>믿음을 잃는 것이 아니다</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="progress-section">
+    <div style="font-weight:700; margin-bottom:12px;">이 자료에서 다루는 범위</div>
+    <div class="progress-label"><span>📖 성경 해석학</span><span>창세기 장르·문맥</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+    <div class="progress-label mt" style="margin-top:10px;"><span>🔬 과학적 증거</span><span>화석·유전학·우주론</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div>
+    <div class="progress-label mt" style="margin-top:10px;"><span>🏛️ 역사·신학</span><span>교부들의 해석, ANE 문헌</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:75%"></div></div>
+    <div class="progress-label mt" style="margin-top:10px;"><span>⚖️ 철학·변증</span><span>반론 분석·논리적 응답</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
+  </div>
+</section>
+
+<!-- ========== S1: 창세기 해석 ========== -->
+<section id="s1">
+  <h2><span class="sec-num">1</span> 창세기 1–3장: 문자주의 해석의 문제</h2>
+
+  <div class="tab-bar" id="tabs-s1">
+    <button class="tab-btn active" onclick="switchTab('s1','genre')">📜 장르 문제</button>
+    <button class="tab-btn" onclick="switchTab('s1','internal')">🔄 내부 모순</button>
+    <button class="tab-btn" onclick="switchTab('s1','church')">⛪ 교부들의 해석</button>
+    <button class="tab-btn" onclick="switchTab('s1','intent')">🎯 본래 의도</button>
+  </div>
+
+  <div id="s1-genre" class="tab-panel active">
+    <div class="card">
+      <h3>📜 창세기는 어떤 종류의 글인가?</h3>
+      <p>성경을 올바로 해석하려면 그 글이 <strong>어떤 장르(genre)</strong>인지 먼저 파악해야 합니다. 시를 역사적 사실처럼, 역사를 비유처럼 읽으면 오해가 생깁니다.</p>
+      <div class="highlight hl-blue mt">
+        <strong>예시:</strong> "예수님은 세상의 빛이다"(요 8:12)를 문자 그대로 읽으면 예수님이 태양이나 전구라는 말이 됩니다. 아무도 그렇게 읽지 않죠. <strong>문맥과 장르를 고려하기 때문입니다.</strong>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card accent">
+        <h3>창세기 1장의 특징들</h3>
+        <ul>
+          <li>고도로 <strong>대칭적·반복적</strong> 구조</li>
+          <li>"저녁이 되고 아침이 되니" 반복 — <strong>시적 리듬</strong></li>
+          <li>1–3일(형태 없음)과 4–6일(채움)이 <strong>대응</strong></li>
+          <li>7일 완성 — 고대 <strong>신전 헌당식</strong> 패턴</li>
+        </ul>
+      </div>
+      <div class="card sky">
+        <h3>학자들의 분류</h3>
+        <ul>
+          <li><strong>신학적 서술시</strong> (John Walton)</li>
+          <li><strong>고대 우주론적 신화</strong> — 부정적 의미 아님</li>
+          <li><strong>예전적(liturgical) 텍스트</strong> — 예배용</li>
+          <li>과학적 설명이 <strong>아닌</strong> 신학적 선언</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight hl-green">
+      <strong>핵심:</strong> 창세기 1장은 "하나님이 어떻게 만드셨나"(과학)가 아니라 "누가, 왜 만드셨나"(신학)에 답합니다.
+    </div>
+  </div>
+
+  <div id="s1-internal" class="tab-panel">
+    <div class="card accent">
+      <h3>🔄 창세기 1장과 2장이 서로 다르다</h3>
+      <p>문자주의로 읽으면 창세기 1장과 2장은 <strong>순서가 다릅니다.</strong></p>
+    </div>
+    <table class="compare-table mt">
+      <tr>
+        <th>항목</th><th>창세기 1장</th><th>창세기 2장</th>
+      </tr>
+      <tr>
+        <td>식물 창조</td><td>3일째 (인간 이전)</td><td>인간 창조 이후에 언급</td>
+      </tr>
+      <tr>
+        <td>동물 창조</td><td>5–6일째 (인간 이전)</td><td>인간 창조 이후에 만들어짐</td>
+      </tr>
+      <tr>
+        <td>남녀 창조</td><td>동시에 창조</td><td>아담 먼저, 이후 하와</td>
+      </tr>
+      <tr>
+        <td>초점</td><td>우주·만물 전체</td><td>인간·에덴 동산 집중</td>
+      </tr>
+    </table>
+    <div class="highlight hl-orange mt">
+      문자주의적으로는 두 장이 <strong>모순</strong>처럼 보입니다. 그러나 이것은 두 장이 <strong>서로 다른 신학적 목적</strong>을 가진 별도의 이야기임을 보여줍니다.
+    </div>
+    <div class="card mt">
+      <h3>💡 두 창조 이야기의 목적</h3>
+      <ul>
+        <li><strong>창세기 1장:</strong> "하나님은 온 우주의 주인이다" (바벨론 포로기 맥락)</li>
+        <li><strong>창세기 2–3장:</strong> "인간은 왜 고통받고 죽는가?" (인간의 조건에 대한 성찰)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="s1-church" class="tab-panel">
+    <div class="card">
+      <h3>⛪ 문자주의는 사실 '현대적' 해석</h3>
+      <p>고대 교부들과 중세 신학자들은 창세기를 문자적으로 읽지 않은 경우가 많았습니다.</p>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>아우구스티누스 (354–430)</summary>
+        <div class="acc-body">
+          "창조의 '날들'을 인간이 경험하는 평범한 날들로 이해해서는 안 된다." 아우구스티누스는 창세기의 6일을 <strong>상징적으로</strong> 해석하며, 하나님은 모든 것을 <strong>동시에</strong> 창조했다는 '즉각적 창조'를 주장하기도 했습니다. 그는 성경이 과학을 가르치려는 것이 아님을 분명히 했습니다.
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>오리게네스 (185–254)</summary>
+        <div class="acc-body">
+          오리게네스는 창세기 1장을 <strong>알레고리(비유)</strong>로 읽어야 한다고 주장했습니다. "빛이 있으라 하기 전에 저녁과 아침이 있었다는 것을 어떻게 문자적으로 이해하겠는가?"라고 반문했습니다.
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>토마스 아퀴나스 (1225–1274)</summary>
+        <div class="acc-body">
+          아퀴나스는 성경의 문자적 의미가 하나님이 의도하신 의미이지만, 그것이 반드시 <strong>물리적·과학적 사실을 가리키지는 않는다</strong>고 했습니다. 성경의 언어는 당시 사람들이 이해할 수 있는 방식으로 쓰였다고 보았습니다.
+        </div>
+      </details>
+    </div>
+    <div class="highlight hl-green mt">
+      <strong>결론:</strong> 창세기를 과학적으로 문자 그대로 읽는 '젊은 지구 창조론'은 고대 전통이 아니라 <strong>19–20세기에 생겨난 매우 현대적인 해석</strong>입니다.
+    </div>
+  </div>
+
+  <div id="s1-intent" class="tab-panel">
+    <div class="card">
+      <h3>🎯 창세기가 실제로 말하는 것</h3>
+    </div>
+    <div class="flip-grid" id="intent-cards">
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">하나님은 누구인가?</div>
+          <div class="flip-back">혼돈과 어둠을 다스리는 <strong>유일한 창조주</strong>. 바벨론의 마르둑 같은 신들과 달리 싸움 없이 말씀만으로 창조하심.</div>
+        </div>
+      </div>
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">인간은 무엇인가?</div>
+          <div class="flip-back">하나님의 <strong>형상(imago Dei)</strong>을 지닌 존재. 왕과 제사장처럼 세상을 돌볼 책임이 있는 존재.</div>
+        </div>
+      </div>
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">왜 안식일이 있나?</div>
+          <div class="flip-back">7일 패턴은 하나님의 창조 리듬. 창세기 1장은 이스라엘의 <strong>안식일 신학의 근거</strong>를 제공한다.</div>
+        </div>
+      </div>
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">왜 인간은 고통받는가?</div>
+          <div class="flip-back">창세기 3장은 인간의 <strong>죄와 소외</strong> 이야기. 하나님과의 관계 단절이 고통의 근원임을 말한다.</div>
+        </div>
+      </div>
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">태양은 신인가?</div>
+          <div class="flip-back">창세기 1:16에서 태양과 달을 단순히 "큰 빛"이라 부름 — 이름조차 없음. <strong>태양 숭배</strong>를 단호히 거부하는 신학적 선언.</div>
+        </div>
+      </div>
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-front">세상은 선한가?</div>
+          <div class="flip-back">"보시기에 좋았더라" 반복. 물질 세계는 <strong>악하지 않다</strong>. 영지주의적 물질 혐오를 차단하는 선언.</div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:.82rem; color:var(--muted); margin-top:8px;">👆 카드를 클릭하면 뒤집힙니다</p>
+  </div>
+</section>
+
+<!-- ========== S2: 창조과학 ========== -->
+<section id="s2">
+  <h2><span class="sec-num">2</span> 창조과학 — 주장과 문제점</h2>
+
+  <div class="card">
+    <h3>창조과학이란?</h3>
+    <p>창세기의 문자적 해석을 과학적으로 증명하려는 운동. 주로 <strong>젊은 지구 창조론(Young Earth Creationism)</strong>과 연결됩니다. 지구 나이를 약 6,000–10,000년으로 봅니다.</p>
+  </div>
+
+  <div class="tab-bar" id="tabs-s2">
+    <button class="tab-btn active" onclick="switchTab('s2','claims')">📋 주요 주장</button>
+    <button class="tab-btn" onclick="switchTab('s2','problems')">🚨 과학적 문제</button>
+    <button class="tab-btn" onclick="switchTab('s2','notscience')">🔬 과학이 아닌 이유</button>
+  </div>
+
+  <div id="s2-claims" class="tab-panel active">
+    <div class="accordion">
+      <details>
+        <summary>주장 1: 지구 나이는 약 6,000년</summary>
+        <div class="acc-body">
+          성경 족보를 더해 계산. 17세기 주교 어셔(Ussher)가 계산한 기원전 4004년을 근거로 삼음.
+          <div class="highlight hl-orange" style="margin-top:10px;">
+            <strong>문제:</strong> 방사성 탄소연대측정, 우라늄-납 측정, 별빛 여행 시간, 지층 형성 속도 등 <strong>독립적인 여러 과학 방법들</strong>이 일관되게 지구 나이를 약 46억 년으로 가리킵니다.
+          </div>
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>주장 2: 노아 홍수가 지층 대부분을 만들었다</summary>
+        <div class="acc-body">
+          전 지구적 홍수 하나가 현재의 지층 기록을 설명한다고 주장.
+          <div class="highlight hl-orange" style="margin-top:10px;">
+            <strong>문제:</strong> 지층은 서로 다른 시대의 생물 화석을 <strong>일관된 순서</strong>로 포함합니다. 홍수라면 모든 생물이 무작위로 섞여야 합니다. 또한 전 지구적 홍수의 지질학적 흔적이 없습니다.
+          </div>
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>주장 3: 진화는 일어난 적 없다 / 종간 진화 없음</summary>
+        <div class="acc-body">
+          "마이크로 진화(종 내 변화)는 있어도 마크로 진화(종간 변화)는 없다"고 주장.
+          <div class="highlight hl-orange" style="margin-top:10px;">
+            <strong>문제:</strong> 마이크로/마크로 구분은 과학에 없는 인위적 구분입니다. 화석 기록, DNA 비교, 직접 관찰(예: 항생제 내성균)은 종분화가 실제로 일어남을 보여줍니다.
+          </div>
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>주장 4: 설계의 복잡성 = 창조의 증거</summary>
+        <div class="acc-body">
+          생물의 복잡한 구조(눈, 편모 등)는 진화로 설명 불가하므로 지적 설계자가 필요하다는 주장.
+          <div class="highlight hl-orange" style="margin-top:10px;">
+            <strong>문제:</strong> 편모와 눈의 진화 경로는 이미 상세히 연구되었습니다. "우리가 아직 모른다"는 것이 "신이 했다"는 증거가 되지 않습니다 → <strong>신 기원의 틈새(God of the Gaps)</strong> 오류.
+          </div>
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>주장 5: 진화론은 "이론"에 불과하다</summary>
+        <div class="acc-body">
+          "이론"이라는 단어를 일상 언어의 '추측'으로 오해하는 주장.
+          <div class="highlight hl-orange" style="margin-top:10px;">
+            <strong>문제:</strong> 과학에서 '이론(theory)'은 방대한 증거로 검증된 <strong>설명 체계</strong>입니다. 중력 이론, 세균 이론, 상대성 이론도 모두 '이론'입니다. 이론은 추측이 아닙니다.
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div id="s2-problems" class="tab-panel">
+    <div class="card accent">
+      <h3>🚨 창조과학에 반하는 과학적 증거들</h3>
+    </div>
+    <table class="compare-table">
+      <tr><th>분야</th><th>증거</th><th>지구 나이 지지</th></tr>
+      <tr><td>방사성 동위원소</td><td>우라늄→납, 포타슘→아르곤 등 여러 방법이 일치</td><td class="ok">✔ 수십억 년</td></tr>
+      <tr><td>별빛과 우주론</td><td>수십억 광년 거리의 별빛이 지구에 도달하려면</td><td class="ok">✔ 138억 년 우주</td></tr>
+      <tr><td>지층 퇴적</td><td>산호초, 빙하코어 연간 층위 수십만 개</td><td class="ok">✔ 수억 년</td></tr>
+      <tr><td>DNA 유전학</td><td>인간-침팬지 98.7% 게놈 일치, 내재성 레트로바이러스</td><td class="ok">✔ 공통 조상</td></tr>
+      <tr><td>화석 기록</td><td>단순→복잡 순서, 전이 화석(시조새, 틱타알릭 등)</td><td class="ok">✔ 점진적 진화</td></tr>
+      <tr><td>생물지리학</td><td>대륙별 고유종 분포가 진화 이동 경로와 일치</td><td class="ok">✔ 진화론 지지</td></tr>
+    </table>
+  </div>
+
+  <div id="s2-notscience" class="tab-panel">
+    <div class="card purple">
+      <h3>🔬 창조과학이 과학이 아닌 이유</h3>
+      <p>과학에는 핵심 원칙들이 있습니다. 창조과학이 이 기준을 충족하는지 확인해봅시다.</p>
+    </div>
+    <table class="compare-table">
+      <tr><th>과학의 조건</th><th>정통 과학</th><th>창조과학</th></tr>
+      <tr>
+        <td><strong>반증 가능성</strong><br><small>틀렸음을 보일 수 있어야 함</small></td>
+        <td class="ok">✔ 가능</td>
+        <td class="no">✘ 어떤 증거도 "신의 뜻"으로 해석 가능</td>
+      </tr>
+      <tr>
+        <td><strong>동료 심사</strong><br><small>전문가 검토 학술지 출판</small></td>
+        <td class="ok">✔ 필수</td>
+        <td class="no">✘ 창조과학 저널은 동료 심사 없음</td>
+      </tr>
+      <tr>
+        <td><strong>예측력</strong><br><small>미래 발견을 예측할 수 있어야 함</small></td>
+        <td class="ok">✔ 예측하고 검증</td>
+        <td class="no">✘ 의미 있는 과학적 예측 없음</td>
+      </tr>
+      <tr>
+        <td><strong>방법론적 자연주의</strong><br><small>자연 원인으로 설명 시도</small></td>
+        <td class="ok">✔ 준수</td>
+        <td class="no">✘ 초자연적 개입을 설명으로 사용</td>
+      </tr>
+    </table>
+    <div class="highlight hl-orange mt">
+      <strong>중요:</strong> 창조과학을 비판하는 것이 하나님의 창조를 부정하는 것이 아닙니다. 창조과학은 <strong>나쁜 과학인 동시에 나쁜 신학</strong>입니다 — 성경을 과학책으로 만들어 오히려 성경의 진짜 메시지를 흐립니다.
+    </div>
+  </div>
+</section>
+
+<!-- ========== S3: 진화론 ========== -->
+<section id="s3">
+  <h2><span class="sec-num">3</span> 진화론 — 제대로 이해하기</h2>
+
+  <div class="card sky">
+    <h3>💡 진화론은 "원숭이가 사람이 됐다"는 이야기가 아닙니다</h3>
+    <p>진화론의 핵심은 <strong>공통 조상과 자연선택에 의한 변화</strong>입니다. 인간과 침팬지는 같은 조상에서 갈라진 것이지, 하나가 다른 하나로 변한 것이 아닙니다.</p>
+  </div>
+
+  <div class="tab-bar" id="tabs-s3">
+    <button class="tab-btn active" onclick="switchTab('s3','core')">🧬 핵심 원리</button>
+    <button class="tab-btn" onclick="switchTab('s3','evidence')">🔍 증거들</button>
+    <button class="tab-btn" onclick="switchTab('s3','timeline')">⏳ 생명의 역사</button>
+    <button class="tab-btn" onclick="switchTab('s3','myths')">❌ 오해 바로잡기</button>
+  </div>
+
+  <div id="s3-core" class="tab-panel active">
+    <div class="grid-2">
+      <div class="card">
+        <h3>① 변이(Variation)</h3>
+        <p>같은 종의 개체들도 서로 조금씩 다릅니다. 이 차이는 주로 <strong>유전자 돌연변이</strong>에서 옵니다.</p>
+      </div>
+      <div class="card">
+        <h3>② 자연선택(Natural Selection)</h3>
+        <p>환경에 더 잘 적응한 개체가 <strong>더 많이 살아남고 번식</strong>합니다. 이것이 다윈의 핵심 발견입니다.</p>
+      </div>
+      <div class="card">
+        <h3>③ 유전(Heredity)</h3>
+        <p>유리한 특성이 <strong>자손에게 전달</strong>됩니다. DNA가 이 정보를 담습니다.</p>
+      </div>
+      <div class="card">
+        <h3>④ 시간</h3>
+        <p>이 과정이 <strong>수백만~수십억 년</strong> 동안 반복되면 전혀 다른 종이 나타납니다.</p>
+      </div>
+    </div>
+    <div class="highlight hl-green">
+      <strong>공통 조상:</strong> 모든 생물은 아주 오래전 단일 공통 조상에서 갈라져 나왔습니다. 인간, 침팬지, 효모, 박테리아가 모두 DNA라는 같은 언어를 사용하는 이유입니다.
+    </div>
+  </div>
+
+  <div id="s3-evidence" class="tab-panel">
+    <div class="card">
+      <h3>🔍 진화를 지지하는 증거들</h3>
+    </div>
+    <div class="accordion">
+      <details open>
+        <summary>🦴 화석 기록</summary>
+        <div class="acc-body">
+          수백만 개의 화석이 시간 순서대로 정렬되면 <strong>단순→복잡으로 변화하는 흐름</strong>이 나타납니다. 어류→양서류→파충류→포유류로 이어지는 전이 화석들이 예측된 위치에서 발견되었습니다. (예: 틱타알릭 — 물고기와 육상동물의 중간)
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>🧬 DNA 비교 유전학</summary>
+        <div class="acc-body">
+          인간과 침팬지의 DNA는 약 <strong>98.7%</strong> 동일합니다. 더 결정적인 것은 <strong>내재성 레트로바이러스(ERV)</strong>입니다 — 오래전 바이러스가 DNA에 끼어든 흔적이 인간과 유인원의 <strong>정확히 같은 위치</strong>에 존재합니다. 공통 조상 없이는 설명이 불가합니다.
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>🌍 생물지리학</summary>
+        <div class="acc-body">
+          호주의 유대류(캥거루, 코알라)는 다른 대륙에 없습니다. 갈라파고스 각 섬의 핀치새 부리 모양이 다릅니다. 이는 지리적 고립 후 <strong>각 환경에 맞게 진화</strong>했기 때문입니다.
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>🏗️ 흔적 기관</summary>
+        <div class="acc-body">
+          고래의 뒷다리 뼈, 인간의 꼬리뼈(미골), 날지 못하는 새의 날개. 이 기관들은 현재 기능이 없거나 축소되었습니다. <strong>공통 조상에게는 기능이 있었던 기관의 흔적</strong>입니다.
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>🔬 직접 관찰</summary>
+        <div class="acc-body">
+          항생제 내성균, 농약 내성 곤충, 실험실의 대장균 장기 진화 실험(40,000세대 이상 관찰) — 진화는 <strong>지금 이 순간에도 일어나고 있습니다.</strong>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div id="s3-timeline" class="tab-panel">
+    <div class="card sky"><h3>⏳ 생명의 역사 타임라인</h3></div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">약 138억 년 전</div>
+        <div class="tl-content">🌌 빅뱅 — 우주 시작</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">약 46억 년 전</div>
+        <div class="tl-content">🌍 지구 형성</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">약 38억 년 전</div>
+        <div class="tl-content">🦠 최초의 생명 (단세포 박테리아)</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">약 21억 년 전</div>
+        <div class="tl-content">🔵 진핵세포 등장 (핵이 있는 세포)</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">약 6억 년 전</div>
+        <div class="tl-content">🐛 다세포 생물 등장</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">약 5.4억 년 전</div>
+        <div class="tl-content">💥 캄브리아기 대폭발 — 동물 다양성 폭발</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">약 3.7억 년 전</div>
+        <div class="tl-content">🐟 어류 → 양서류 (육지 진출)</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">약 2.3억 년 전</div>
+        <div class="tl-content">🦕 공룡 등장</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">약 6,600만 년 전</div>
+        <div class="tl-content">☄️ 대멸종 — 공룡 멸종, 포유류 번성</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">약 700만 년 전</div>
+        <div class="tl-content">🦍 인간과 침팬지 공통 조상에서 분리</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">약 30만 년 전</div>
+        <div class="tl-content">🧑 현생 인류(호모 사피엔스) 등장</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">약 10,000년 전</div>
+        <div class="tl-content">🌾 농업 시작, 문명의 발달</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="s3-myths" class="tab-panel">
+    <table class="compare-table">
+      <tr><th>흔한 오해</th><th>실제 사실</th></tr>
+      <tr>
+        <td>"원숭이가 사람이 됐다"</td>
+        <td>인간과 현생 유인원은 <strong>공통 조상</strong>에서 갈라짐. 하나가 다른 하나로 변한 게 아님.</td>
+      </tr>
+      <tr>
+        <td>"진화는 진행 방향이 있다"</td>
+        <td>진화에는 목표 없음. 현재 환경에 맞는 방향으로 변화할 뿐.</td>
+      </tr>
+      <tr>
+        <td>"진화는 우연이다"</td>
+        <td>돌연변이는 무작위지만, 자연선택은 <strong>비무작위적</strong> 과정. 유리한 변이가 선택됨.</td>
+      </tr>
+      <tr>
+        <td>"진화는 무신론을 증명한다"</td>
+        <td>진화는 <strong>방법</strong>을 설명할 뿐, 존재의 이유나 목적에 대해 말하지 않음.</td>
+      </tr>
+      <tr>
+        <td>"전이 화석이 없다"</td>
+        <td>수천 개의 전이 화석이 발견됨 (틱타알릭, 시조새, 인간 조상 화석 등).</td>
+      </tr>
+      <tr>
+        <td>"진화는 검증 안 된 추측"</td>
+        <td>진화는 <strong>수백 년간 수만 개의 연구</strong>로 검증된 과학 이론. 거의 모든 생물학의 토대.</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- ========== S4: 진화적 창조 ========== -->
+<section id="s4">
+  <h2><span class="sec-num">4</span> 진화적 창조 — 신앙과 과학의 통합</h2>
+
+  <div class="card" style="border-left-color: var(--primary-light); background: var(--primary-xlight);">
+    <h3>✨ 진화적 창조(Evolutionary Creation)란?</h3>
+    <p>하나님이 진화라는 과정을 통해 생명을 창조하셨다는 견해. <strong>'유신진화론(Theistic Evolution)'</strong>이라고도 합니다. 과학적 진화론을 온전히 수용하면서 동시에 하나님을 창조주로 고백합니다.</p>
+  </div>
+
+  <div class="tab-bar" id="tabs-s4">
+    <button class="tab-btn active" onclick="switchTab('s4','what')">💡 핵심 입장</button>
+    <button class="tab-btn" onclick="switchTab('s4','who')">👥 지지자들</button>
+    <button class="tab-btn" onclick="switchTab('s4','how')">🔗 어떻게 통합하나</button>
+    <button class="tab-btn" onclick="switchTab('s4','compare')">⚖️ 입장 비교</button>
+  </div>
+
+  <div id="s4-what" class="tab-panel active">
+    <div class="grid-2">
+      <div class="card">
+        <h3>과학에 대해</h3>
+        <ul>
+          <li>지구 나이 약 <strong>46억 년</strong> 수용</li>
+          <li>우주 나이 약 <strong>138억 년</strong> 수용</li>
+          <li>생물 진화 — <strong>공통 조상</strong> 수용</li>
+          <li>인류도 진화 과정을 통해 등장 수용</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>신학에 대해</h3>
+        <ul>
+          <li>하나님은 <strong>우주의 창조주</strong>이심</li>
+          <li>진화는 하나님의 <strong>창조 방법</strong></li>
+          <li>성경은 <strong>신학적 권위</strong>를 지님</li>
+          <li>인간은 하나님의 <strong>형상(imago Dei)</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight hl-green mt">
+      <strong>비유로 이해하기:</strong> 화가가 붓을 사용해 그림을 그린다고 해서 그 그림이 화가의 작품이 아닌 게 아닙니다. 하나님이 진화를 '붓'으로 사용하셔도 창조는 여전히 하나님의 창조입니다.
+    </div>
+    <div class="highlight hl-blue mt">
+      <strong>또 다른 비유:</strong> 아이가 태어날 때 의학·생물학적 과정이 작동합니다. 그렇다고 그 아이가 "하나님의 선물이 아니다"라고 말하지 않습니다. <strong>과정과 목적은 다른 차원의 질문</strong>입니다.
+    </div>
+  </div>
+
+  <div id="s4-who" class="tab-panel">
+    <div class="card">
+      <h3>👥 진화적 창조를 지지하는 유명 인물들</h3>
+    </div>
+    <div class="accordion">
+      <details open>
+        <summary>프랜시스 콜린스 — 인간 게놈 프로젝트 총괄, 전 NIH 원장</summary>
+        <div class="acc-body">
+          세계 최고의 유전학자 중 한 명. 독실한 기독교인. 저서 <em>『신의 언어(The Language of God)』</em>에서 DNA가 진화의 증거인 동시에 "하나님의 언어"라고 주장. BioLogos 창립.
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>알리스터 맥그래스 — 분자생물학 박사 + 신학 박사</summary>
+        <div class="acc-body">
+          옥스퍼드 대학교. 과학과 신학 모두 전문. 진화론과 기독교 신앙이 충돌하지 않음을 지속적으로 논증.
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>존 폴킹혼 — 케임브리지 수리물리학 교수, 성공회 사제</summary>
+        <div class="acc-body">
+          물리학자로서 양자역학 연구 후 신학으로 전향. 과학과 종교의 대화에 평생 헌신.
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>틸로이크 칼리 — 생물학 교수 (한국계 미국인 기독교인)</summary>
+        <div class="acc-body">
+          BioLogos 협력 학자. 한국 기독교인들에게 진화적 창조를 소개하는 데 기여.
+        </div>
+      </details>
+    </div>
+    <div class="highlight hl-blue mt">
+      <strong>BioLogos:</strong> 프랜시스 콜린스가 세운 단체. "생물학(Biology)"과 "하나님의 말씀(Logos)"을 합친 이름. 과학과 신앙의 통합을 연구하는 기독교인 과학자들의 커뮤니티. (<a href="https://biologos.org" target="_blank">biologos.org</a>)
+    </div>
+  </div>
+
+  <div id="s4-how" class="tab-panel">
+    <div class="card">
+      <h3>🔗 진화적 창조는 어떻게 신학적 개념들을 재해석하나?</h3>
+    </div>
+    <div class="accordion">
+      <details open>
+        <summary>아담과 하와 — 역사적 개인인가?</summary>
+        <div class="acc-body">
+          다양한 접근이 있습니다:
+          <ul style="margin-top:8px;">
+            <li><strong>대표 인류설:</strong> 아담은 특정 개인이 아닌 인류 전체 또는 그 대표를 상징 (N.T. 라이트 지지)</li>
+            <li><strong>집단 조상설:</strong> 하나님이 어느 시점에 진화한 인류 집단에게 영적 자아를 부여 (John Walton)</li>
+            <li><strong>연방 대표설:</strong> 아담은 역사적 개인이지만 유전적 조상이 아닌 언약적 대표 (C.S. Lewis 유사 관점)</li>
+          </ul>
+          공통점: 창세기 3장은 <strong>인간의 죄성과 하나님으로부터의 소외</strong>에 대한 진리를 담고 있음.
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>원죄 — 진화적 맥락에서</summary>
+        <div class="acc-body">
+          <p>자기중심성, 폭력성, 욕망 — 이것들은 진화 과정에서 생존에 유리했던 특성들입니다. 기독교는 이 자기중심적 본성을 "죄성(sin nature)"으로 신학화합니다.</p>
+          <p class="mt">하나님은 이런 본성을 가진 인간을 <strong>사랑으로 부르시고 변화시키심</strong> — 이것이 구원의 이야기입니다.</p>
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>죽음 — 진화 이전부터 있었나?</summary>
+        <div class="acc-body">
+          창조과학은 "아담의 타락 이전에는 죽음이 없었다"고 주장하지만, 진화에서는 죽음이 필수입니다. 진화적 창조는 창세기 3장의 "죽음"을 <strong>영적 죽음 — 하나님과의 관계 단절</strong>로 해석합니다. (롬 5:12의 "죽음"을 영적으로 해석)
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>하나님의 형상 (Imago Dei)</summary>
+        <div class="acc-body">
+          <p>"형상"은 외모가 아닙니다. 신학자들은 이를 <strong>관계적 능력, 도덕적 책임감, 하나님과 소통할 수 있는 능력</strong>으로 해석합니다.</p>
+          <p class="mt">하나님이 진화 과정 어느 시점에 인간에게 이 영적 차원을 부여하셨다고 볼 수 있습니다. "흙으로 빚고 생기를 불어넣으심"이 그 신학적 표현입니다.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div id="s4-compare" class="tab-panel">
+    <table class="compare-table">
+      <tr>
+        <th>입장</th>
+        <th>지구 나이</th>
+        <th>진화 수용</th>
+        <th>성경 해석</th>
+        <th>과학계 수용도</th>
+      </tr>
+      <tr>
+        <td><strong>젊은 지구 창조론</strong><br><small>(창조과학)</small></td>
+        <td class="no">6,000–10,000년</td>
+        <td class="no">거부</td>
+        <td>문자적</td>
+        <td class="no">✘</td>
+      </tr>
+      <tr>
+        <td><strong>오랜 지구 창조론</strong></td>
+        <td class="ok">수십억 년</td>
+        <td class="no">부분 거부</td>
+        <td>하루=긴 시대</td>
+        <td>부분적</td>
+      </tr>
+      <tr>
+        <td><strong>지적 설계론</strong></td>
+        <td class="ok">수십억 년</td>
+        <td>제한적</td>
+        <td>다양</td>
+        <td class="no">✘</td>
+      </tr>
+      <tr>
+        <td><strong>진화적 창조</strong></td>
+        <td class="ok">수십억 년</td>
+        <td class="ok">완전 수용</td>
+        <td>장르·신학 중심</td>
+        <td class="ok">✔</td>
+      </tr>
+      <tr>
+        <td><strong>무신론적 진화론</strong></td>
+        <td class="ok">수십억 년</td>
+        <td class="ok">완전 수용</td>
+        <td>해당 없음</td>
+        <td class="ok">✔</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- ========== S5: 반론과 반박 ========== -->
+<section id="s5">
+  <h2><span class="sec-num">5</span> 진화적 창조에 대한 반론과 반박</h2>
+
+  <div class="debate-pair">
+    <div class="debate-against">
+      <h4>❌ 반론 1</h4>
+      <p>"성경은 하나님의 말씀인데, 진화를 수용하면 성경의 권위가 무너진다."</p>
+    </div>
+    <div class="debate-for">
+      <h4>✅ 반박</h4>
+      <p>성경의 권위는 그 장르에 맞게 읽을 때 살아납니다. 시를 역사처럼 읽으면 오히려 성경을 왜곡합니다. 창세기가 신학 문서임을 인정하는 것이 권위를 훼손하는 게 아닙니다.</p>
+    </div>
+  </div>
+
+  <div class="debate-pair">
+    <div class="debate-against">
+      <h4>❌ 반론 2</h4>
+      <p>"진화를 믿으면 아담과 하와, 원죄, 구원이 다 무너진다."</p>
+    </div>
+    <div class="debate-for">
+      <h4>✅ 반박</h4>
+      <p>원죄의 핵심은 인간이 하나님으로부터 소외된 자기중심적 존재라는 것입니다. 이 진리는 아담이 역사적 개인이든 아니든 유효합니다. 예수님의 구원도 역사적 사실이며 이에 영향받지 않습니다.</p>
+    </div>
+  </div>
+
+  <div class="debate-pair">
+    <div class="debate-against">
+      <h4>❌ 반론 3</h4>
+      <p>"진화는 하나님 없이 모든 것을 설명하므로 하나님이 필요 없다."</p>
+    </div>
+    <div class="debate-for">
+      <h4>✅ 반박</h4>
+      <p>진화는 생명이 <em>어떻게</em> 변해왔는지를 설명합니다. 왜 무에서 유가 생겼는지, 왜 법칙들이 그렇게 미세조정되었는지, 왜 의미·사랑·도덕이 존재하는지는 과학이 다루는 영역이 아닙니다.</p>
+    </div>
+  </div>
+
+  <div class="debate-pair">
+    <div class="debate-against">
+      <h4>❌ 반론 4</h4>
+      <p>"진화에는 죽음이 수십억 년 있었는데, 성경은 죽음이 죄의 결과라고 한다."</p>
+    </div>
+    <div class="debate-for">
+      <h4>✅ 반박</h4>
+      <p>로마서 5:12의 "죽음"은 신학적 맥락에서 <strong>영적 죽음</strong> — 하나님과의 관계 단절 — 을 의미합니다. 동물의 생물학적 죽음과는 다른 차원입니다. 많은 교부들도 이렇게 해석했습니다.</p>
+    </div>
+  </div>
+
+  <div class="debate-pair">
+    <div class="debate-against">
+      <h4>❌ 반론 5</h4>
+      <p>"진화적 창조는 세상과 타협하는 것이다."</p>
+    </div>
+    <div class="debate-for">
+      <h4>✅ 반박</h4>
+      <p>"모든 진리는 하나님의 진리"(어거스틴)입니다. 창조세계를 연구하는 과학도 하나님의 진리를 발견하는 방법입니다. 과학적 사실을 인정하는 것은 타협이 아니라 정직입니다.</p>
+    </div>
+  </div>
+
+  <div class="debate-pair">
+    <div class="debate-against">
+      <h4>❌ 반론 6</h4>
+      <p>"하나님이 직접 창조하지 않으면 하나님을 창조에서 분리하는 이신론이다."</p>
+    </div>
+    <div class="debate-for">
+      <h4>✅ 반박</h4>
+      <p>진화적 창조는 이신론이 아닙니다. 하나님은 과정 속에서 <strong>계속 내재하시고 섭리하시는 분</strong>입니다. 아이의 탄생에 생물학적 과정이 있어도 하나님의 창조라고 고백하는 것과 같습니다.</p>
+    </div>
+  </div>
+
+  <div class="highlight hl-gold mt">
+    <strong>추가 반론:</strong> "교회가 2,000년 동안 문자적으로 해석했는데, 왜 이제 와서 바꾸나?" → <strong>반박:</strong> 앞서 보았듯 교부 아우구스티누스, 오리게네스는 이미 비문자적 해석을 했습니다. 또한 지동설도 교회가 처음엔 거부했지만 지금은 모두 수용합니다. 진리 앞에서 해석을 발전시키는 것은 정직한 신앙의 태도입니다.
+  </div>
+</section>
+
+<!-- ========== S6: 고대근동 ========== -->
+<section id="s6">
+  <h2><span class="sec-num">+</span> 보너스: 고대근동 문헌과 창세기</h2>
+
+  <div class="card purple">
+    <h3>🌏 창세기가 쓰인 문화적 배경</h3>
+    <p>창세기는 진공 상태에서 쓰인 게 아닙니다. 고대 중동 문화권에는 비슷한 창조 이야기들이 있었습니다. 창세기는 그 문화의 언어로, 그러나 <strong>전혀 다른 신학적 메시지</strong>를 선포합니다.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card accent">
+      <h3>에누마 엘리시 (바벨론)</h3>
+      <ul>
+        <li>마르둑 신이 티아마트(혼돈의 신)를 죽임</li>
+        <li>티아마트 몸으로 세상을 만듦</li>
+        <li>인간은 신들의 <strong>노예</strong>로 창조됨</li>
+        <li>창조는 폭력적 전쟁의 결과</li>
+      </ul>
+    </div>
+    <div class="card sky">
+      <h3>창세기 1장 (이스라엘)</h3>
+      <ul>
+        <li>하나님은 혼돈과 싸우지 않고 <strong>말씀</strong>으로 다스림</li>
+        <li>물질로부터 만들지 않음 (무에서 유)</li>
+        <li>인간은 신의 <strong>형상</strong>으로 존귀하게 창조됨</li>
+        <li>창조는 선하고 질서 있는 행위</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card mt">
+    <h3>🤔 이것이 의미하는 것</h3>
+    <p>창세기가 바벨론 이야기와 <strong>비슷한 구조</strong>를 가진다는 것은 성경이 거짓이라는 의미가 아닙니다. 오히려 이스라엘은 당시 문화의 언어를 빌려 <strong>전혀 다른 하나님의 모습</strong>을 선포한 것입니다.</p>
+    <div class="highlight hl-green mt">
+      마치 예수님이 당시 유대인들이 이해할 수 있는 비유(씨앗, 양, 빵)를 사용하셔서 하나님 나라를 가르치신 것처럼, 창세기 저자도 당시 문화의 이야기 형식을 사용해 이스라엘의 하나님이 어떤 분인지 선포했습니다.
+    </div>
+  </div>
+
+  <div class="card gold mt">
+    <h3>✨ 이 발견이 우리에게 주는 것</h3>
+    <ul>
+      <li>성경은 더욱 <strong>풍부하고 정교한</strong> 문서로 이해됨</li>
+      <li>하나님의 메시지는 특정 <strong>문화·역사 속에서 주어짐</strong> (성육신적 계시)</li>
+      <li>과학적 정보를 전달하려는 게 아니라 <strong>신학적 진리</strong>를 선포하려는 의도가 명확해짐</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== S7: 퀴즈 ========== -->
+<section id="s7">
+  <h2><span class="sec-num">?</span> 확인 퀴즈</h2>
+
+  <div class="card sky"><p>지금까지 배운 내용을 확인해봅시다. 각 질문의 보기를 클릭하세요!</p></div>
+
+  <!-- Q1 -->
+  <div class="quiz-card" id="q1">
+    <div class="q-text"><span class="q-num">1</span> 창세기 1장의 주된 목적은 무엇인가요?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="checkQ(1,'a','c')">우주가 어떻게 만들어졌는지 과학적으로 설명하기</button>
+      <button class="quiz-opt" onclick="checkQ(1,'b','c')">하나님이 누구시며 창조의 의미가 무엇인지 신학적으로 선포하기</button>
+      <button class="quiz-opt" onclick="checkQ(1,'c','c')">이스라엘 역사의 시작점을 연대기적으로 기록하기</button>
+      <button class="quiz-opt" onclick="checkQ(1,'d','c')">바벨론 창조 신화를 그대로 번역하기</button>
+    </div>
+    <div class="quiz-feedback" id="q1-fb"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="quiz-card" id="q2">
+    <div class="q-text"><span class="q-num">2</span> 창조과학이 '과학'이 아닌 가장 중요한 이유는?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="checkQ(2,'a','b')">기독교인들만 연구하기 때문</button>
+      <button class="quiz-opt" onclick="checkQ(2,'b','b')">반증 불가능하고 동료 심사 없이 운영되기 때문</button>
+      <button class="quiz-opt" onclick="checkQ(2,'c','b')">지구 나이를 짧게 보기 때문</button>
+      <button class="quiz-opt" onclick="checkQ(2,'d','b')">성경을 근거로 삼기 때문</button>
+    </div>
+    <div class="quiz-feedback" id="q2-fb"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="quiz-card" id="q3">
+    <div class="q-text"><span class="q-num">3</span> 진화론에 대한 설명으로 옳은 것은?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="checkQ(3,'a','d')">원숭이가 인간으로 변했다는 이론이다</button>
+      <button class="quiz-opt" onclick="checkQ(3,'b','d')">진화는 완전히 무작위적인 과정이다</button>
+      <button class="quiz-opt" onclick="checkQ(3,'c','d')">진화론은 검증되지 않은 추측에 불과하다</button>
+      <button class="quiz-opt" onclick="checkQ(3,'d','d')">인간과 침팬지는 공통 조상에서 갈라진 것이다</button>
+    </div>
+    <div class="quiz-feedback" id="q3-fb"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="quiz-card" id="q4">
+    <div class="q-text"><span class="q-num">4</span> 진화적 창조(유신진화론)의 핵심 주장은?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="checkQ(4,'a','c')">성경은 신뢰할 수 없으므로 과학만 믿어야 한다</button>
+      <button class="quiz-opt" onclick="checkQ(4,'b','c')">하나님은 창조에 개입하지 않으셨다 (이신론)</button>
+      <button class="quiz-opt" onclick="checkQ(4,'c','c')">하나님이 진화라는 과정을 통해 생명을 창조하셨다</button>
+      <button class="quiz-opt" onclick="checkQ(4,'d','c')">진화는 일어났지만 인간만은 특별히 따로 창조됐다</button>
+    </div>
+    <div class="quiz-feedback" id="q4-fb"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="quiz-card" id="q5">
+    <div class="q-text"><span class="q-num">5</span> 아우구스티누스(354–430)가 창세기 해석에서 보여준 것은?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="checkQ(5,'a','b')">창세기를 철저히 문자적으로만 읽어야 한다고 주장했다</button>
+      <button class="quiz-opt" onclick="checkQ(5,'b','b')">창세기의 '날'을 반드시 문자적으로 해석할 필요 없다고 봤다</button>
+      <button class="quiz-opt" onclick="checkQ(5,'c','b')">창세기가 바벨론 신화를 베꼈다고 주장했다</button>
+      <button class="quiz-opt" onclick="checkQ(5,'d','b')">성경과 과학은 완전히 분리해야 한다고 주장했다</button>
+    </div>
+    <div class="quiz-feedback" id="q5-fb"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="quiz-card" id="q6">
+    <div class="q-text"><span class="q-num">6</span> 내재성 레트로바이러스(ERV)가 진화의 증거인 이유는?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="checkQ(6,'a','c')">바이러스가 변이하기 때문에</button>
+      <button class="quiz-opt" onclick="checkQ(6,'b','c')">바이러스가 인간에게도 감염되기 때문에</button>
+      <button class="quiz-opt" onclick="checkQ(6,'c','c')">과거 바이러스 흔적이 인간과 유인원 DNA의 정확히 같은 위치에 있기 때문에</button>
+      <button class="quiz-opt" onclick="checkQ(6,'d','c')">모든 생물이 같은 바이러스에 감염됐기 때문에</button>
+    </div>
+    <div class="quiz-feedback" id="q6-fb"></div>
+  </div>
+
+  <div id="quiz-score-box">
+    <h3 id="score-title">결과</h3>
+    <p id="score-desc"></p>
+  </div>
+  <button id="show-score-btn" onclick="showScore()" style="display:none; margin-top:16px; padding:12px 28px; background:var(--primary); color:#fff; border:none; border-radius:20px; font-size:1rem; font-weight:700; cursor:pointer;">🏆 최종 결과 보기</button>
+</section>
+
+</main>
+
+<footer>
+  <p>이브 (성경·신학·진화생물학·고대근동 전문) | 진화적 창조 교육자료 | 중학생 대상</p>
+  <p style="margin-top:6px;"><a href="https://biologos.org" target="_blank">BioLogos.org</a> — 과학과 신앙의 통합을 위한 학술 커뮤니티</p>
+</footer>
+
+<script>
+// NAV ACTIVE
+function setActive(el) {
+  document.querySelectorAll('nav ul li a').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// TAB SWITCH
+function switchTab(section, panelId) {
+  const bar = document.getElementById('tabs-' + section);
+  const buttons = bar.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('[id^="' + section + '-"]');
+  panels.forEach(p => p.classList.remove('active'));
+  buttons.forEach(b => b.classList.remove('active'));
+  document.getElementById(section + '-' + panelId).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// QUIZ
+const feedbacks = {
+  1: { c: '✅ 정답! 창세기 1장은 "어떻게"가 아닌 "누가·왜"를 신학적으로 선포합니다.', a: '❌ 창세기는 과학 교과서가 아닙니다. 신학적 목적으로 쓰였습니다.', b: '❌ 가깝지만, 더 정확히는 신학적 선포가 목적입니다.', d: '❌ 창세기는 바벨론 이야기와 유사하지만 전혀 다른 신학적 메시지를 담습니다.' },
+  2: { b: '✅ 정답! 반증 불가능성과 동료 심사 부재가 핵심 문제입니다.', a: '❌ 기독교인이 연구하는 것 자체가 문제는 아닙니다.', c: '❌ 지구 나이 추정치 자체가 문제가 아니라 방법론의 문제입니다.', d: '❌ 성경을 근거로 삼는 것 자체보다 검증 방법이 없다는 게 더 핵심 문제입니다.' },
+  3: { d: '✅ 정답! 인간과 침팬지는 공통 조상에서 약 700만 년 전 갈라졌습니다.', a: '❌ 원숭이→인간이 아닙니다. 공통 조상에서 갈라진 것입니다.', b: '❌ 돌연변이는 무작위지만 자연선택은 비무작위적입니다.', c: '❌ 진화론은 수만 개의 연구로 검증된 과학 이론입니다.' },
+  4: { c: '✅ 정답! 하나님이 진화를 방법으로 사용하셔서 생명을 창조하셨다는 입장입니다.', a: '❌ 진화적 창조는 성경의 신학적 권위를 인정합니다.', b: '❌ 이신론이 아닙니다. 하나님은 과정 속에 내재하시는 분입니다.', d: '❌ 진화적 창조는 인간도 진화 과정을 통해 등장했음을 수용합니다.' },
+  5: { b: '✅ 정답! 아우구스티누스는 창세기의 날을 상징적으로 해석하며 즉각적 창조를 주장하기도 했습니다.', a: '❌ 반대입니다. 아우구스티누스는 비문자적 해석의 선구자입니다.', c: '❌ 아우구스티누스는 그런 주장을 하지 않았습니다.', d: '❌ 아우구스티누스는 성경과 이성/자연의 통합을 추구했습니다.' },
+  6: { c: '✅ 정답! 공통 조상 없이는 정확히 같은 위치에 같은 바이러스 흔적이 있을 수 없습니다.', a: '❌ 바이러스 변이 자체가 증거는 아닙니다.', b: '❌ 그것이 증거가 아닙니다. 위치의 정확한 일치가 핵심입니다.', d: '❌ 이유가 틀렸습니다. 위치의 일치가 핵심 증거입니다.' },
+};
+
+let answered = {};
+let correct = 0;
+
+function checkQ(qNum, chosen, correctAns) {
+  if (answered[qNum]) return;
+  answered[qNum] = chosen;
+  const card = document.getElementById('q' + qNum);
+  const opts = card.querySelectorAll('.quiz-opt');
+  const fb = document.getElementById('q' + qNum + '-fb');
+  const letters = ['a','b','c','d'];
+  opts.forEach((opt, i) => {
+    opt.disabled = true;
+    if (letters[i] === correctAns) opt.classList.add('correct');
+    else if (letters[i] === chosen) opt.classList.add('wrong');
+  });
+  const isCorrect = chosen === correctAns;
+  if (isCorrect) correct++;
+  fb.textContent = feedbacks[qNum][chosen];
+  fb.className = 'quiz-feedback show ' + (isCorrect ? 'correct' : 'wrong');
+  if (Object.keys(answered).length === 6) {
+    document.getElementById('show-score-btn').style.display = 'inline-block';
+  }
+}
+
+function showScore() {
+  const box = document.getElementById('quiz-score-box');
+  const title = document.getElementById('score-title');
+  const desc = document.getElementById('score-desc');
+  box.style.display = 'block';
+  title.textContent = correct + ' / 6 정답';
+  if (correct === 6) desc.textContent = '🎉 완벽합니다! 진화적 창조의 핵심을 완전히 이해했습니다.';
+  else if (correct >= 4) desc.textContent = '👍 잘 했어요! 다시 한번 틀린 부분을 읽어보세요.';
+  else if (correct >= 2) desc.textContent = '💪 조금 더 읽어보면 금방 이해될 거예요!';
+  else desc.textContent = '📚 처음부터 다시 천천히 읽어보세요. 어렵지 않아요!';
+  document.getElementById('show-score-btn').style.display = 'none';
+  box.scrollIntoView({ behavior: 'smooth' });
+}
+
+// SCROLL SPY
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav ul li a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+
+// Animate progress bars on load
+window.addEventListener('load', () => {
+  document.querySelectorAll('.progress-fill').forEach(bar => {
+    const w = bar.style.width;
+    bar.style.width = '0';
+    setTimeout(() => { bar.style.width = w; }, 300);
+  });
+});
+</script>
+</body>
+</html>
