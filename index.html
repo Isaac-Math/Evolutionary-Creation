@@ -65,10 +65,11 @@
 
   .version-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 24px;
   }
-  @media (max-width: 620px) { .version-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) { .version-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .version-grid { grid-template-columns: 1fr; } }
   @media (max-width: 480px) {
     header { padding: 36px 16px 28px; }
     header h1 { font-size: 1.6rem; }
@@ -103,6 +104,8 @@
   .version-card.middle:hover { border-color: var(--primary); }
   .version-card.high { border-color: var(--sky); }
   .version-card.high:hover { border-color: #2d6fd4; }
+  .version-card.kids { border-color: var(--gold); }
+  .version-card.kids:hover { border-color: var(--accent); }
 
   .version-card::before {
     content: '';
@@ -112,11 +115,13 @@
   }
   .version-card.middle::before { background: linear-gradient(90deg, var(--primary-light), var(--primary)); }
   .version-card.high::before { background: linear-gradient(90deg, var(--sky), #2d6fd4); }
+  .version-card.kids::before { background: linear-gradient(90deg, var(--gold), var(--accent)); }
 
   .v-emoji { font-size: 2.8rem; }
   .v-level { font-size: .78rem; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; }
   .version-card.middle .v-level { color: var(--primary); }
   .version-card.high .v-level { color: var(--sky); }
+  .version-card.kids .v-level { color: var(--accent); }
   .v-title { font-size: 1.3rem; font-weight: 800; }
   .v-desc { font-size: .93rem; color: var(--muted); line-height: 1.7; }
 
@@ -125,6 +130,7 @@
   .v-features li::before { content: '✓'; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
   .version-card.middle .v-features li::before { color: var(--primary); }
   .version-card.high .v-features li::before { color: var(--sky); }
+  .version-card.kids .v-features li::before { color: var(--accent); }
 
   .v-btn {
     margin-top: auto;
@@ -138,6 +144,7 @@
   }
   .version-card.middle .v-btn { background: var(--primary); color: #fff; }
   .version-card.high .v-btn { background: var(--sky); color: #fff; }
+  .version-card.kids .v-btn { background: var(--accent); color: #fff; }
   .version-card:hover .v-btn { opacity: .88; }
 
   .info-box {
@@ -216,12 +223,27 @@
       <span class="v-btn">대학생 버전으로 →</span>
     </a>
 
+    <a href="kids.html" class="version-card kids">
+      <span class="v-emoji">🌟</span>
+      <span class="v-level">어린이 버전</span>
+      <span class="v-title">세상을 만드신 하나님</span>
+      <p class="v-desc">초등 3–4학년을 위한 눈높이 탐구. 그림과 이야기로 진화적 창조를 쉽게 배워요.</p>
+      <ul class="v-features">
+        <li>생명의 역사 타임라인 삽화</li>
+        <li>진화가 뭔지 그림으로 쉽게!</li>
+        <li>아담과 하와에 대한 궁금증</li>
+        <li>성경과 과학은 싸우지 않아요</li>
+        <li>간단한 퀴즈 5문제</li>
+      </ul>
+      <span class="v-btn">어린이 버전으로 →</span>
+    </a>
+
   </div>
 
   <div class="info-box">
     <span class="info-icon">💡</span>
     <p><strong>어떤 버전을 선택해야 할까요?</strong><br>
-    두 버전 모두 같은 핵심 주제를 다룹니다. 청소년 버전은 개념 이해에, 대학생 버전은 학술적 논증과 원문 분석에 초점을 맞춥니다. 청소년 버전을 먼저 읽고 대학생 버전으로 심화하는 것도 좋은 방법입니다.</p>
+    세 버전 모두 같은 핵심 주제를 다룹니다. 어린이 버전은 초등 3–4학년을 위해 그림과 이야기로 쉽게 소개하고, 청소년 버전은 개념 이해에, 대학생 버전은 학술적 논증과 원문 분석에 초점을 맞춥니다. 순서대로 읽으면서 단계별로 심화하는 것도 좋은 방법입니다.</p>
   </div>
 </main>
 

@@ -23,11 +23,11 @@ a{color:var(--primary);}
 .level-badge{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:4px 16px;font-size:.8rem;margin-top:14px;}
 
 /* ── Nav ── */
-nav{background:#fff;border-bottom:2px solid var(--primary-light);position:sticky;top:0;z-index:100;overflow-x:auto;}
-.nav-inner{display:flex;gap:0;white-space:nowrap;max-width:1100px;margin:0 auto;padding:0 12px;}
-nav a{display:inline-block;padding:14px 14px;font-size:.82rem;font-weight:600;color:var(--muted);text-decoration:none;border-bottom:3px solid transparent;transition:.2s;}
-nav a:hover{color:var(--primary);}
-nav a.active{color:var(--primary);border-bottom-color:var(--primary);}
+nav{background:#fff;border-bottom:2px solid var(--primary-xlight);position:sticky;top:0;z-index:100;overflow-x:auto;scrollbar-width:none;}
+nav::-webkit-scrollbar{display:none;}
+.nav-inner{display:flex;gap:0;max-width:1100px;margin:0 auto;padding:0 12px;}
+nav a{display:inline-block;padding:13px 14px;font-size:.83rem;font-weight:600;color:var(--muted);text-decoration:none;white-space:nowrap;border-bottom:3px solid transparent;transition:.2s;}
+nav a:hover,nav a.active{color:var(--primary);border-bottom-color:var(--primary);}
 
 /* ── Main ── */
 main{max-width:900px;margin:0 auto;padding:40px 20px 80px;}
@@ -63,7 +63,8 @@ li{margin-bottom:4px;}
 .blockquote.purple{background:var(--purple-light);border-color:var(--purple);}
 
 /* ── Tabs ── */
-.tab-bar{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:0;overflow-x:auto;}
+.tab-bar{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:0;overflow-x:auto;scrollbar-width:none;}
+.tab-bar::-webkit-scrollbar{display:none;}
 .tab-btn{padding:10px 18px;font-size:.86rem;font-weight:600;color:var(--muted);background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;cursor:pointer;transition:.2s;white-space:nowrap;}
 .tab-btn.active{color:var(--primary);border-bottom-color:var(--primary);}
 .tab-panel{display:none;background:var(--card);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius);padding:22px;}

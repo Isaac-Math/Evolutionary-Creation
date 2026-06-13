@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>진화적 창조 — 어린이 버전</title>
+<style>
+:root {
+  --primary:#2d6a4f; --primary-light:#52b788; --primary-xlight:#d8f3dc;
+  --accent:#e76f51; --accent-light:#fde8e0;
+  --gold:#f59e0b; --gold-light:#fef3c7;
+  --sky:#4895ef; --sky-light:#cce5ff;
+  --bg:#f0fdf4; --card:#ffffff; --text:#1a1a2e; --muted:#6b7280;
+  --radius:16px; --shadow:0 4px 20px rgba(0,0,0,0.09);
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body {
+  font-family:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+  background:var(--bg); color:var(--text);
+  min-height:100vh; display:flex; flex-direction:column;
+  font-size:1.05rem; line-height:1.8;
+}
+
+/* TOP BAR */
+.top-bar {
+  background:var(--primary); padding:10px 20px;
+  display:flex; align-items:center; gap:10px;
+}
+.top-bar a {
+  color:#fff; text-decoration:none; font-size:.83rem; font-weight:600;
+  display:inline-flex; align-items:center; gap:5px;
+  background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.3);
+  border-radius:16px; padding:4px 12px;
+}
+.top-bar span { color:rgba(255,255,255,.55); font-size:.8rem; }
+.breadcrumb { color:rgba(255,255,255,.8); font-size:.82rem; }
+
+/* SITE HEADER */
+.site-header {
+  background:linear-gradient(135deg,var(--primary) 0%,#52b788 60%,#95d5b2 100%);
+  color:#fff; padding:48px 24px 40px; text-align:center;
+}
+.site-header h1 { font-size:2rem; font-weight:800; margin-bottom:8px; }
+.site-header .subtitle { opacity:.9; font-size:1.05rem; max-width:480px; margin:0 auto 18px; line-height:1.7; }
+.level-badge {
+  display:inline-block; background:rgba(255,255,255,.25);
+  border:1.5px solid rgba(255,255,255,.5);
+  border-radius:20px; padding:5px 18px; font-size:.85rem; font-weight:700;
+}
+
+/* TAB NAV */
+.tab-nav {
+  background:#fff; border-bottom:2px solid var(--primary-xlight);
+  overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
+}
+.tab-nav::-webkit-scrollbar { display:none; }
+.tab-nav-inner {
+  display:flex; max-width:900px; margin:0 auto; padding:0 12px;
+}
+.tab-btn {
+  flex-shrink:0; padding:13px 14px; border:none; background:none;
+  cursor:pointer; font-size:.83rem; font-weight:600; color:var(--muted);
+  border-bottom:3px solid transparent; margin-bottom:-2px; transition:all .2s;
+  font-family:inherit; white-space:nowrap;
+}
+.tab-btn.active { color:var(--primary); border-bottom-color:var(--primary); }
+.tab-btn:hover { color:var(--primary); }
+
+/* MAIN */
+main { flex:1; max-width:860px; margin:0 auto; padding:44px 20px 80px; width:100%; }
+
+/* SECTION */
+.section { display:none; }
+.section.active { display:block; }
+
+.section-title {
+  font-size:1.6rem; font-weight:800; color:var(--primary);
+  margin-bottom:8px; display:flex; align-items:center; gap:10px;
+}
+.section-intro { font-size:1rem; color:var(--muted); margin-bottom:28px; line-height:1.8; }
+
+/* CARDS */
+.card {
+  background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:28px; margin-bottom:20px;
+}
+.card.green { border-left:5px solid var(--primary); }
+.card.orange { border-left:5px solid var(--accent); }
+.card.yellow { border-left:5px solid var(--gold); background:var(--gold-light); }
+.card h3 { margin-bottom:12px; }
+
+.callout {
+  background:var(--gold-light); border-radius:12px; padding:20px 24px;
+  margin:20px 0; display:flex; gap:14px; align-items:flex-start;
+  border-left:4px solid var(--gold);
+}
+.callout-icon { font-size:1.6rem; flex-shrink:0; }
+.callout p { font-size:.95rem; line-height:1.75; }
+
+/* SVG WRAPPER */
+.svg-wrapper {
+  background:#fff; border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:20px; margin:24px 0; overflow-x:auto;
+}
+.svg-wrapper svg { display:block; }
+
+/* TWO-COLUMN GRID */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:8px; }
+@media (max-width:540px) { .two-col { grid-template-columns:1fr; } }
+.col-box { border-radius:10px; padding:16px; text-align:center; }
+.col-box .col-icon { font-size:1.8rem; margin-bottom:8px; }
+.col-box p { font-size:.9rem; margin-top:8px; color:#374151; line-height:1.7; }
+
+/* HIGHLIGHT BOX */
+.highlight {
+  background:var(--primary-xlight); border-radius:10px;
+  padding:16px 20px; margin:14px 0; font-size:.95rem; line-height:1.75;
+}
+.highlight strong { color:var(--primary); }
+
+/* ACCORDION */
+.accordion { display:flex; flex-direction:column; gap:12px; }
+.accordion-item { background:#fff; border-radius:12px; box-shadow:var(--shadow); overflow:hidden; }
+.accordion-btn {
+  width:100%; text-align:left; padding:18px 22px; border:none; background:none;
+  cursor:pointer; font-size:1rem; font-weight:700; color:var(--text);
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  font-family:inherit; line-height:1.5;
+}
+.accordion-btn .q-text { display:flex; align-items:center; gap:10px; }
+.accordion-btn .q-icon { font-size:1.3rem; flex-shrink:0; }
+.accordion-btn .arrow { font-size:.8rem; color:var(--muted); transition:transform .2s; flex-shrink:0; }
+.accordion-btn.open .arrow { transform:rotate(180deg); }
+.accordion-content { display:none; padding:0 22px 20px; }
+.accordion-content.open { display:block; }
+.accordion-content p { font-size:.97rem; line-height:1.8; }
+.accordion-content p + p { margin-top:10px; }
+
+/* FEATURE LIST */
+.feature-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.feature-list li { display:flex; align-items:flex-start; gap:8px; font-size:.97rem; }
+
+/* QUIZ */
+.quiz-card {
+  background:#fff; border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:28px; margin-bottom:16px; border-left:4px solid var(--primary-light);
+}
+.quiz-q { font-size:1rem; font-weight:700; margin-bottom:14px; line-height:1.6; }
+.quiz-options { display:flex; flex-direction:column; gap:8px; }
+.quiz-opt {
+  padding:12px 16px; border:2px solid #e5e7eb; border-radius:10px;
+  cursor:pointer; font-size:.95rem; transition:all .18s;
+  background:#fff; text-align:left; font-family:inherit;
+}
+.quiz-opt:hover:not(:disabled) { border-color:var(--primary-light); background:var(--primary-xlight); }
+.quiz-opt.correct { border-color:#22c55e; background:#dcfce7; }
+.quiz-opt.wrong { border-color:#ef4444; background:#fee2e2; }
+.quiz-feedback { margin-top:10px; font-size:.9rem; font-weight:600; display:none; line-height:1.6; }
+.quiz-feedback.show { display:block; }
+.quiz-feedback.ok { color:#16a34a; }
+.quiz-feedback.no { color:#dc2626; }
+
+#quiz-result {
+  text-align:center; background:var(--primary-xlight);
+  border-radius:var(--radius); padding:32px; display:none; margin-top:20px;
+}
+#quiz-result h3 { font-size:1.5rem; color:var(--primary); margin-bottom:8px; }
+#quiz-result p { color:var(--muted); }
+
+/* FOOTER */
+footer {
+  background:var(--primary); color:rgba(255,255,255,.8);
+  text-align:center; padding:20px; font-size:.83rem;
+}
+footer a { color:rgba(255,255,255,.9); }
+
+/* RESPONSIVE */
+@media (max-width:600px) {
+  .site-header { padding:36px 16px 30px; }
+  .site-header h1 { font-size:1.6rem; }
+  main { padding:32px 14px 60px; }
+  .card { padding:20px; }
+  .section-title { font-size:1.35rem; }
+  .tab-btn { padding:12px 12px; font-size:.82rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <a href="index.html">🏠 버전 선택으로</a>
+  <span>|</span>
+  <span class="breadcrumb">진화적 창조 — 어린이 버전</span>
+</div>
+
+<!-- SITE HEADER -->
+<div class="site-header">
+  <h1>🌿 진화적 창조</h1>
+  <p class="subtitle">하나님이 세상을 어떻게 만드셨는지 함께 알아봐요!</p>
+  <span class="level-badge">어린이 버전 (초등 3–4학년)</span>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="showSection(0)">🌍 하나님의 창조</button>
+    <button class="tab-btn" onclick="showSection(1)">⏱️ 생명의 역사</button>
+    <button class="tab-btn" onclick="showSection(2)">🌱 어떻게 만드셨을까?</button>
+    <button class="tab-btn" onclick="showSection(3)">🤔 궁금한 점들</button>
+    <button class="tab-btn" onclick="showSection(4)">📖 성경의 이야기</button>
+    <button class="tab-btn" onclick="showSection(5)">✝️ 우리의 믿음</button>
+    <button class="tab-btn" onclick="showSection(6)">✏️ 퀴즈</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ── S1: 하나님의 창조 ── -->
+<section class="section active" id="s1">
+  <h2 class="section-title">🌍 하나님이 세상을 만드셨어요</h2>
+  <p class="section-intro">창세기 1장을 읽어보면, 하나님이 빛도 만드시고, 하늘도, 땅도, 동물도, 그리고 사람도 만드셨다고 해요. 근데 "어떻게" 만드셨을까요?</p>
+
+  <div class="card green">
+    <p>📖 <strong>창세기 1장 1절</strong>: "태초에 하나님이 천지를 창조하시니라"</p>
+    <p style="margin-top:12px;">이 짧은 문장 안에 엄청난 진리가 들어 있어요. 하나님이 이 모든 것의 주인이시라는 것! 그런데 과학자들은 하나님이 세상을 어떻게 만드셨는지 그 과정을 연구해 왔어요.</p>
+  </div>
+
+  <div class="callout">
+    <span class="callout-icon">💡</span>
+    <p><strong>생각해 봐요:</strong> 엄마나 아빠가 케이크를 만들 때, 재료를 가져오고, 섞고, 구우는 <em>과정</em>이 있잖아요? 하나님도 세상을 만드실 때 <em>과정</em>을 사용하셨을 수 있어요!</p>
+  </div>
+
+  <div class="card">
+    <h3 style="color:var(--primary);">🎯 이 페이지에서 배울 것들</h3>
+    <ul class="feature-list" style="margin-top:4px;">
+      <li>⏱️ 우주와 생명이 어떻게 시작되었는지</li>
+      <li>🌱 "진화"가 무엇인지, 왜 하나님의 창조와 함께 이야기할 수 있는지</li>
+      <li>🤔 아담과 하와에 대한 궁금증들</li>
+      <li>📖 성경이 말하는 것과 과학이 말하는 것이 어떻게 다른지</li>
+      <li>✝️ 하나님을 믿는 믿음은 변하지 않는다는 것!</li>
+    </ul>
+  </div>
+
+  <div class="card yellow">
+    <p>🌟 <strong>진화적 창조(Evolutionary Creation)</strong>란, 하나님이 진화라는 과정을 통해 생명을 만드셨다고 보는 생각이에요. 과학과 신앙이 싸우지 않고 함께 갈 수 있다는 거예요!</p>
+  </div>
+</section>
+
+<!-- ── S2: 생명의 역사 ── -->
+<section class="section" id="s2">
+  <h2 class="section-title">⏱️ 우주와 생명의 역사</h2>
+  <p class="section-intro">과학자들은 아주 오래된 돌(암석), 화석, 별빛을 연구해서 우주와 지구의 역사를 알아냈어요. 얼마나 오래됐을까요?</p>
+
+  <!-- TIMELINE SVG -->
+  <div class="svg-wrapper">
+    <svg viewBox="0 0 800 390" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:580px;">
+      <rect width="800" height="390" fill="#f0fdf4" rx="12"/>
+      <text x="400" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#2d6a4f" font-family="'Noto Sans KR',sans-serif">🌿 생명의 역사 타임라인</text>
+
+      <!-- Arrow labels -->
+      <text x="80" y="56" text-anchor="middle" font-size="11" fill="#6b7280" font-family="sans-serif">← 오래된 과거</text>
+      <text x="500" y="56" text-anchor="middle" font-size="11" fill="#2d6a4f" font-family="sans-serif">하나님의 창조 계획이 이루어지는 긴 시간</text>
+
+      <!-- Timeline line -->
+      <line x1="60" y1="130" x2="738" y2="130" stroke="#52b788" stroke-width="4"/>
+      <polygon points="738,124 754,130 738,136" fill="#52b788"/>
+      <text x="760" y="134" font-size="11" fill="#52b788" font-family="sans-serif">지금</text>
+
+      <!-- Event nodes (y=130 on line) -->
+
+      <!-- 1. 빅뱅 -->
+      <circle cx="85" cy="130" r="20" fill="#7b2d8b"/>
+      <!-- emoji above -->
+      <text x="85" y="95" text-anchor="middle" font-size="28" font-family="sans-serif">💥</text>
+      <!-- label below -->
+      <text x="85" y="162" text-anchor="middle" font-size="11" font-weight="bold" fill="#4a1942" font-family="sans-serif">빅뱅</text>
+      <text x="85" y="177" text-anchor="middle" font-size="10" fill="#6b7280" font-family="sans-serif">138억 년 전</text>
+      <text x="85" y="192" text-anchor="middle" font-size="10" fill="#6b7280" font-family="sans-serif">우주의 시작!</text>
+
+      <!-- 2. 지구 탄생 -->
+      <circle cx="218" cy="130" r="20" fill="#f59e0b"/>
+      <text x="218" y="95" text-anchor="middle" font-size="28" font-family="sans-serif">🌍</text>
+      <text x="218" y="162" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e" font-family="sans-serif">지구 탄생</text>
+      <text x="218" y="177" text-anchor="middle" font-size="10" fill="#6b7280" font-family="sans-serif">46억 년 전</text>
+      <text x="218" y="192" text-anchor="middle" font-size="10" fill="#6b7280" font-family="sans-serif">태양계 완성</text>
+
+      <!-- 3. 첫 생명체 -->
+      <circle cx="350" cy="130" r="20" fill="#10b981"/>
+      <text x="350" y="95" text-anchor="middle" font-size="28" font-family="sans-serif">🦠</text>
+      <text x="350" y="162" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46" font-family="sans-serif">첫 생명체</text>
+      <text x="350" y="177" text-anchor="middle" font-size="10" fill="#6b7280" font-family="sans-serif">38억 년 전</text>
+      <text x="350" y="192" text-anchor="middle" font-size="10" fill="#6b7280" font-family="sans-serif">아주 작은 세균</text>
+
+      <!-- 4. 다양한 생물 -->
+      <circle cx="480" cy="130" r="20" fill="#4895ef"/>
+      <text x="480" y="95" text-anchor="middle" font-size="28" font-family="sans-serif">🐟</text>
+      <text x="480" y="162" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e40af" font-family="sans-serif">다양한 생물</text>
+      <text x="480" y="177" text-anchor="middle" font-size="10" fill="#6b7280" font-family="sans-serif">5억 년 전</text>
+      <text x="480" y="192" text-anchor="middle" font-size="10" fill="#6b7280" font-family="sans-serif">물고기·식물</text>
+
+      <!-- 5. 공룡 -->
+      <circle cx="600" cy="130" r="20" fill="#e76f51"/>
+      <text x="600" y="95" text-anchor="middle" font-size="28" font-family="sans-serif">🦕</text>
+      <text x="600" y="162" text-anchor="middle" font-size="11" font-weight="bold" fill="#7c2d12" font-family="sans-serif">공룡 시대</text>
+      <text x="600" y="177" text-anchor="middle" font-size="10" fill="#6b7280" font-family="sans-serif">2억 년 전</text>
+      <text x="600" y="192" text-anchor="middle" font-size="10" fill="#6b7280" font-family="sans-serif">거대한 공룡들</text>
+
+      <!-- 6. 인류 -->
+      <circle cx="710" cy="130" r="20" fill="#2d6a4f"/>
+      <text x="710" y="95" text-anchor="middle" font-size="28" font-family="sans-serif">👤</text>
+      <text x="710" y="162" text-anchor="middle" font-size="11" font-weight="bold" fill="#2d6a4f" font-family="sans-serif">인류 등장</text>
+      <text x="710" y="177" text-anchor="middle" font-size="10" fill="#6b7280" font-family="sans-serif">수십만 년 전</text>
+      <text x="710" y="192" text-anchor="middle" font-size="10" fill="#6b7280" font-family="sans-serif">우리의 조상!</text>
+
+      <!-- Bottom note box -->
+      <rect x="170" y="230" width="460" height="130" rx="12" fill="rgba(45,106,79,0.08)" stroke="#52b788" stroke-width="1.5"/>
+      <text x="400" y="256" text-anchor="middle" font-size="13" font-weight="bold" fill="#2d6a4f" font-family="sans-serif">🙏 이 모든 역사 속에 하나님이 함께 계셨어요!</text>
+      <text x="400" y="278" text-anchor="middle" font-size="12" fill="#374151" font-family="sans-serif">과학은 "어떻게" 만들어졌는지를 보여주고,</text>
+      <text x="400" y="298" text-anchor="middle" font-size="12" fill="#374151" font-family="sans-serif">성경은 "왜, 누가" 만드셨는지를 알려줘요.</text>
+      <text x="400" y="318" text-anchor="middle" font-size="12" fill="#374151" font-family="sans-serif">둘이 함께하면 더 넓은 하나님의 세계를 볼 수 있어요!</text>
+      <text x="400" y="345" text-anchor="middle" font-size="11" fill="#6b7280" font-family="sans-serif">(스크롤해서 타임라인을 모두 보세요 →)</text>
+    </svg>
+  </div>
+
+  <div class="card green">
+    <h3 style="color:var(--primary);">🔍 과학자들이 발견한 것들</h3>
+    <p>과학자들은 화석(옛날 생물의 흔적이 돌에 굳어진 것), 유전자(세포 안의 생명 설계도), 그리고 별빛을 연구해서 지구가 약 <strong>46억 년</strong>이나 되었다는 것을 알아냈어요.</p>
+    <p style="margin-top:10px;">46억 년은 얼마나 긴 시간일까요? 초당 1년으로 세면 <strong>146년</strong>이 지나야 46억에 도달해요! 정말 엄청나게 긴 하나님의 시간이에요.</p>
+  </div>
+
+  <div class="callout">
+    <span class="callout-icon">🤔</span>
+    <p><strong>질문이 생길 수 있어요:</strong> "성경에서는 6일 만에 만드셨다고 하던데?" — 이 질문은 5번 섹션에서 자세히 알아볼 거예요!</p>
+  </div>
+
+  <div class="card">
+    <h3 style="color:var(--primary);">🌊 생명은 어디서 시작됐을까요?</h3>
+    <p>처음 생명은 바다에서 시작되었어요. 처음엔 아주 아주 작은 세균 같은 것들만 있었어요. 그것들이 수십억 년에 걸쳐 조금씩 변하면서 지금처럼 다양한 생물들이 생겨났답니다.</p>
+  </div>
+</section>
+
+<!-- ── S3: 어떻게 만드셨을까 ── -->
+<section class="section" id="s3">
+  <h2 class="section-title">🌱 하나님은 어떻게 만드셨을까요?</h2>
+  <p class="section-intro">"진화(進化)"라는 말을 들어봤나요? 어렵게 들릴 수 있지만, 사실 간단한 생각이에요. 생물이 오랜 시간에 걸쳐 조금씩 변한다는 거예요.</p>
+
+  <div class="card green">
+    <h3 style="color:var(--primary);">🐕 진화란 무엇일까요?</h3>
+    <p>강아지를 생각해 봐요. 지금 우리 주변에는 푸들, 진돗개, 불독, 시바이누 등 정말 다양한 종류의 개가 있어요. 그런데 이 개들은 원래 늑대에서 왔다는 걸 알고 있나요?</p>
+    <p style="margin-top:10px;">수천 년 동안 사람들이 필요에 맞는 개들을 골라서 키우면서 이렇게 다양한 개들이 생겨났어요. 이것도 일종의 변화예요!</p>
+  </div>
+
+  <!-- EVOLUTION SVG -->
+  <div class="svg-wrapper">
+    <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:520px;">
+      <rect width="720" height="380" fill="#f0fdf4" rx="12"/>
+      <text x="360" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d6a4f" font-family="sans-serif">생물이 변화하는 방법 (자연선택)</text>
+
+      <!-- Step headers -->
+      <rect x="20" y="45" width="200" height="44" rx="8" fill="#d8f3dc"/>
+      <text x="120" y="63" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d6a4f" font-family="sans-serif">① 다양한 개체들</text>
+      <text x="120" y="80" text-anchor="middle" font-size="10.5" fill="#4b5563" font-family="sans-serif">같은 종이라도 조금씩 달라요</text>
+
+      <rect x="260" y="45" width="200" height="44" rx="8" fill="#fef3c7"/>
+      <text x="360" y="63" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e" font-family="sans-serif">② 환경에 맞는 것이 살아남아요</text>
+      <text x="360" y="80" text-anchor="middle" font-size="10.5" fill="#4b5563" font-family="sans-serif">자손도 더 많이 남겨요</text>
+
+      <rect x="500" y="45" width="200" height="44" rx="8" fill="#cce5ff"/>
+      <text x="600" y="63" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af" font-family="sans-serif">③ 오랜 시간 후</text>
+      <text x="600" y="80" text-anchor="middle" font-size="10.5" fill="#4b5563" font-family="sans-serif">새로운 종류가 많아져요</text>
+
+      <!-- Arrows -->
+      <polygon points="228,155 248,145 248,165" fill="#52b788"/>
+      <polygon points="468,155 488,145 488,165" fill="#52b788"/>
+
+      <!-- Column 1: diverse bugs (3 different sizes) -->
+      <text x="60" y="165" text-anchor="middle" font-size="20" font-family="sans-serif">🐛</text>
+      <text x="110" y="158" text-anchor="middle" font-size="28" font-family="sans-serif">🐛</text>
+      <text x="168" y="168" text-anchor="middle" font-size="16" font-family="sans-serif">🐛</text>
+      <text x="105" y="200" text-anchor="middle" font-size="10.5" fill="#6b7280" font-family="sans-serif">크기가 조금씩 달라요</text>
+
+      <!-- Column 2: environment -->
+      <rect x="270" y="115" width="175" height="90" rx="10" fill="rgba(245,158,11,0.12)" stroke="#f59e0b" stroke-width="1.5"/>
+      <text x="357" y="148" text-anchor="middle" font-size="26" font-family="sans-serif">🍃🍃🍃</text>
+      <text x="357" y="178" text-anchor="middle" font-size="22" font-family="sans-serif">🐛🐛</text>
+      <text x="357" y="218" text-anchor="middle" font-size="10.5" fill="#6b7280" font-family="sans-serif">큰 벌레가 더 잘 먹고</text>
+      <text x="357" y="232" text-anchor="middle" font-size="10.5" fill="#6b7280" font-family="sans-serif">자손도 더 많이 남겨요</text>
+
+      <!-- Column 3: result -->
+      <text x="600" y="165" text-anchor="middle" font-size="44" font-family="sans-serif">🐛</text>
+      <text x="600" y="205" text-anchor="middle" font-size="10.5" fill="#6b7280" font-family="sans-serif">수백 세대 후에는</text>
+      <text x="600" y="219" text-anchor="middle" font-size="10.5" fill="#6b7280" font-family="sans-serif">더 큰 종류가 많아져요</text>
+
+      <!-- Bottom explanation -->
+      <rect x="55" y="263" width="610" height="95" rx="12" fill="rgba(45,106,79,0.08)" stroke="#52b788" stroke-width="1.5"/>
+      <text x="360" y="285" text-anchor="middle" font-size="13" font-weight="bold" fill="#2d6a4f" font-family="sans-serif">🙏 하나님이 이 방법을 사용하셨다면?</text>
+      <text x="360" y="306" text-anchor="middle" font-size="11.5" fill="#374151" font-family="sans-serif">수십억 년 동안 수많은 변화를 통해</text>
+      <text x="360" y="324" text-anchor="middle" font-size="11.5" fill="#374151" font-family="sans-serif">세균 → 물고기 → 육지 동물 → 포유류 → 사람까지</text>
+      <text x="360" y="342" text-anchor="middle" font-size="11.5" fill="#374151" font-family="sans-serif">만들어 가셨을 수 있어요. 이것도 하나님의 창조 방법이에요!</text>
+    </svg>
+  </div>
+
+  <div class="card orange">
+    <h3 style="color:var(--accent);">🎨 하나님의 창조를 상상해 보아요</h3>
+    <p>화가가 그림을 그릴 때 한 번에 완성하는 사람도 있지만, 스케치 → 밑칠 → 세부 묘사로 천천히 완성해 가는 사람도 있어요.</p>
+    <p style="margin-top:10px;">하나님도 처음부터 완성된 모습으로 만드셨을 수도 있고, 진화라는 과정을 통해 천천히 완성해 가셨을 수도 있어요. <strong>어느 쪽이든 하나님이 만드신 것은 같아요!</strong></p>
+  </div>
+
+  <div class="callout">
+    <span class="callout-icon">🌿</span>
+    <p><strong>진화적 창조는 이렇게 생각해요:</strong> "하나님이 진화라는 방법을 통해 생명을 만드셨어요. 과학이 발견한 것들이 하나님의 창조 방법을 보여 주는 거예요."</p>
+  </div>
+</section>
+
+<!-- ── S4: 궁금한 점들 ── -->
+<section class="section" id="s4">
+  <h2 class="section-title">🤔 궁금한 점들</h2>
+  <p class="section-intro">진화와 창조 이야기를 들으면 자연스럽게 궁금한 점들이 생겨요. 자주 나오는 질문들을 함께 생각해 봐요.</p>
+
+  <div class="accordion">
+
+    <div class="accordion-item">
+      <button class="accordion-btn" onclick="toggleAcc(this)">
+        <span class="q-text"><span class="q-icon">👫</span> 아담과 하와는 정말 있었나요?</span>
+        <span class="arrow">▼</span>
+      </button>
+      <div class="accordion-content">
+        <p>성경에서 아담과 하와는 하나님이 특별히 만드신 첫 사람들이에요. 과학자들은 인류가 수십만 년 전에 아프리카에서 시작되었다고 해요.</p>
+        <p>그렇다면 아담과 하와는 어떻게 봐야 할까요? 크리스천 학자들 사이에 몇 가지 생각이 있어요:</p>
+        <div class="highlight">
+          <p>💡 <strong>생각 1:</strong> 아담과 하와는 실제로 살았던 특별한 사람들로, 하나님이 그들을 선택해서 특별한 관계를 시작하셨어요.</p>
+        </div>
+        <div class="highlight">
+          <p>💡 <strong>생각 2:</strong> 아담과 하와는 하나님과 특별한 관계를 맺은 첫 번째 인류를 대표하는 이름이에요. 마치 전래동화의 주인공처럼, 진리를 담은 이야기 속 인물이에요.</p>
+        </div>
+        <p>어느 쪽이든, <strong>가장 중요한 것</strong>은: 하나님이 인간을 특별히 사랑하시고, 우리가 하나님과 멀어졌다는 것, 그리고 예수님이 우리를 다시 하나님께 데려오셨다는 거예요. 이것은 변하지 않아요! ✝️</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-btn" onclick="toggleAcc(this)">
+        <span class="q-text"><span class="q-icon">🐒</span> 우리가 원숭이에서 왔다는 게 맞나요?</span>
+        <span class="arrow">▼</span>
+      </button>
+      <div class="accordion-content">
+        <p>사람들이 많이 오해하는 부분이에요! 과학자들은 "사람이 원숭이에서 왔다"고 하지 않아요.</p>
+        <p>정확하게는, 사람과 침팬지 같은 유인원은 <strong>아주 오래전에 공통 조상이 있었다</strong>는 거예요. 마치 형제가 같은 부모를 가졌듯이요.</p>
+        <div class="highlight">
+          <p>🌳 <strong>나무 비유:</strong> 나무에서 가지들이 뻗어나가듯, 오래된 공통 조상에서 침팬지와 사람이 서로 다른 방향으로 변해왔어요. 침팬지가 변해서 사람이 된 게 아니라, 둘이 같은 가지에서 나온 거예요!</p>
+        </div>
+        <p>그리고 진화가 어떻게 됐든, 하나님은 인간을 특별하게 만드셨어요. 하나님의 형상(Imago Dei)을 담고 있는 것은 우리 인간뿐이에요!</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-btn" onclick="toggleAcc(this)">
+        <span class="q-text"><span class="q-icon">📅</span> 지구가 46억 살이면 성경이 틀린 건가요?</span>
+        <span class="arrow">▼</span>
+      </button>
+      <div class="accordion-content">
+        <p>아니에요! 성경은 과학 교과서가 아니에요. 성경은 <strong>왜 세상이 만들어졌는지</strong>와 <strong>하나님이 누구신지</strong>를 알려주는 책이에요.</p>
+        <p>창세기 1장의 "6일"은 하나님이 단계별로 세상을 창조하셨다는 것을 강조하는 표현일 수 있어요. 고대 사람들에게 "6일" 이야기는 "하나님이 완전하고 질서 있게 만드셨다"는 뜻이었을 거예요.</p>
+        <div class="highlight">
+          <p>✅ <strong>핵심:</strong> 성경은 "하나님이 세상을 만드셨다"는 진리를 알려줘요. 과학은 "어떻게 만드셨는지"를 연구해요. 둘은 싸우지 않아요!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-btn" onclick="toggleAcc(this)">
+        <span class="q-text"><span class="q-icon">💀</span> 죽음이 아담 전부터 있었던 건가요?</span>
+        <span class="arrow">▼</span>
+      </button>
+      <div class="accordion-content">
+        <p>좋은 질문이에요! 진화가 맞다면 수십억 년 동안 동물들이 죽고 새로운 생물들이 생겨났을 거예요. 그렇다면 "아담이 죄를 지어서 죽음이 들어왔다"는 말은 어떻게 이해해야 할까요?</p>
+        <p>크리스천 학자들은 이렇게 생각하기도 해요: 성경이 말하는 죽음은 <strong>하나님과의 분리</strong>를 의미한다는 거예요. 동물의 죽음과는 다른, 영적인 죽음이요.</p>
+        <div class="highlight">
+          <p>🙏 <strong>변하지 않는 진리:</strong> 인간은 하나님과 멀어졌고(죄), 예수님이 그것을 회복시켜 주셨어요(구원). 이것은 진화 이야기와 상관없이 변하지 않는 복음이에요!</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── S5: 성경의 이야기 ── -->
+<section class="section" id="s5">
+  <h2 class="section-title">📖 성경은 무엇을 말할까요?</h2>
+  <p class="section-intro">성경과 과학, 둘이 같은 걸 말하는 걸까요, 아니면 다른 걸 말하는 걸까요?</p>
+
+  <div class="card">
+    <h3 style="color:var(--primary);">🤝 과학과 성경의 다른 질문</h3>
+    <div class="two-col" style="margin-top:14px;">
+      <div class="col-box" style="background:var(--primary-xlight);">
+        <div class="col-icon">🔬</div>
+        <strong style="color:var(--primary);">과학이 묻는 것</strong>
+        <p>"어떻게" 만들어졌나요?<br>언제 만들어졌나요?<br>어떤 과정을 거쳤나요?</p>
+      </div>
+      <div class="col-box" style="background:#fde8e0;">
+        <div class="col-icon">📖</div>
+        <strong style="color:var(--accent);">성경이 말하는 것</strong>
+        <p>"왜" 만드셨나요?<br>"누가" 만드셨나요?<br>우리는 누구인가요?</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="callout-icon">📚</span>
+    <p><strong>예를 들어 볼게요:</strong> 무지개를 보면 과학자는 "빛이 물방울에서 굴절되어서 여러 색으로 보이는 거야"라고 해요. 성경은 "무지개는 하나님이 다시는 홍수로 심판하지 않겠다는 약속의 표시야"라고 해요. 둘 다 맞아요! 서로 다른 것을 말하는 거예요.</p>
+  </div>
+
+  <div class="card green">
+    <h3 style="color:var(--primary);">📜 창세기는 어떤 종류의 글일까요?</h3>
+    <p>창세기를 쓴 사람들은 아주 오래 전 고대 사람들이었어요. 그 시대 사람들은 진리를 이야기 형식으로 전했어요. "6일 창조"는 하나님이 세상을 완전하고 질서 있게 만드셨다는 것을 아름답게 표현한 방식이에요.</p>
+    <p style="margin-top:10px;">마치 우리가 "해가 뜬다"고 말할 때 실제로 해가 움직인다고 생각하지 않는 것처럼요. 말하는 방식이 다를 뿐, 진리는 같아요!</p>
+  </div>
+
+  <div class="card yellow">
+    <p>🌟 <strong>성경의 핵심 진리 — 변하지 않아요!</strong></p>
+    <ul class="feature-list" style="margin-top:12px;">
+      <li>✅ 하나님이 모든 것을 만드셨어요</li>
+      <li>✅ 인간은 하나님의 형상으로 만들어진 특별한 존재예요</li>
+      <li>✅ 우리는 죄로 하나님과 멀어졌어요</li>
+      <li>✅ 하나님은 우리를 너무나 사랑하셔서 예수님을 보내셨어요</li>
+      <li>✅ 예수님을 믿으면 하나님과 다시 가까워질 수 있어요</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── S6: 우리의 믿음 ── -->
+<section class="section" id="s6">
+  <h2 class="section-title">✝️ 우리는 어떻게 믿을까요?</h2>
+  <p class="section-intro">과학이 많은 것을 알려줘도, 신앙의 핵심은 변하지 않아요. 하나님을 믿는 믿음과 과학 지식은 함께 갈 수 있어요!</p>
+
+  <div class="card green">
+    <h3 style="color:var(--primary);">❤️ 가장 중요한 것</h3>
+    <p>진화가 맞는지 안 맞는지, 아담과 하와가 정확히 어떤 분들인지보다 더 중요한 게 있어요:</p>
+    <div class="highlight">
+      <p>🙏 <strong>하나님이 나를 사랑하신다는 것.</strong><br>
+      예수님이 나의 죄를 위해 십자가에 달리셨다는 것.<br>
+      예수님을 믿으면 하나님의 자녀가 될 수 있다는 것.</p>
+    </div>
+    <p style="margin-top:10px;">이것이 복음의 핵심이에요. 이것은 어떤 과학 발견이 있어도 변하지 않아요! ✝️</p>
+  </div>
+
+  <div class="card">
+    <h3 style="color:var(--primary);">🔬 과학자도 크리스천이 될 수 있나요?</h3>
+    <p>물론이에요! 역사적으로 많은 위대한 과학자들이 크리스천이었어요.</p>
+    <div class="highlight">
+      <p>👨‍🔬 <strong>프랜시스 콜린스:</strong> 인간 유전체(DNA) 지도를 완성한 세계적인 과학자. 크리스천이에요!</p>
+    </div>
+    <div class="highlight">
+      <p>🌿 <strong>조지 워싱턴 카버:</strong> 땅콩으로 300가지 제품을 발명한 과학자. 독실한 크리스천이었어요!</p>
+    </div>
+    <p style="margin-top:10px;">이들은 "과학이 하나님의 창조 방법을 발견하는 거야"라고 생각했어요.</p>
+  </div>
+
+  <div class="card orange">
+    <h3 style="color:var(--accent);">💪 질문하는 것은 좋은 거예요!</h3>
+    <p>신앙에 대해, 과학에 대해 궁금한 것이 생기면 물어보는 게 좋아요. 하나님은 우리의 질문을 두려워하지 않으세요.</p>
+    <p style="margin-top:10px;">성경에서 많은 인물들이 하나님께 "왜요?"라고 물었어요. 욥, 다윗, 예레미야... 하나님은 그들의 질문을 받아 주셨어요!</p>
+  </div>
+
+  <div class="callout">
+    <span class="callout-icon">🌿</span>
+    <p><strong>함께 기억해요:</strong> 과학은 하나님이 <em>어떻게</em> 만드셨는지를 보여주고, 성경은 하나님이 <em>왜</em>, <em>누구</em>를 위해 만드셨는지를 알려줘요. 둘이 함께하면 더 넓은 하나님의 세계를 볼 수 있어요! 🌍</p>
+  </div>
+</section>
+
+<!-- ── S7: 퀴즈 ── -->
+<section class="section" id="s7">
+  <h2 class="section-title">✏️ 오늘 배운 것 확인해요!</h2>
+  <p class="section-intro">5문제예요. 잘 생각해서 답해 보세요!</p>
+
+  <div class="quiz-card" id="qc0">
+    <p class="quiz-q">1. 하나님이 진화라는 과정을 통해 세상을 만드셨다는 생각을 무엇이라고 부르나요?</p>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="answerQuiz(0,0)">🔬 창조과학</button>
+      <button class="quiz-opt" onclick="answerQuiz(0,1)">🌿 진화적 창조 (Evolutionary Creation)</button>
+      <button class="quiz-opt" onclick="answerQuiz(0,2)">🧬 유전공학</button>
+    </div>
+    <div class="quiz-feedback" id="qf0"></div>
+  </div>
+
+  <div class="quiz-card" id="qc1">
+    <p class="quiz-q">2. 과학자들에 따르면 지구는 약 몇 살인가요?</p>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="answerQuiz(1,0)">📅 6,000년</button>
+      <button class="quiz-opt" onclick="answerQuiz(1,1)">📅 100만 년</button>
+      <button class="quiz-opt" onclick="answerQuiz(1,2)">📅 46억 년</button>
+    </div>
+    <div class="quiz-feedback" id="qf1"></div>
+  </div>
+
+  <div class="quiz-card" id="qc2">
+    <p class="quiz-q">3. 성경은 어떤 질문에 가장 잘 답해 주나요?</p>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="answerQuiz(2,0)">🔬 지구가 정확히 몇 살인가요?</button>
+      <button class="quiz-opt" onclick="answerQuiz(2,1)">❤️ 하나님이 왜, 누구를 위해 만드셨나요?</button>
+      <button class="quiz-opt" onclick="answerQuiz(2,2)">🧬 DNA는 어떻게 작동하나요?</button>
+    </div>
+    <div class="quiz-feedback" id="qf2"></div>
+  </div>
+
+  <div class="quiz-card" id="qc3">
+    <p class="quiz-q">4. 사람과 침팬지의 관계로 가장 올바른 설명은?</p>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="answerQuiz(3,0)">🐒 침팬지가 변해서 사람이 되었다</button>
+      <button class="quiz-opt" onclick="answerQuiz(3,1)">🌳 사람과 침팬지는 아주 오래전 공통 조상을 가진다</button>
+      <button class="quiz-opt" onclick="answerQuiz(3,2)">❌ 아무 관련이 없다</button>
+    </div>
+    <div class="quiz-feedback" id="qf3"></div>
+  </div>
+
+  <div class="quiz-card" id="qc4">
+    <p class="quiz-q">5. 어떤 과학 발견이 있어도 변하지 않는 복음의 핵심은?</p>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="answerQuiz(4,0)">✝️ 하나님이 나를 사랑하시고, 예수님이 나의 죄를 위해 오셨다</button>
+      <button class="quiz-opt" onclick="answerQuiz(4,1)">📅 지구는 6,000년 전에 만들어졌다</button>
+      <button class="quiz-opt" onclick="answerQuiz(4,2)">🔬 과학이 발견한 것들은 모두 거짓이다</button>
+    </div>
+    <div class="quiz-feedback" id="qf4"></div>
+  </div>
+
+  <div id="quiz-result">
+    <h3 id="result-title"></h3>
+    <p id="result-msg" style="margin-top:8px;"></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Made by Isaac with Claude | 진화적 창조 교육자료 — 어린이 버전</p>
+  <p style="margin-top:6px;"><a href="index.html">← 버전 선택으로</a></p>
+</footer>
+
+<script>
+const tabs = document.querySelectorAll('.tab-btn');
+const sections = document.querySelectorAll('.section');
+
+function showSection(n) {
+  sections.forEach((s, i) => s.classList.toggle('active', i === n));
+  tabs.forEach((t, i) => t.classList.toggle('active', i === n));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleAcc(btn) {
+  const content = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.accordion-btn').forEach(b => {
+    b.classList.remove('open');
+    b.nextElementSibling.classList.remove('open');
+  });
+  if (!isOpen) {
+    btn.classList.add('open');
+    content.classList.add('open');
+  }
+}
+
+const answers = [1, 2, 1, 1, 0];
+const feedbacks = [
+  [
+    '창조과학은 지구가 약 6,000년이라고 주장하는 입장이에요.',
+    '정답! 진화적 창조는 하나님이 진화라는 과정을 사용해 만드셨다는 생각이에요. 🌿',
+    '유전공학은 DNA를 연구하고 조작하는 과학 기술이에요.'
+  ],
+  [
+    '6,000년은 창조과학의 주장이에요. 과학적 증거들은 훨씬 오래된 지구를 가리켜요.',
+    '100만 년도 실제 나이보다 훨씬 짧아요.',
+    '정답! 과학자들은 화석과 방사성 동위원소 연구로 지구가 약 46억 년이라는 것을 알아냈어요. 🌍'
+  ],
+  [
+    '지구 나이는 과학이 더 잘 답해줘요.',
+    '정답! 성경은 "왜" 만드셨고 "누구를 위해" 만드셨는지를 알려줘요. 과학은 "어떻게"를 연구하고요. 📖',
+    'DNA는 과학이 연구하는 주제예요.'
+  ],
+  [
+    '흔한 오해예요! 침팬지가 변해서 사람이 된 게 아니에요.',
+    '정답! 사람과 침팬지는 아주 오래전에 공통 조상을 가지고 있어요. 마치 형제처럼요. 🌳',
+    '유전자 연구에 따르면 사람과 침팬지는 공통 조상을 공유해요.'
+  ],
+  [
+    '정답! 하나님의 사랑과 예수님의 구원. 이것은 어떤 과학 발견으로도 바뀌지 않아요. ✝️',
+    '지구 나이는 복음의 핵심 메시지가 아니에요.',
+    '과학 발견들이 모두 거짓이라는 주장은 복음의 핵심과 달라요.'
+  ]
+];
+
+const answered = new Array(5).fill(false);
+let score = 0;
+
+function answerQuiz(q, choice) {
+  if (answered[q]) return;
+  answered[q] = true;
+  const opts = document.querySelectorAll('#qc' + q + ' .quiz-opt');
+  const fb = document.getElementById('qf' + q);
+  const correct = answers[q];
+  opts.forEach((o, i) => {
+    if (i === correct) o.classList.add('correct');
+    else if (i === choice) o.classList.add('wrong');
+    o.disabled = true;
+  });
+  fb.textContent = feedbacks[q][choice];
+  fb.classList.add('show', choice === correct ? 'ok' : 'no');
+  if (choice === correct) score++;
+  if (answered.every(Boolean)) showResult();
+}
+
+function showResult() {
+  const el = document.getElementById('quiz-result');
+  el.style.display = 'block';
+  const t = document.getElementById('result-title');
+  const m = document.getElementById('result-msg');
+  if (score === 5) {
+    t.textContent = '🎉 완벽해요! 5점 만점!';
+    m.textContent = '오늘 배운 내용을 모두 이해했어요. 정말 대단해요!';
+  } else if (score >= 3) {
+    t.textContent = '😊 잘했어요! ' + score + '/5점';
+    m.textContent = '좋아요! 다시 한번 읽어보면 더 잘 이해할 수 있어요.';
+  } else {
+    t.textContent = '🌱 조금 더 공부해요! ' + score + '/5점';
+    m.textContent = '괜찮아요. 다시 섹션들을 읽어보면 도움이 될 거예요!';
+  }
+  el.scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
