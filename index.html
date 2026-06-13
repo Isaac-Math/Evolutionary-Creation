@@ -151,6 +151,22 @@
   .mt { margin-top: 16px; }
   strong.tag { display: inline-block; background: var(--primary-xlight); color: var(--primary); border-radius: 4px; padding: 1px 7px; font-size: .8rem; margin-right: 4px; }
   .scripture { font-style: italic; color: var(--muted); font-size: .9rem; border-left: 3px solid var(--gold); padding-left: 12px; margin: 10px 0; }
+
+  /* PERSON CARD */
+  .person-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+  .person-card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; display: flex; flex-direction: column; gap: 8px; border-top: 3px solid var(--primary-light); }
+  .person-card .person-emoji { font-size: 2.4rem; }
+  .person-card .person-name { font-size: 1rem; font-weight: 800; color: var(--primary); }
+  .person-card .person-role { font-size: .8rem; color: var(--muted); font-weight: 600; }
+  .person-card .person-quote { font-style: italic; font-size: .88rem; border-left: 3px solid var(--primary-light); padding-left: 10px; color: var(--text); line-height: 1.5; }
+  .person-card .person-tag { font-size: .75rem; background: var(--primary-xlight); color: var(--primary); border-radius: 4px; padding: 2px 8px; display: inline-block; margin: 2px 2px 0 0; }
+
+  /* GLOSSARY */
+  .gloss-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .gloss-item { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; border-top: 3px solid var(--primary-light); }
+  .gloss-item .gloss-term { font-weight: 800; font-size: .95rem; color: var(--primary); margin-bottom: 4px; }
+  .gloss-item .gloss-en { font-size: .78rem; color: var(--muted); margin-bottom: 8px; font-style: italic; }
+  .gloss-item .gloss-def { font-size: .88rem; line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -176,6 +192,11 @@
     <li><a href="#s4" onclick="setActive(this)">🌿 진화적 창조</a></li>
     <li><a href="#s5" onclick="setActive(this)">⚖️ 반론과 반박</a></li>
     <li><a href="#s6" onclick="setActive(this)">🌏 고대근동</a></li>
+    <li><a href="#s8" onclick="setActive(this)">👤 아담과 하와</a></li>
+    <li><a href="#s9" onclick="setActive(this)">✨ 하나님의 형상</a></li>
+    <li><a href="#s10" onclick="setActive(this)">💔 죽음과 고통</a></li>
+    <li><a href="#s11" onclick="setActive(this)">🧑‍🔬 주요 인물</a></li>
+    <li><a href="#s12" onclick="setActive(this)">📚 용어 사전</a></li>
     <li><a href="#s7" onclick="setActive(this)">❓ 퀴즈</a></li>
   </ul>
 </nav>
@@ -991,25 +1012,485 @@
   </div>
 </section>
 
+<!-- ========== S8: 아담과 하와 ========== -->
+<section id="s8">
+  <h2><span class="sec-num">8</span> 아담과 하와 — 어떻게 이해할까?</h2>
+
+  <div class="card accent">
+    <h3>🤔 가장 많이 받는 질문</h3>
+    <p>"진화가 사실이면 아담과 하와는 실존 인물인가요? 원죄는요? 구원은요?"</p>
+    <div class="highlight hl-orange mt">
+      이 질문은 진화적 창조를 처음 접하는 거의 모든 사람이 던집니다. 그리고 진지한 신학자들 사이에도 <strong>다양한 입장</strong>이 있습니다. 하나의 정답이 있는 게 아닙니다.
+    </div>
+  </div>
+
+  <div class="card mt">
+    <h3>📜 창세기 2–3장이 말하는 것</h3>
+    <p>창세기 2장은 하나님이 아담을 "흙으로 빚어" 만드시고 하와를 "갈비뼈로" 만드셨다고 합니다. 이 이야기가 무엇을 의미하는지는 <strong>이야기의 장르와 의도</strong>에 따라 달라집니다.</p>
+    <div class="highlight hl-blue mt">
+      <strong>존 월튼(John Walton)의 통찰:</strong> 창세기 2장은 인간의 <strong>물질적 기원</strong>이 아니라 <strong>기능적·신학적 정체성</strong>을 선포합니다. "흙으로 빚으심"은 인간의 취약성과 피조성을, "생기를 불어넣으심"은 하나님과의 특별한 관계를 선언합니다. 히브리어 '아담(adam)'은 그냥 <strong>"사람"</strong>이라는 뜻이기도 합니다.
+    </div>
+  </div>
+
+  <div class="card sky mt">
+    <h3>📊 신학적 해석의 스펙트럼</h3>
+    <p>진화적 창조를 수용하는 학자들 사이에서도 아담에 대한 해석은 다양합니다.</p>
+  </div>
+
+  <div class="accordion">
+    <details open>
+      <summary>① 역사적 개인설 (Historical Adam)</summary>
+      <div class="acc-body">
+        <p>아담은 실존 역사적 개인이며 인류의 조상이라는 입장. 다만 창세기 2장을 <strong>문자적 묘사가 아닌 신학적 서술</strong>로 읽습니다.</p>
+        <div class="highlight hl-blue" style="margin-top:10px;">
+          <strong>지지자:</strong> C.S. 루이스(유사), 일부 복음주의 학자들<br>
+          <strong>강점:</strong> 로마서 5장 아담-그리스도 대조 구조에 자연스러움<br>
+          <strong>어려움:</strong> 인구 유전학은 인류가 단 두 명에서 시작했을 가능성을 부정함
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>② 언약적 대표설 (Federal/Representative Headship)</summary>
+      <div class="acc-body">
+        <p>아담은 역사적 개인이지만 <strong>생물학적 조상이 아닌 언약적 대표</strong>로 이해합니다. 국가 대표가 전 국민을 대신해 조약을 맺듯, 아담은 이미 존재하던 인류의 대표로 행동했습니다.</p>
+        <div class="highlight hl-green" style="margin-top:10px;">
+          <strong>지지자:</strong> 존 콜린스(Jack Collins)<br>
+          <strong>강점:</strong> 역사성을 유지하면서 유전학적 문제 해결<br>
+          <strong>참고:</strong> 로마서 5장의 아담은 "생물학적 유전"이 아닌 "언약적 대표"로 읽을 수 있음
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>③ 원형적 해석 (Archetypal Reading)</summary>
+      <div class="acc-body">
+        <p>존 월튼의 입장. 창세기 2–3장은 특정 개인의 전기가 아니라 <strong>모든 인간의 경험을 담은 원형 이야기</strong>입니다. 아담의 이야기는 곧 모든 사람의 이야기입니다.</p>
+        <div class="highlight hl-purple" style="margin-top:10px;">
+          <strong>지지자:</strong> 존 월튼, 피터 엔스(Pete Enns)<br>
+          <strong>강점:</strong> 고대 근동 문학 장르와 가장 잘 어울림<br>
+          <strong>핵심:</strong> "역사적 개인인가?"라는 질문 자체가 현대적 질문 — 이야기의 본래 의도가 아님
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="accordion">
+    <details>
+      <summary>④ 집단 부여설 (Group Endowment)</summary>
+      <div class="acc-body">
+        <p>어느 시점에 하나님이 진화한 인류 집단에게 <strong>영적 자의식(imago Dei)을 부여</strong>하셨다는 입장. 아담/하와는 그 첫 번째 수혜자나 대표일 수 있습니다.</p>
+        <div class="highlight hl-gold" style="margin-top:10px;">
+          <strong>지지자:</strong> 데니스 알렉산더(Denis Alexander)<br>
+          <strong>강점:</strong> 고고학 데이터와 잘 맞음 (약 4–10만 년 전 예술·종교·상징적 사고의 등장)<br>
+          <strong>참고:</strong> "생기를 불어넣으심"이 이 시점의 신학적 표현일 수 있음
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="card gold mt">
+    <h3>✅ 어떤 입장이든 변하지 않는 것</h3>
+    <ul>
+      <li>인간은 <strong>하나님과 특별한 관계</strong>를 맺도록 부름받은 존재</li>
+      <li>인간에게는 하나님을 떠나 자기 방식대로 살려는 <strong>죄성</strong>이 있음</li>
+      <li>예수 그리스도의 죽음과 부활은 <strong>역사적 사건</strong>이며 아담의 역사성 여부에 영향받지 않음</li>
+      <li>구원의 필요성과 그 내용은 유효함</li>
+    </ul>
+  </div>
+
+  <div class="scripture">
+    "기록된 바 첫 사람 아담은 생령이 되었다 함과 같이 마지막 아담은 살려 주는 영이 되었나니" — 고린도전서 15:45
+    <br><small style="margin-top:6px; display:block;">N.T. 라이트: 바울의 아담-그리스도 대조는 생물학적 역사성보다 <strong>인류 전체를 대표하는 역할</strong>에 초점이 있다.</small>
+  </div>
+</section>
+
+<!-- ========== S9: Imago Dei ========== -->
+<section id="s9">
+  <h2><span class="sec-num">9</span> 하나님의 형상 — 진화해도 인간은 특별한가?</h2>
+
+  <div class="card" style="border-left-color: var(--gold); background: var(--gold-light);">
+    <h3>✨ 핵심 질문</h3>
+    <p>"침팬지와 98.7% DNA가 같다면, 인간이 정말 특별한 존재인가요? 하나님의 형상이 아직 의미가 있나요?"</p>
+  </div>
+
+  <div class="card mt">
+    <h3>📖 Imago Dei란?</h3>
+    <p>"하나님의 형상"(라틴어: Imago Dei)은 창세기 1:26-27에서 처음 등장합니다.</p>
+    <div class="scripture mt">
+      "하나님이 이르시되 우리의 형상을 따라 우리의 모양대로 우리가 사람을 만들고 그들로 … 다스리게 하자 하시고" — 창세기 1:26
+    </div>
+    <p class="mt">이 "형상"이 무엇인지에 대해 신학자들은 크게 세 방향으로 이해해 왔습니다.</p>
+  </div>
+
+  <div class="tab-bar" id="tabs-s9">
+    <button class="tab-btn active" onclick="switchTab('s9','meaning')">📜 형상의 의미</button>
+    <button class="tab-btn" onclick="switchTab('s9','evolution')">🧬 진화와 형상</button>
+    <button class="tab-btn" onclick="switchTab('s9','dignity')">🌟 인간 존엄성</button>
+  </div>
+
+  <div id="s9-meaning" class="tab-panel active">
+    <div class="grid-2">
+      <div class="card">
+        <h3>① 실체적 해석</h3>
+        <p>인간이 하나님처럼 <strong>이성, 의지, 도덕 판단력</strong>을 갖고 있다는 것. 중세 신학의 주류 해석(아퀴나스).</p>
+        <div class="highlight hl-blue mt">이성과 의지의 능력이 인간을 동물과 구별하는 하나님의 형상</div>
+      </div>
+      <div class="card">
+        <h3>② 기능적 해석</h3>
+        <p>고대 근동에서 왕의 형상(조각)은 왕의 대리자를 의미. 인간은 하나님의 <strong>대리자로서 세상을 다스리고 돌볼</strong> 역할을 부여받음(존 월튼).</p>
+        <div class="highlight hl-green mt">"다스리게 하자"는 창세기 1:26의 목적절이 이를 뒷받침</div>
+      </div>
+    </div>
+    <div class="card purple mt">
+      <h3>③ 관계적 해석</h3>
+      <p>인간이 <strong>하나님과 인격적 관계</strong>를 맺을 수 있다는 것 자체가 형상. 하나님을 인식하고, 응답하고, 사랑할 수 있는 능력(칼 바르트).</p>
+      <div class="highlight hl-purple mt">형상은 인간 안에 있는 무언가가 아니라, <strong>하나님과 인간 사이의 관계적 능력</strong></div>
+    </div>
+  </div>
+
+  <div id="s9-evolution" class="tab-panel">
+    <div class="debate-pair">
+      <div class="debate-against">
+        <h4>❌ 우려</h4>
+        <p>"우리가 동물에서 진화했다면 인간이 하나님의 형상이라는 게 의미 없지 않나요?"</p>
+      </div>
+      <div class="debate-for">
+        <h4>✅ 응답</h4>
+        <p>DNA 유사성은 <strong>물질적 재료</strong>의 공유를 뜻합니다. 같은 흙으로 만든 그릇과 예술 작품이 다른 것처럼, <strong>재료가 같다고 기능·의미·관계가 같은 건 아닙니다.</strong></p>
+      </div>
+    </div>
+    <div class="card mt">
+      <h3>진화 과정을 통한 형상 부여</h3>
+      <p>진화적 창조에서는 하나님이 진화 과정을 통해, 또는 특정 시점에 인간에게 <strong>하나님과 관계 맺을 수 있는 능력</strong>을 부여하셨다고 봅니다.</p>
+      <div class="highlight hl-green mt">
+        <strong>고고학적 증거:</strong> 약 4–10만 년 전 현생 인류는 <strong>상징적 사고, 예술, 종교 의례, 타인을 위한 희생</strong>을 시작합니다. 이것이 "생기를 불어넣으신" 시점의 신학적 상징일 수 있습니다.
+      </div>
+    </div>
+    <div class="card sky mt">
+      <h3>비유로 이해하기</h3>
+      <p>아이가 태어나면서 서서히 <strong>언어, 도덕 감각, 자아 인식</strong>을 발달시킵니다. 이 발달이 "점진적"이라고 해서 아이의 인간성이나 존엄성이 덜한 것이 아닙니다. 진화를 통한 Imago Dei 부여도 마찬가지입니다.</p>
+    </div>
+  </div>
+
+  <div id="s9-dignity" class="tab-panel">
+    <div class="grid-2">
+      <div class="card">
+        <span class="emoji-big">🤝</span>
+        <h3>관계의 존엄성</h3>
+        <p>인간의 가치는 DNA나 지능이 아닌 <strong>하나님이 부르시고 관계 맺으신다는 사실</strong>에서 옵니다. 진화 여부와 무관합니다.</p>
+      </div>
+      <div class="card">
+        <span class="emoji-big">🏛️</span>
+        <h3>책임의 존엄성</h3>
+        <p>인간은 피조세계를 <strong>돌보고 책임질</strong> 존재로 부름받았습니다. 진화는 이 책임을 오히려 더 깊이 이해하게 합니다.</p>
+      </div>
+      <div class="card">
+        <span class="emoji-big">💝</span>
+        <h3>사랑받는 존엄성</h3>
+        <p><strong>하나님이 인간을 사랑하신다는 사실</strong> 자체가 존엄성의 근거. 가치는 진화 경로가 아닌 하나님의 사랑에서 옵니다.</p>
+      </div>
+      <div class="card">
+        <span class="emoji-big">✝️</span>
+        <h3>성육신의 존엄성</h3>
+        <p>하나님이 직접 <strong>인간의 몸을 입으셨다</strong>는 성육신은 인간 존재가 얼마나 존귀한지를 보여주는 가장 강력한 증거입니다.</p>
+      </div>
+    </div>
+    <div class="highlight hl-orange mt">
+      <strong>중요한 역설:</strong> 진화적 창조는 인간 존엄성을 오히려 <em>더 넓게</em> 적용합니다. 인간의 가치가 생물학적 우월성이 아닌 <strong>하나님의 사랑과 부르심</strong>에 있다면, 지적 장애인, 노인, 태아 모두 동등하게 존엄합니다.
+    </div>
+  </div>
+</section>
+
+<!-- ========== S10: 죽음과 고통 ========== -->
+<section id="s10">
+  <h2><span class="sec-num">10</span> 죽음과 고통 — 진화 세계의 신정론</h2>
+
+  <div class="card accent">
+    <h3>💔 가장 어려운 질문</h3>
+    <p>"진화에는 수십억 년의 죽음, 고통, 포식이 있습니다. 성경은 죽음이 죄의 결과라고 하는데, 선하신 하나님이 이 과정을 설계하셨나요?"</p>
+  </div>
+
+  <div class="tab-bar" id="tabs-s10">
+    <button class="tab-btn active" onclick="switchTab('s10','death')">💀 죽음의 의미</button>
+    <button class="tab-btn" onclick="switchTab('s10','theodicy')">⚖️ 신정론</button>
+    <button class="tab-btn" onclick="switchTab('s10','response')">✅ 신학적 응답</button>
+  </div>
+
+  <div id="s10-death" class="tab-panel active">
+    <div class="card">
+      <h3>📖 "죄로 인한 죽음" — 무슨 뜻인가?</h3>
+      <p>창세기 3장과 로마서 5장은 죽음이 죄의 결과라고 말합니다. 이것이 <strong>생물학적 죽음</strong>인지, <strong>영적 죽음</strong>인지가 핵심 질문입니다.</p>
+    </div>
+    <div class="grid-2 mt">
+      <div class="card accent">
+        <h3>문자적 해석 (창조과학)</h3>
+        <ul>
+          <li>아담 타락 이전: <strong>죽음이 없었음</strong></li>
+          <li>동물도 죽지 않았음</li>
+          <li>타락으로 생물학적 죽음이 세상에 들어옴</li>
+          <li><strong>문제:</strong> 화석 기록은 인간 이전 수억 년의 죽음을 보여줌</li>
+        </ul>
+      </div>
+      <div class="card sky">
+        <h3>진화적 창조의 해석</h3>
+        <ul>
+          <li>생물학적 죽음은 진화 과정의 <strong>본질적 부분</strong></li>
+          <li>창세기 3장의 "죽음"은 <strong>영적 죽음</strong> — 하나님과의 관계 단절</li>
+          <li>로마서 5:12 "죄로 인한 죽음"은 신학적·영적 의미</li>
+          <li>교부들도 영적 죽음으로 해석한 경우 다수</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight hl-green mt">
+      <strong>성경 내 증거:</strong> 에베소서 2:1 "허물과 죄로 죽었던 너희를" — 여기서 "죽음"은 분명히 <strong>영적 죽음</strong>입니다. 그들은 생물학적으로 살아있었으니까요.
+    </div>
+  </div>
+
+  <div id="s10-theodicy" class="tab-panel">
+    <div class="card purple">
+      <h3>⚖️ 신정론: 선한 하나님과 고통의 세계</h3>
+      <p>이것은 진화적 창조만의 문제가 아닙니다. 기독교 신앙 전체가 씨름하는 근본적 질문입니다.</p>
+    </div>
+    <div class="accordion mt">
+      <details open>
+        <summary>진화 세계의 고통은 '설계의 결함'인가?</summary>
+        <div class="acc-body">
+          <p>포식자와 피식자, 기생충, 자연재해 — 진화 세계에는 엄청난 고통이 있습니다.</p>
+          <div class="highlight hl-blue" style="margin-top:10px;">
+            <strong>한 관점:</strong> 고통과 죽음은 진화적 창조 세계가 <strong>진정한 자유와 자율성</strong>을 갖기 위한 조건입니다. 완전히 통제된 세계는 실제 의미에서의 창조물이 아닙니다.
+          </div>
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>케노시스(Kenosis) — 하나님의 자기 비움</summary>
+        <div class="acc-body">
+          <p>일부 신학자들은 하나님이 창조 과정에서 <strong>자신의 통제권 일부를 내어주셨다</strong>고 봅니다. 이것이 진화적 과정, 자연법칙, 인간의 자유의지가 가능한 이유입니다.</p>
+          <div class="highlight hl-purple" style="margin-top:10px;">
+            <strong>존 폴킹혼:</strong> "하나님은 사랑이시기 때문에, 타인이 진정으로 존재하도록 공간을 내어주십니다. 이것이 고통의 가능성을 열지만, 동시에 진정한 사랑과 자유의 가능성도 엽니다."
+          </div>
+        </div>
+      </details>
+    </div>
+    <div class="accordion">
+      <details>
+        <summary>욥기 — 고통에 대한 성경의 답</summary>
+        <div class="acc-body">
+          <p>욥기는 고통의 문제를 정면으로 다루는 성경입니다. 하나님의 대답은 설명이 아닌 <strong>임재</strong>입니다.</p>
+          <div class="scripture" style="margin-top:10px;">
+            "내가 땅의 기초를 놓을 때에 네가 어디 있었느냐?" — 욥기 38:4
+          </div>
+          <p class="mt">고통의 문제는 <strong>지적 해결보다 관계적 임재</strong>가 응답입니다.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div id="s10-response" class="tab-panel">
+    <div class="card mt">
+      <h3>① 종말론적 응답 — 지금이 끝이 아니다</h3>
+      <p>예수님의 부활은 <strong>새 창조의 첫 열매</strong>입니다. 피조물 전체가 "해방되기를 고대"합니다.</p>
+      <div class="scripture">
+        "피조물이 다 이제까지 함께 탄식하며 함께 고통을 겪고 있는 것을 우리가 아느니라" — 로마서 8:22
+      </div>
+    </div>
+    <div class="card mt">
+      <h3>② 그리스도론적 응답 — 하나님이 고통에 들어오셨다</h3>
+      <p>하나님이 예수 그리스도 안에서 직접 고통, 죽음, 버림받음을 경험하셨습니다. 하나님은 고통 밖 관조자가 아니라 <strong>고통 안에 함께 계신 분</strong>입니다.</p>
+      <div class="highlight hl-orange">십자가는 고통에 대한 <strong>지적 답이 아닌 관계적 답</strong>입니다. "나도 여기 있다."</div>
+    </div>
+    <div class="card mt">
+      <h3>③ 열린 질문으로 남겨두기</h3>
+      <p>이 질문은 진화 때문에 새로 생긴 게 아니라 <strong>기독교 신앙의 오래된 핵심 질문</strong>입니다. 완전한 해결보다 성실한 씨름이 신앙의 태도입니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== S11: 주요 인물 ========== -->
+<section id="s11">
+  <h2><span class="sec-num">★</span> 주요 인물 — 신앙과 과학을 함께 산 사람들</h2>
+
+  <div class="card sky">
+    <h3>🧑‍🔬 "이런 사람들이 실제로 있구나"</h3>
+    <p>진화적 창조는 단순한 이론이 아닙니다. 세계 최고의 과학자들과 신학자들이 이 입장을 견지하며 탁월한 학문과 신실한 신앙을 함께 살아가고 있습니다.</p>
+  </div>
+
+  <div class="person-grid mt">
+    <div class="person-card">
+      <span class="person-emoji">🧬</span>
+      <div class="person-name">프랜시스 콜린스</div>
+      <div class="person-role">유전학자 · 의사 · 기독교인</div>
+      <div class="person-quote">"DNA는 하나님이 생명을 창조하실 때 사용하신 언어다."</div>
+      <div style="margin-top:8px;">
+        <span class="person-tag">인간 게놈 프로젝트 총괄</span>
+        <span class="person-tag">전 NIH 원장</span>
+        <span class="person-tag">BioLogos 창립</span>
+      </div>
+      <p style="font-size:.8rem; margin-top:8px; color:var(--muted);">무신론자였다가 C.S. 루이스의 <em>순전한 기독교</em>를 읽고 회심. 저서 <em>신의 언어(The Language of God)</em>.</p>
+    </div>
+
+    <div class="person-card">
+      <span class="person-emoji">📚</span>
+      <div class="person-name">존 월튼</div>
+      <div class="person-role">구약학자 · 고대근동 전문가</div>
+      <div class="person-quote">"창세기는 물질적 기원이 아닌 기능적 기원을 다룬다."</div>
+      <div style="margin-top:8px;">
+        <span class="person-tag">휘튼칼리지 교수</span>
+        <span class="person-tag">The Lost World of Genesis One</span>
+      </div>
+      <p style="font-size:.8rem; margin-top:8px; color:var(--muted);">고대 근동 문학 맥락에서 창세기를 재해석. 진화적 창조 신학의 성경적 토대를 제공.</p>
+    </div>
+
+    <div class="person-card">
+      <span class="person-emoji">⚛️</span>
+      <div class="person-name">존 폴킹혼</div>
+      <div class="person-role">수리물리학자 · 성공회 사제</div>
+      <div class="person-quote">"과학과 신학은 같은 실재의 다른 측면을 탐구한다."</div>
+      <div style="margin-top:8px;">
+        <span class="person-tag">케임브리지 교수</span>
+        <span class="person-tag">템플턴상 수상</span>
+      </div>
+      <p style="font-size:.8rem; margin-top:8px; color:var(--muted);">양자역학 전문가. 과학자 경력 후 성공회 사제 서품. 과학-종교 대화의 선구자.</p>
+    </div>
+
+    <div class="person-card">
+      <span class="person-emoji">🏛️</span>
+      <div class="person-name">알리스터 맥그래스</div>
+      <div class="person-role">분자생물학 박사 · 신학 박사</div>
+      <div class="person-quote">"기독교는 과학의 적이 아니라 과학의 모태였다."</div>
+      <div style="margin-top:8px;">
+        <span class="person-tag">옥스퍼드 교수</span>
+        <span class="person-tag">도킨스의 신</span>
+      </div>
+      <p style="font-size:.8rem; margin-top:8px; color:var(--muted);">한때 무신론자. 과학과 신앙 모두에서 박사학위. 리처드 도킨스의 주장을 학문적으로 비판.</p>
+    </div>
+
+    <div class="person-card">
+      <span class="person-emoji">✝️</span>
+      <div class="person-name">N.T. 라이트</div>
+      <div class="person-role">신약학자 · 성공회 주교</div>
+      <div class="person-quote">"진화는 하나님이 세상을 만드신 방식일 수 있다. 그것이 부활의 의미를 약화시키지 않는다."</div>
+      <div style="margin-top:8px;">
+        <span class="person-tag">세인트앤드루스 교수</span>
+        <span class="person-tag">Surprised by Hope</span>
+      </div>
+      <p style="font-size:.8rem; margin-top:8px; color:var(--muted);">현존 최고의 신약학자 중 한 명. 아담을 언약적 대표로 해석. 역사적 부활 강조.</p>
+    </div>
+
+    <div class="person-card">
+      <span class="person-emoji">🌿</span>
+      <div class="person-name">데니스 알렉산더</div>
+      <div class="person-role">신경과학자 · 기독교인</div>
+      <div class="person-quote">"진화론은 생명의 역사를 기술한다. 창조론은 그 생명의 목적을 선언한다."</div>
+      <div style="margin-top:8px;">
+        <span class="person-tag">케임브리지 연구원</span>
+        <span class="person-tag">Creation or Evolution?</span>
+      </div>
+      <p style="font-size:.8rem; margin-top:8px; color:var(--muted);">진화와 기독교 신앙의 관계를 과학적·신학적으로 정밀하게 분석. 집단 부여설 주창.</p>
+    </div>
+  </div>
+
+  <div class="highlight hl-green mt">
+    <strong>공통점:</strong> 이들은 모두 해당 분야 최고 수준의 전문가이며, 진화론을 온전히 수용하면서 신실한 기독교 신앙을 고백합니다. "과학을 알면 신앙을 잃는다"는 주장이 근거 없음을 삶으로 증명합니다.
+  </div>
+</section>
+
+<!-- ========== S12: 용어 사전 ========== -->
+<section id="s12">
+  <h2><span class="sec-num">📚</span> 용어 사전</h2>
+
+  <div class="card sky">
+    <h3>이 자료에서 자주 등장하는 핵심 용어들</h3>
+    <p>처음 접하는 용어들이 많을 수 있습니다. 여기서 한 번에 정리해 보세요.</p>
+  </div>
+
+  <div class="gloss-grid mt">
+    <div class="gloss-item">
+      <div class="gloss-term">진화적 창조</div>
+      <div class="gloss-en">Evolutionary Creation / Theistic Evolution</div>
+      <div class="gloss-def">하나님이 진화라는 과정을 통해 생명을 창조하셨다는 신학적 입장. 과학적 진화론을 완전히 수용하면서 하나님의 창조를 고백한다.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">하나님의 형상</div>
+      <div class="gloss-en">Imago Dei</div>
+      <div class="gloss-def">창세기 1:26-27에서 인간이 하나님의 형상으로 창조되었다는 개념. 이성, 도덕 능력, 관계적 능력, 피조세계 돌봄의 역할 등으로 해석된다.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">신정론</div>
+      <div class="gloss-en">Theodicy</div>
+      <div class="gloss-def">선하고 전능하신 하나님이 왜 악과 고통을 허용하시는가에 대한 신학적 논의. '신(theos)'과 '정의(dike)'의 합성어.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">고조화주의</div>
+      <div class="gloss-en">Concordism</div>
+      <div class="gloss-def">성경과 과학이 같은 사실에 대해 말하므로 일치해야 한다는 접근. 창세기의 '날'을 지질학적 시대로 보는 식. 진화적 창조는 이 접근을 거부한다.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">수용 원리</div>
+      <div class="gloss-en">Accommodation</div>
+      <div class="gloss-def">하나님이 계시를 주실 때 당시 사람들이 이해할 수 있는 언어와 개념으로 말씀하셨다는 원리. 칼뱅도 사용한 전통적 해석 원칙.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">언약적 대표</div>
+      <div class="gloss-en">Federal Headship</div>
+      <div class="gloss-def">아담이 인류의 생물학적 조상이 아닌 언약(계약)적 대표로서 행동했다는 개념. 대통령이 국가를 대표해 조약을 맺는 것과 유사.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">고대근동</div>
+      <div class="gloss-en">Ancient Near East (ANE)</div>
+      <div class="gloss-def">메소포타미아(현 이라크), 시리아, 이집트 등 고대 중동 문명권. 구약성경은 이 문화권 안에서 쓰였으며, 당시 문학 장르와 관습을 이해하면 성경 해석이 풍부해진다.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">자연선택</div>
+      <div class="gloss-en">Natural Selection</div>
+      <div class="gloss-def">환경에 더 잘 적응한 개체가 더 많이 생존하고 번식하면서 그 특성이 집단에 퍼지는 진화의 핵심 메커니즘. 찰스 다윈이 발견.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">내재성 레트로바이러스</div>
+      <div class="gloss-en">Endogenous Retrovirus (ERV)</div>
+      <div class="gloss-def">과거에 숙주 DNA에 통합된 바이러스의 흔적. 인간과 유인원 DNA의 정확히 같은 위치에 존재하여 공통 조상의 강력한 증거가 된다.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">케노시스</div>
+      <div class="gloss-en">Kenosis / 자기 비움</div>
+      <div class="gloss-def">빌립보서 2:7에서 예수님이 "자기를 비워" 인간이 되셨다는 개념. 일부 신학자들은 하나님이 창조 시에도 피조물의 자율성을 위해 통제를 자발적으로 제한하셨다고 본다.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">방법론적 자연주의</div>
+      <div class="gloss-en">Methodological Naturalism</div>
+      <div class="gloss-def">과학이 자연 원인으로만 현상을 설명하려는 방법론적 원칙. 철학적 무신론과 다르다. 진화적 창조는 이 원칙을 받아들이면서 신앙을 유지한다.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">전이 화석</div>
+      <div class="gloss-en">Transitional Fossil</div>
+      <div class="gloss-def">두 생물 그룹 사이의 중간적 특성을 보여주는 화석. 예: 틱타알릭(어류→육상동물), 시조새(공룡→조류). 진화론의 강력한 증거.</div>
+    </div>
+  </div>
+</section>
+
 <!-- ========== S7: 퀴즈 ========== -->
 <section id="s7">
   <h2><span class="sec-num">?</span> 확인 퀴즈</h2>
 
-  <div class="card sky"><p>지금까지 배운 내용을 확인해봅시다. 각 질문의 보기를 클릭하세요!</p></div>
+  <div class="card sky"><p>지금까지 배운 내용을 확인해봅시다. 각 질문의 보기를 클릭하세요! (총 10문제)</p></div>
 
-  <!-- Q1 -->
   <div class="quiz-card" id="q1">
     <div class="q-text"><span class="q-num">1</span> 창세기 1장의 주된 목적은 무엇인가요?</div>
     <div class="quiz-opts">
-      <button class="quiz-opt" onclick="checkQ(1,'a','c')">우주가 어떻게 만들어졌는지 과학적으로 설명하기</button>
-      <button class="quiz-opt" onclick="checkQ(1,'b','c')">하나님이 누구시며 창조의 의미가 무엇인지 신학적으로 선포하기</button>
-      <button class="quiz-opt" onclick="checkQ(1,'c','c')">이스라엘 역사의 시작점을 연대기적으로 기록하기</button>
-      <button class="quiz-opt" onclick="checkQ(1,'d','c')">바벨론 창조 신화를 그대로 번역하기</button>
+      <button class="quiz-opt" onclick="checkQ(1,'a','b')">우주가 어떻게 만들어졌는지 과학적으로 설명하기</button>
+      <button class="quiz-opt" onclick="checkQ(1,'b','b')">하나님이 누구시며 창조의 의미가 무엇인지 신학적으로 선포하기</button>
+      <button class="quiz-opt" onclick="checkQ(1,'c','b')">이스라엘 역사의 시작점을 연대기적으로 기록하기</button>
+      <button class="quiz-opt" onclick="checkQ(1,'d','b')">바벨론 창조 신화를 그대로 번역하기</button>
     </div>
     <div class="quiz-feedback" id="q1-fb"></div>
   </div>
 
-  <!-- Q2 -->
   <div class="quiz-card" id="q2">
     <div class="q-text"><span class="q-num">2</span> 창조과학이 '과학'이 아닌 가장 중요한 이유는?</div>
     <div class="quiz-opts">
@@ -1021,7 +1502,6 @@
     <div class="quiz-feedback" id="q2-fb"></div>
   </div>
 
-  <!-- Q3 -->
   <div class="quiz-card" id="q3">
     <div class="q-text"><span class="q-num">3</span> 진화론에 대한 설명으로 옳은 것은?</div>
     <div class="quiz-opts">
@@ -1033,7 +1513,6 @@
     <div class="quiz-feedback" id="q3-fb"></div>
   </div>
 
-  <!-- Q4 -->
   <div class="quiz-card" id="q4">
     <div class="q-text"><span class="q-num">4</span> 진화적 창조(유신진화론)의 핵심 주장은?</div>
     <div class="quiz-opts">
@@ -1045,7 +1524,6 @@
     <div class="quiz-feedback" id="q4-fb"></div>
   </div>
 
-  <!-- Q5 -->
   <div class="quiz-card" id="q5">
     <div class="q-text"><span class="q-num">5</span> 아우구스티누스(354–430)가 창세기 해석에서 보여준 것은?</div>
     <div class="quiz-opts">
@@ -1057,7 +1535,6 @@
     <div class="quiz-feedback" id="q5-fb"></div>
   </div>
 
-  <!-- Q6 -->
   <div class="quiz-card" id="q6">
     <div class="q-text"><span class="q-num">6</span> 내재성 레트로바이러스(ERV)가 진화의 증거인 이유는?</div>
     <div class="quiz-opts">
@@ -1067,6 +1544,50 @@
       <button class="quiz-opt" onclick="checkQ(6,'d','c')">모든 생물이 같은 바이러스에 감염됐기 때문에</button>
     </div>
     <div class="quiz-feedback" id="q6-fb"></div>
+  </div>
+
+  <div class="quiz-card" id="q7">
+    <div class="q-text"><span class="q-num">7</span> Imago Dei(하나님의 형상)에 대한 설명으로 가장 적절한 것은?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="checkQ(7,'a','c')">인간이 하나님처럼 두 발로 걷는다는 의미</button>
+      <button class="quiz-opt" onclick="checkQ(7,'b','c')">인간의 DNA가 다른 동물보다 복잡하다는 의미</button>
+      <button class="quiz-opt" onclick="checkQ(7,'c','c')">하나님과 관계 맺고, 도덕적으로 책임지며, 세상을 돌볼 수 있는 능력</button>
+      <button class="quiz-opt" onclick="checkQ(7,'d','c')">인간만이 지구상에서 유일하게 도구를 사용한다는 의미</button>
+    </div>
+    <div class="quiz-feedback" id="q7-fb"></div>
+  </div>
+
+  <div class="quiz-card" id="q8">
+    <div class="q-text"><span class="q-num">8</span> 진화적 창조에서 "죄로 인해 죽음이 세상에 들어왔다"(롬 5:12)를 어떻게 해석하는가?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="checkQ(8,'a','b')">생물학적 죽음이 아담 이후 처음 시작되었다</button>
+      <button class="quiz-opt" onclick="checkQ(8,'b','b')">영적 죽음 — 하나님과의 관계 단절을 의미한다</button>
+      <button class="quiz-opt" onclick="checkQ(8,'c','b')">죽음은 인간이 만든 개념에 불과하다</button>
+      <button class="quiz-opt" onclick="checkQ(8,'d','b')">동물의 죽음은 괜찮지만 인간의 죽음은 타락의 결과이다</button>
+    </div>
+    <div class="quiz-feedback" id="q8-fb"></div>
+  </div>
+
+  <div class="quiz-card" id="q9">
+    <div class="q-text"><span class="q-num">9</span> 인물과 설명이 바르게 연결된 것은?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="checkQ(9,'a','c')">프랜시스 콜린스 — 창조과학 연구소 소장</button>
+      <button class="quiz-opt" onclick="checkQ(9,'b','c')">존 월튼 — 진화생물학 교수</button>
+      <button class="quiz-opt" onclick="checkQ(9,'c','c')">알리스터 맥그래스 — 분자생물학 박사이자 신학 박사</button>
+      <button class="quiz-opt" onclick="checkQ(9,'d','c')">N.T. 라이트 — 물리학자</button>
+    </div>
+    <div class="quiz-feedback" id="q9-fb"></div>
+  </div>
+
+  <div class="quiz-card" id="q10">
+    <div class="q-text"><span class="q-num">10</span> '수용 원리(Accommodation)'가 의미하는 것은?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="checkQ(10,'a','b')">기독교인이 세상의 가치관에 타협하는 것</button>
+      <button class="quiz-opt" onclick="checkQ(10,'b','b')">하나님이 당시 사람들이 이해할 수 있는 언어로 계시를 주셨다는 원리</button>
+      <button class="quiz-opt" onclick="checkQ(10,'c','b')">진화론과 성경이 반드시 일치해야 한다는 원칙</button>
+      <button class="quiz-opt" onclick="checkQ(10,'d','b')">과학이 신학을 대체하는 과정</button>
+    </div>
+    <div class="quiz-feedback" id="q10-fb"></div>
   </div>
 
   <div id="quiz-score-box">
@@ -1084,13 +1605,11 @@
 </footer>
 
 <script>
-// NAV ACTIVE
 function setActive(el) {
   document.querySelectorAll('nav ul li a').forEach(a => a.classList.remove('active'));
   el.classList.add('active');
 }
 
-// TAB SWITCH
 function switchTab(section, panelId) {
   const bar = document.getElementById('tabs-' + section);
   const buttons = bar.querySelectorAll('.tab-btn');
@@ -1101,14 +1620,17 @@ function switchTab(section, panelId) {
   event.target.classList.add('active');
 }
 
-// QUIZ
 const feedbacks = {
-  1: { c: '✅ 정답! 창세기 1장은 "어떻게"가 아닌 "누가·왜"를 신학적으로 선포합니다.', a: '❌ 창세기는 과학 교과서가 아닙니다. 신학적 목적으로 쓰였습니다.', b: '❌ 가깝지만, 더 정확히는 신학적 선포가 목적입니다.', d: '❌ 창세기는 바벨론 이야기와 유사하지만 전혀 다른 신학적 메시지를 담습니다.' },
-  2: { b: '✅ 정답! 반증 불가능성과 동료 심사 부재가 핵심 문제입니다.', a: '❌ 기독교인이 연구하는 것 자체가 문제는 아닙니다.', c: '❌ 지구 나이 추정치 자체가 문제가 아니라 방법론의 문제입니다.', d: '❌ 성경을 근거로 삼는 것 자체보다 검증 방법이 없다는 게 더 핵심 문제입니다.' },
+  1: { b: '✅ 정답! 창세기 1장은 "어떻게"가 아닌 "누가·왜"를 신학적으로 선포합니다.', a: '❌ 창세기는 과학 교과서가 아닙니다. 신학적 목적으로 쓰였습니다.', c: '❌ 가깝지만, 더 정확히는 신학적 선포가 목적입니다.', d: '❌ 창세기는 바벨론 이야기와 유사하지만 전혀 다른 신학적 메시지를 담습니다.' },
+  2: { b: '✅ 정답! 반증 불가능성과 동료 심사 부재가 핵심 문제입니다.', a: '❌ 기독교인이 연구하는 것 자체가 문제는 아닙니다.', c: '❌ 지구 나이 추정치 자체가 문제가 아니라 방법론의 문제입니다.', d: '❌ 성경을 근거로 삼는 것보다 검증 방법이 없다는 게 핵심 문제입니다.' },
   3: { d: '✅ 정답! 인간과 침팬지는 공통 조상에서 약 700만 년 전 갈라졌습니다.', a: '❌ 원숭이→인간이 아닙니다. 공통 조상에서 갈라진 것입니다.', b: '❌ 돌연변이는 무작위지만 자연선택은 비무작위적입니다.', c: '❌ 진화론은 수만 개의 연구로 검증된 과학 이론입니다.' },
   4: { c: '✅ 정답! 하나님이 진화를 방법으로 사용하셔서 생명을 창조하셨다는 입장입니다.', a: '❌ 진화적 창조는 성경의 신학적 권위를 인정합니다.', b: '❌ 이신론이 아닙니다. 하나님은 과정 속에 내재하시는 분입니다.', d: '❌ 진화적 창조는 인간도 진화 과정을 통해 등장했음을 수용합니다.' },
-  5: { b: '✅ 정답! 아우구스티누스는 창세기의 날을 상징적으로 해석하며 즉각적 창조를 주장하기도 했습니다.', a: '❌ 반대입니다. 아우구스티누스는 비문자적 해석의 선구자입니다.', c: '❌ 아우구스티누스는 그런 주장을 하지 않았습니다.', d: '❌ 아우구스티누스는 성경과 이성/자연의 통합을 추구했습니다.' },
-  6: { c: '✅ 정답! 공통 조상 없이는 정확히 같은 위치에 같은 바이러스 흔적이 있을 수 없습니다.', a: '❌ 바이러스 변이 자체가 증거는 아닙니다.', b: '❌ 그것이 증거가 아닙니다. 위치의 정확한 일치가 핵심입니다.', d: '❌ 이유가 틀렸습니다. 위치의 일치가 핵심 증거입니다.' },
+  5: { b: '✅ 정답! 아우구스티누스는 창세기의 날을 상징적으로 해석한 비문자적 해석의 선구자입니다.', a: '❌ 반대입니다.', c: '❌ 아우구스티누스는 그런 주장을 하지 않았습니다.', d: '❌ 아우구스티누스는 성경과 이성/자연의 통합을 추구했습니다.' },
+  6: { c: '✅ 정답! 공통 조상 없이는 정확히 같은 위치에 같은 바이러스 흔적이 있을 수 없습니다.', a: '❌ 바이러스 변이 자체가 증거는 아닙니다.', b: '❌ 위치의 정확한 일치가 핵심입니다.', d: '❌ 위치의 일치가 핵심 증거입니다.' },
+  7: { c: '✅ 정답! Imago Dei는 외모가 아니라 하나님과 관계 맺고, 도덕적 책임을 지며, 세상을 돌보는 능력입니다.', a: '❌ 형상은 외모적 닮음이 아닙니다.', b: '❌ DNA 복잡성이 형상을 정의하지 않습니다.', d: '❌ 도구 사용은 일부 동물도 하며, 형상의 핵심이 아닙니다.' },
+  8: { b: '✅ 정답! 에베소서 2:1처럼 "죽음"은 영적 죽음(하나님과의 관계 단절)을 의미합니다.', a: '❌ 화석 기록은 인간 이전 수억 년의 생물학적 죽음을 보여줍니다.', c: '❌ 죽음은 성경적으로도 실재하는 현실입니다.', d: '❌ 성경의 "죽음"은 영적 개념으로 인간-동물 구분이 아닙니다.' },
+  9: { c: '✅ 정답! 알리스터 맥그래스는 분자생물학과 신학 모두에서 박사학위를 받은 옥스퍼드 교수입니다.', a: '❌ 프랜시스 콜린스는 인간 게놈 프로젝트를 총괄한 유전학자이자 BioLogos 창립자입니다.', b: '❌ 존 월튼은 구약학자이자 고대근동 전문가입니다.', d: '❌ N.T. 라이트는 신약학자이자 성공회 주교입니다.' },
+  10: { b: '✅ 정답! 수용 원리는 하나님이 당시 청중이 이해할 수 있는 언어로 계시를 주셨다는 전통적 해석 원칙입니다.', a: '❌ 세상 가치관에 타협하는 것이 아닙니다. 해석학적 원칙입니다.', c: '❌ 그것은 고조화주의(Concordism)에 가깝습니다.', d: '❌ 수용 원리는 계시 방식에 대한 개념입니다.' },
 };
 
 let answered = {};
@@ -1130,7 +1652,7 @@ function checkQ(qNum, chosen, correctAns) {
   if (isCorrect) correct++;
   fb.textContent = feedbacks[qNum][chosen];
   fb.className = 'quiz-feedback show ' + (isCorrect ? 'correct' : 'wrong');
-  if (Object.keys(answered).length === 6) {
+  if (Object.keys(answered).length === 10) {
     document.getElementById('show-score-btn').style.display = 'inline-block';
   }
 }
@@ -1140,16 +1662,15 @@ function showScore() {
   const title = document.getElementById('score-title');
   const desc = document.getElementById('score-desc');
   box.style.display = 'block';
-  title.textContent = correct + ' / 6 정답';
-  if (correct === 6) desc.textContent = '🎉 완벽합니다! 진화적 창조의 핵심을 완전히 이해했습니다.';
-  else if (correct >= 4) desc.textContent = '👍 잘 했어요! 다시 한번 틀린 부분을 읽어보세요.';
-  else if (correct >= 2) desc.textContent = '💪 조금 더 읽어보면 금방 이해될 거예요!';
+  title.textContent = correct + ' / 10 정답';
+  if (correct === 10) desc.textContent = '🎉 완벽합니다! 진화적 창조의 핵심을 완전히 이해했습니다.';
+  else if (correct >= 7) desc.textContent = '👍 잘 했어요! 다시 한번 틀린 부분을 읽어보세요.';
+  else if (correct >= 4) desc.textContent = '💪 조금 더 읽어보면 금방 이해될 거예요!';
   else desc.textContent = '📚 처음부터 다시 천천히 읽어보세요. 어렵지 않아요!';
   document.getElementById('show-score-btn').style.display = 'none';
   box.scrollIntoView({ behavior: 'smooth' });
 }
 
-// SCROLL SPY
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('nav ul li a');
 window.addEventListener('scroll', () => {
@@ -1162,7 +1683,6 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// Animate progress bars on load
 window.addEventListener('load', () => {
   document.querySelectorAll('.progress-fill').forEach(bar => {
     const w = bar.style.width;
