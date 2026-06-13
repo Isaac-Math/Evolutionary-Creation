@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>진화적 창조 — 버전 선택</title>
+<style>
+  :root {
+    --primary: #2d6a4f;
+    --primary-light: #52b788;
+    --primary-xlight: #d8f3dc;
+    --accent: #e76f51;
+    --sky: #4895ef;
+    --sky-light: #cce5ff;
+    --gold: #f4a261;
+    --gold-light: #fde9d4;
+    --bg: #f9fafb;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --muted: #6c757d;
+    --border: #dee2e6;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #1b4332 100%);
+    color: #fff;
+    padding: 56px 24px 44px;
+    text-align: center;
+  }
+  header .icon { font-size: 3.2rem; display: block; margin-bottom: 14px; }
+  header h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; }
+  header p { opacity: .85; font-size: 1.05rem; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
+  .badge-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+  .badge { background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3); border-radius: 20px; padding: 4px 14px; font-size: .82rem; }
+
+  main {
+    flex: 1;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 52px 20px 80px;
+    width: 100%;
+  }
+
+  .choose-label {
+    text-align: center;
+    font-size: .88rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .version-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 620px) { .version-grid { grid-template-columns: 1fr; } }
+
+  .version-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 36px 28px 32px;
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border: 2px solid transparent;
+    transition: all .22s;
+    position: relative;
+    overflow: hidden;
+  }
+  .version-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 36px rgba(0,0,0,0.14);
+  }
+  .version-card.middle { border-color: var(--primary-light); }
+  .version-card.middle:hover { border-color: var(--primary); }
+  .version-card.high { border-color: var(--sky); }
+  .version-card.high:hover { border-color: #2d6fd4; }
+
+  .version-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+  }
+  .version-card.middle::before { background: linear-gradient(90deg, var(--primary-light), var(--primary)); }
+  .version-card.high::before { background: linear-gradient(90deg, var(--sky), #2d6fd4); }
+
+  .v-emoji { font-size: 2.8rem; }
+  .v-level { font-size: .78rem; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; }
+  .version-card.middle .v-level { color: var(--primary); }
+  .version-card.high .v-level { color: var(--sky); }
+  .v-title { font-size: 1.3rem; font-weight: 800; }
+  .v-desc { font-size: .93rem; color: var(--muted); line-height: 1.7; }
+
+  .v-features { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+  .v-features li { font-size: .85rem; display: flex; align-items: flex-start; gap: 7px; }
+  .v-features li::before { content: '✓'; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .version-card.middle .v-features li::before { color: var(--primary); }
+  .version-card.high .v-features li::before { color: var(--sky); }
+
+  .v-btn {
+    margin-top: auto;
+    display: inline-block;
+    padding: 12px 0;
+    border-radius: 30px;
+    font-size: .92rem;
+    font-weight: 700;
+    text-align: center;
+    transition: opacity .2s;
+  }
+  .version-card.middle .v-btn { background: var(--primary); color: #fff; }
+  .version-card.high .v-btn { background: var(--sky); color: #fff; }
+  .version-card:hover .v-btn { opacity: .88; }
+
+  .info-box {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-top: 32px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border-left: 4px solid var(--gold);
+  }
+  .info-box .info-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .info-box p { font-size: .9rem; color: var(--muted); line-height: 1.7; }
+  .info-box strong { color: var(--text); }
+
+  footer {
+    background: var(--primary);
+    color: rgba(255,255,255,.75);
+    text-align: center;
+    padding: 20px;
+    font-size: .82rem;
+  }
+  footer a { color: rgba(255,255,255,.9); }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="icon">🌿</span>
+  <h1>진화적 창조</h1>
+  <p>성경과 과학, 함께 읽을 수 있을까?<br>학습 대상을 선택해 탐구를 시작하세요.</p>
+  <div class="badge-row">
+    <span class="badge">📖 성경 해석학</span>
+    <span class="badge">🔬 진화생물학</span>
+    <span class="badge">✝️ 신학</span>
+    <span class="badge">🌍 고대근동</span>
+  </div>
+</header>
+
+<main>
+  <p class="choose-label">버전 선택</p>
+
+  <div class="version-grid">
+
+    <a href="index.html" class="version-card middle">
+      <span class="v-emoji">📗</span>
+      <span class="v-level">중학생 버전</span>
+      <span class="v-title">신앙과 과학의 첫 만남</span>
+      <p class="v-desc">핵심 개념을 쉽고 명확하게. 플립카드·탭·퀴즈로 인터랙티브하게 학습합니다.</p>
+      <ul class="v-features">
+        <li>창세기 문자주의 해석의 문제</li>
+        <li>창조과학 주장과 과학적 반박</li>
+        <li>진화론 핵심 원리와 증거</li>
+        <li>아담·하와, Imago Dei, 고대근동</li>
+        <li>주요 인물 카드 + 용어 사전</li>
+        <li>확인 퀴즈 10문제</li>
+      </ul>
+      <span class="v-btn">중학생 버전으로 →</span>
+    </a>
+
+    <a href="high.html" class="version-card high">
+      <span class="v-emoji">📘</span>
+      <span class="v-level">고등학생 버전</span>
+      <span class="v-title">깊이 파고드는 탐구</span>
+      <p class="v-desc">히브리어 원문·해석학 이론·인구유전학까지. 학문적 깊이로 신앙과 과학을 통합합니다.</p>
+      <ul class="v-features">
+        <li>히브리어 원문 분석 (bara, yatsar 등)</li>
+        <li>해석학 이론 (역사-문법적·정경적·수사비평)</li>
+        <li>인구유전학과 공통 조상의 증거</li>
+        <li>고급 신정론과 케노시스 신학</li>
+        <li>드레이퍼-화이트 테제 비판 (과학-종교 갈등론)</li>
+        <li>토론 논제 + 심화 퀴즈 12문제</li>
+      </ul>
+      <span class="v-btn">고등학생 버전으로 →</span>
+    </a>
+
+  </div>
+
+  <div class="info-box">
+    <span class="info-icon">💡</span>
+    <p><strong>어떤 버전을 선택해야 할까요?</strong><br>
+    두 버전 모두 같은 핵심 주제를 다룹니다. 중학생 버전은 개념 이해에, 고등학생 버전은 학술적 논증과 원문 분석에 초점을 맞춥니다. 중학생 버전을 먼저 읽고 고등학생 버전으로 심화하는 것도 좋은 방법입니다.</p>
+  </div>
+</main>
+
+<footer>
+  <p>이브 (성경·신학·진화생물학·고대근동 전문) | 진화적 창조 교육자료</p>
+  <p style="margin-top:6px;"><a href="https://biologos.org" target="_blank">BioLogos.org</a></p>
+</footer>
+
+</body>
+</html>
