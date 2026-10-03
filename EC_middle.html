@@ -49,7 +49,8 @@
     --shadow: 0 2px 12px rgba(0,0,0,0.08);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  body { font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; word-break: keep-all; overflow-wrap: break-word; }
+  th, td { overflow-wrap: anywhere; }
 
   /* HEADER */
   header { background: linear-gradient(135deg, var(--primary) 0%, #1b4332 100%); color: #fff; padding: 48px 24px 36px; text-align: center; }
@@ -147,10 +148,10 @@
 
   /* FLIP CARD */
   .flip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin: 12px 0; }
-  .flip-card { height: 190px; cursor: pointer; perspective: 1000px; }
-  .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform .5s; transform-style: preserve-3d; }
+  .flip-card { min-height: 190px; display: grid; cursor: pointer; perspective: 1000px; }
+  .flip-card-inner { position: relative; width: 100%; display: grid; transition: transform .5s; transform-style: preserve-3d; }
   .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
-  .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: var(--radius); display: flex; flex-direction: column; justify-content: center; padding: 18px 16px; font-size: .88rem; overflow: hidden; }
+  .flip-front, .flip-back { grid-area: 1/1; min-width: 0; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: var(--radius); display: flex; flex-direction: column; justify-content: center; padding: 18px 16px; font-size: .88rem; overflow: hidden; }
   .flip-front { background: var(--primary); color: #fff; font-weight: 700; align-items: center; text-align: center; }
   .flip-front::after { content: '↩ 탭해서 확인'; font-size: .72rem; opacity: .7; font-weight: 400; margin-top: 8px; }
   .flip-back { background: var(--primary-xlight); color: var(--text); transform: rotateY(180deg); border: 2px solid var(--primary-light); align-items: flex-start; text-align: left; line-height: 1.6; }
@@ -189,7 +190,7 @@
     .tab-btn { font-size: .8rem; padding: 7px 12px; }
     .person-card { padding: 14px; }
     .gloss-item { padding: 12px; }
-    .flip-card { height: 160px; }
+    .flip-card { min-height: 160px; }
   }
   .mt { margin-top: 16px; }
   strong.tag { display: inline-block; background: var(--primary-xlight); color: var(--primary); border-radius: 4px; padding: 1px 7px; font-size: .8rem; margin-right: 4px; }
@@ -383,8 +384,8 @@
 
   <div id="s1-church" class="tab-panel">
     <div class="card">
-      <h3>⛪ 문자주의는 사실 '현대적' 해석</h3>
-      <p>고대 교부들과 중세 신학자들은 창세기를 문자적으로 읽지 않은 경우가 많았습니다.</p>
+      <h3>⛪ 교부들은 창세기를 어떻게 읽었을까?</h3>
+      <p>고대 교부들과 중세 신학자들의 창세기 해석은 다양했습니다.</p>
     </div>
     <div class="accordion">
       <details>
@@ -411,7 +412,7 @@
       </details>
     </div>
     <div class="highlight hl-green mt">
-      <strong>결론:</strong> 창세기를 과학적으로 문자 그대로 읽는 '젊은 지구 창조론'은 고대 전통이 아니라 <strong>19–20세기에 생겨난 매우 현대적인 해석</strong>입니다.
+      <strong>결론:</strong> 교부들은 대체로 지구가 젊다고 믿었지만(아우구스티누스 포함), '날'의 의미는 다양하게 읽었습니다(오리게네스·아우구스티누스는 비문자적으로). 창세기를 과학 이론으로 체계화해 지질학과 경쟁시키는 '창조과학'(홍수 지질학)은 <strong>20세기에 생겨난 현대적 운동</strong>입니다.
     </div>
   </div>
 
@@ -447,7 +448,7 @@
       <div class="flip-card" onclick="this.classList.toggle('flipped')">
         <div class="flip-card-inner">
           <div class="flip-front">태양은 신인가?</div>
-          <div class="flip-back">창세기 1:16에서 태양과 달을 단순히 "큰 빛"이라 부름 — 이름조차 없음. <strong>태양 숭배</strong>를 단호히 거부하는 신학적 선언.</div>
+          <div class="flip-back">창세기 1:16에서 태양과 달을 단순히 "두 큰 광명체"라 부름 — 이름조차 없음. <strong>태양 숭배</strong>를 단호히 거부하는 신학적 선언.</div>
         </div>
       </div>
       <div class="flip-card" onclick="this.classList.toggle('flipped')">
@@ -483,7 +484,7 @@
         <div class="acc-body">
           성경 족보를 더해 계산. 17세기 주교 어셔(Ussher)가 계산한 기원전 4004년을 근거로 삼음.
           <div class="highlight hl-orange" style="margin-top:10px;">
-            <strong>문제:</strong> 방사성 탄소연대측정, 우라늄-납 측정, 별빛 여행 시간, 지층 형성 속도 등 <strong>독립적인 여러 과학 방법들</strong>이 일관되게 지구 나이를 약 46억 년으로 가리킵니다.
+            <strong>문제:</strong> 우라늄-납 연대 측정(운석과 가장 오래된 광물)이 지구 나이 약 45억 4천만 년(흔히 '약 46억 년'이라고도 말함)을 가리키고, 별빛이 오는 데 걸린 시간·지층·빙하 코어 같은 <strong>독립 증거들</strong>도 '수천 년'보다 훨씬 오래되었음을 일관되게 보여 줍니다. (방사성 탄소 연대 측정은 약 5만 년까지만 잴 수 있어 지구 나이 측정에는 쓰이지 않습니다.)
           </div>
         </div>
       </details>
@@ -505,7 +506,7 @@
         <div class="acc-body">
           "마이크로 진화(종 내 변화)는 있어도 마크로 진화(종간 변화)는 없다"고 주장.
           <div class="highlight hl-orange" style="margin-top:10px;">
-            <strong>문제:</strong> 마이크로/마크로 구분은 과학에 없는 인위적 구분입니다. 화석 기록, DNA 비교, 직접 관찰(예: 항생제 내성균)은 종분화가 실제로 일어남을 보여줍니다.
+            <strong>문제:</strong> 과학에서도 소진화(마이크로 진화, 종 안의 변화)·대진화(마크로 진화, 종 수준 이상의 변화)라는 말을 쓰지만, 대진화는 같은 과정이 오랜 시간 쌓인 결과로 봅니다. 창조과학이 말하는 '넘을 수 없는 경계'는 발견되지 않았습니다. 항생제 내성균은 지금도 일어나는 적응(소진화)의 예이고, 화석 기록과 DNA 비교는 종 수준 이상의 변화가 실제로 일어났음을 보여 줍니다.
           </div>
         </div>
       </details>
@@ -542,7 +543,7 @@
       <tr><th>분야</th><th>증거</th><th>지구 나이 지지</th></tr>
       <tr><td>방사성 동위원소</td><td>우라늄→납, 포타슘→아르곤 등 여러 방법이 일치</td><td class="ok">✔ 수십억 년</td></tr>
       <tr><td>별빛과 우주론</td><td>수십억 광년 거리의 별빛이 지구에 도달하려면</td><td class="ok">✔ 138억 년 우주</td></tr>
-      <tr><td>지층 퇴적</td><td>산호초, 빙하코어 연간 층위 수십만 개</td><td class="ok">✔ 수억 년</td></tr>
+      <tr><td>빙하 연층</td><td>그린란드 빙하 코어 연층 약 6만 개</td><td class="ok">✔ 수만 년 이상</td></tr>
       <tr><td>DNA 유전학</td><td>인간-침팬지 98.7% 게놈 일치, 내재성 레트로바이러스</td><td class="ok">✔ 공통 조상</td></tr>
       <tr><td>화석 기록</td><td>단순→복잡 순서, 전이 화석(시조새, 틱타알릭 등)</td><td class="ok">✔ 점진적 진화</td></tr>
       <tr><td>생물지리학</td><td>대륙별 고유종 분포가 진화 이동 경로와 일치</td><td class="ok">✔ 진화론 지지</td></tr>
@@ -564,7 +565,7 @@
       <tr>
         <td><strong>동료 심사</strong><br><small>전문가 검토 학술지 출판</small></td>
         <td class="ok">✔ 필수</td>
-        <td class="no">✘ 창조과학 저널은 동료 심사 없음</td>
+        <td class="no">✘ 주류 학술지 심사를 통과한 연구가 거의 없음(자체 저널은 같은 입장의 심사자만 참여)</td>
       </tr>
       <tr>
         <td><strong>예측력</strong><br><small>미래 발견을 예측할 수 있어야 함</small></td>
@@ -827,14 +828,6 @@
         </div>
       </details>
     </div>
-    <div class="accordion">
-      <details>
-        <summary>틸로이크 칼리 — 생물학 교수 (한국계 미국인 기독교인)</summary>
-        <div class="acc-body">
-          BioLogos 협력 학자. 한국 기독교인들에게 진화적 창조를 소개하는 데 기여.
-        </div>
-      </details>
-    </div>
     <div class="highlight hl-blue mt">
       <strong>BioLogos:</strong> 프랜시스 콜린스가 세운 단체. "생물학(Biology)"과 "하나님의 말씀(Logos)"을 합친 이름. 과학과 신앙의 통합을 연구하는 기독교인 과학자들의 커뮤니티. (<a href="https://biologos.org" target="_blank">biologos.org</a>)
     </div>
@@ -1005,7 +998,7 @@
   </div>
 
   <div class="highlight hl-gold mt">
-    <strong>추가 반론:</strong> "교회가 2,000년 동안 문자적으로 해석했는데, 왜 이제 와서 바꾸나?" → <strong>반박:</strong> 앞서 보았듯 교부 아우구스티누스, 오리게네스는 이미 비문자적 해석을 했습니다. 또한 지동설도 교회가 처음엔 거부했지만 지금은 모두 수용합니다. 진리 앞에서 해석을 발전시키는 것은 정직한 신앙의 태도입니다.
+    <strong>추가 반론:</strong> "교회가 2,000년 동안 문자적으로 해석했는데, 왜 이제 와서 바꾸나?" → <strong>반박:</strong> 앞서 보았듯 아우구스티누스·오리게네스 같은 교부들도 창조의 '날'은 비문자적으로 읽었습니다. 또한 지동설도 교회가 처음엔 거부했지만 지금은 모두 수용합니다. 진리 앞에서 해석을 발전시키는 것은 정직한 신앙의 태도입니다.
   </div>
 </section>
 
@@ -1541,7 +1534,7 @@
     <div class="q-text"><span class="q-num">2</span> 창조과학이 '과학'이 아닌 가장 중요한 이유는?</div>
     <div class="quiz-opts">
       <button class="quiz-opt" onclick="checkQ(2,'a','b')">기독교인들만 연구하기 때문</button>
-      <button class="quiz-opt" onclick="checkQ(2,'b','b')">반증 불가능하고 동료 심사 없이 운영되기 때문</button>
+      <button class="quiz-opt" onclick="checkQ(2,'b','b')">주류 과학계의 검증(동료 심사)을 거의 거치지 않고, 결론이 미리 정해져 있기 때문</button>
       <button class="quiz-opt" onclick="checkQ(2,'c','b')">지구 나이를 짧게 보기 때문</button>
       <button class="quiz-opt" onclick="checkQ(2,'d','b')">성경을 근거로 삼기 때문</button>
     </div>
@@ -1604,12 +1597,12 @@
   </div>
 
   <div class="quiz-card" id="q8">
-    <div class="q-text"><span class="q-num">8</span> 진화적 창조에서 "죄로 인해 죽음이 세상에 들어왔다"(롬 5:12)를 어떻게 해석하는가?</div>
+    <div class="q-text"><span class="q-num">8</span> 진화적 창조에서 "죄로 말미암아 사망이 들어왔나니"(롬 5:12)를 어떻게 해석하는가?</div>
     <div class="quiz-opts">
       <button class="quiz-opt" onclick="checkQ(8,'a','b')">생물학적 죽음이 아담 이후 처음 시작되었다</button>
       <button class="quiz-opt" onclick="checkQ(8,'b','b')">영적 죽음 — 하나님과의 관계 단절을 의미한다</button>
       <button class="quiz-opt" onclick="checkQ(8,'c','b')">죽음은 인간이 만든 개념에 불과하다</button>
-      <button class="quiz-opt" onclick="checkQ(8,'d','b')">동물의 죽음은 괜찮지만 인간의 죽음은 타락의 결과이다</button>
+      <button class="quiz-opt" onclick="checkQ(8,'d','b')">죽음은 타락 이후 동물에게만 생겼다</button>
     </div>
     <div class="quiz-feedback" id="q8-fb"></div>
   </div>
@@ -1668,13 +1661,13 @@ function switchTab(section, panelId) {
 
 const feedbacks = {
   1: { b: '✅ 정답! 창세기 1장은 "어떻게"가 아닌 "누가·왜"를 신학적으로 선포합니다.', a: '❌ 창세기는 과학 교과서가 아닙니다. 신학적 목적으로 쓰였습니다.', c: '❌ 가깝지만, 더 정확히는 신학적 선포가 목적입니다.', d: '❌ 창세기는 바벨론 이야기와 유사하지만 전혀 다른 신학적 메시지를 담습니다.' },
-  2: { b: '✅ 정답! 반증 불가능성과 동료 심사 부재가 핵심 문제입니다.', a: '❌ 기독교인이 연구하는 것 자체가 문제는 아닙니다.', c: '❌ 지구 나이 추정치 자체가 문제가 아니라 방법론의 문제입니다.', d: '❌ 성경을 근거로 삼는 것보다 검증 방법이 없다는 게 핵심 문제입니다.' },
+  2: { b: '✅ 정답! 결론을 미리 정해 두고, 주류 과학계의 검증(동료 심사)을 거의 거치지 않는다는 점이 핵심 문제입니다.', a: '❌ 기독교인이 연구하는 것 자체가 문제는 아닙니다.', c: '❌ 지구 나이 추정치 자체가 문제가 아니라 방법론의 문제입니다.', d: '❌ 성경을 근거로 삼는 것 자체보다, 결론이 미리 정해져 있고 주류 과학계의 검증을 거의 거치지 않는다는 게 핵심 문제입니다.' },
   3: { d: '✅ 정답! 인간과 침팬지는 공통 조상에서 약 700만 년 전 갈라졌습니다.', a: '❌ 원숭이→인간이 아닙니다. 공통 조상에서 갈라진 것입니다.', b: '❌ 돌연변이는 무작위지만 자연선택은 비무작위적입니다.', c: '❌ 진화론은 수만 개의 연구로 검증된 과학 이론입니다.' },
   4: { c: '✅ 정답! 하나님이 진화를 방법으로 사용하셔서 생명을 창조하셨다는 입장입니다.', a: '❌ 진화적 창조는 성경의 신학적 권위를 인정합니다.', b: '❌ 이신론이 아닙니다. 하나님은 과정 속에 내재하시는 분입니다.', d: '❌ 진화적 창조는 인간도 진화 과정을 통해 등장했음을 수용합니다.' },
-  5: { b: '✅ 정답! 아우구스티누스는 창세기의 날을 상징적으로 해석한 비문자적 해석의 선구자입니다.', a: '❌ 반대입니다.', c: '❌ 아우구스티누스는 그런 주장을 하지 않았습니다.', d: '❌ 아우구스티누스는 성경과 이성/자연의 통합을 추구했습니다.' },
+  5: { b: '✅ 정답! 아우구스티누스는 창세기의 날을 상징적으로 해석한 비문자적 해석의 대표적 인물입니다.', a: '❌ 반대입니다.', c: '❌ 아우구스티누스는 그런 주장을 하지 않았습니다.', d: '❌ 아우구스티누스는 성경과 이성/자연의 통합을 추구했습니다.' },
   6: { c: '✅ 정답! 공통 조상 없이는 정확히 같은 위치에 같은 바이러스 흔적이 있을 수 없습니다.', a: '❌ 바이러스 변이 자체가 증거는 아닙니다.', b: '❌ 위치의 정확한 일치가 핵심입니다.', d: '❌ 위치의 일치가 핵심 증거입니다.' },
   7: { c: '✅ 정답! Imago Dei는 외모가 아니라 하나님과 관계 맺고, 도덕적 책임을 지며, 세상을 돌보는 능력입니다.', a: '❌ 형상은 외모적 닮음이 아닙니다.', b: '❌ DNA 복잡성이 형상을 정의하지 않습니다.', d: '❌ 도구 사용은 일부 동물도 하며, 형상의 핵심이 아닙니다.' },
-  8: { b: '✅ 정답! 에베소서 2:1처럼 "죽음"은 영적 죽음(하나님과의 관계 단절)을 의미합니다.', a: '❌ 화석 기록은 인간 이전 수억 년의 생물학적 죽음을 보여줍니다.', c: '❌ 죽음은 성경적으로도 실재하는 현실입니다.', d: '❌ 성경의 "죽음"은 영적 개념으로 인간-동물 구분이 아닙니다.' },
+  8: { b: '✅ 정답! 에베소서 2:1처럼 "죽음"은 영적 죽음(하나님과의 관계 단절)을 의미합니다.', a: '❌ 화석 기록은 인간 이전 수억 년의 생물학적 죽음을 보여줍니다.', c: '❌ 죽음은 성경적으로도 실재하는 현실입니다.', d: '❌ 화석 기록은 인간이 나타나기 훨씬 전부터 동물의 죽음이 있었음을 보여줍니다. 로마서 5:12가 말하는 죽음도 동물이 아니라 사람에게 이른 죽음입니다.' },
   9: { c: '✅ 정답! 알리스터 맥그래스는 분자생물학과 신학 모두에서 박사학위를 받은 옥스퍼드 교수입니다.', a: '❌ 프랜시스 콜린스는 인간 게놈 프로젝트를 총괄한 유전학자이자 BioLogos 창립자입니다.', b: '❌ 존 월튼은 구약학자이자 고대근동 전문가입니다.', d: '❌ N.T. 라이트는 신약학자이자 성공회 주교입니다.' },
   10: { b: '✅ 정답! 수용 원리는 하나님이 당시 청중이 이해할 수 있는 언어로 계시를 주셨다는 전통적 해석 원칙입니다.', a: '❌ 세상 가치관에 타협하는 것이 아닙니다. 해석학적 원칙입니다.', c: '❌ 그것은 고조화주의(Concordism)에 가깝습니다.', d: '❌ 수용 원리는 계시 방식에 대한 개념입니다.' },
 };
