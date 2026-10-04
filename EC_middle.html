@@ -43,7 +43,7 @@
     --bg: #f9fafb;
     --card: #ffffff;
     --text: #1a1a2e;
-    --muted: #6c757d;
+    --muted: #5c636a;
     --border: #dee2e6;
     --radius: 12px;
     --shadow: 0 2px 12px rgba(0,0,0,0.08);
@@ -211,11 +211,15 @@
   .gloss-item .gloss-term { font-weight: 800; font-size: .95rem; color: var(--primary); margin-bottom: 4px; }
   .gloss-item .gloss-en { font-size: .78rem; color: var(--muted); margin-bottom: 8px; font-style: italic; }
   .gloss-item .gloss-def { font-size: .88rem; line-height: 1.6; }
+  /* 상단 바: 알약 버튼은 한 줄로 유지하고, 경로 문구는 좁은 화면에서 숨긴다 */
+  .top-bar a { white-space: nowrap; flex-shrink: 0; }
+  .top-bar > span:last-child { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  @media (max-width: 480px) { .top-bar > span:nth-last-child(-n+2) { display: none; } }
 </style>
 </head>
 <body>
 
-<div style="background:#1b4332;padding:10px 20px;display:flex;align-items:center;gap:10px;">
+<div class="top-bar" style="background:#1b4332;padding:10px 20px;display:flex;align-items:center;gap:10px;">
   <a href="https://faithreason.kr/Faith_Reason/" style="color:#fff;text-decoration:none;font-size:.83rem;font-weight:600;display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:4px 12px;">← 전체 시리즈</a>
   <span style="color:rgba(255,255,255,.35);font-size:.8rem;">|</span>
   <a href="index.html" style="color:#fff;text-decoration:none;font-size:.83rem;font-weight:600;display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:16px;padding:4px 12px;">🏠 홈으로</a>
@@ -828,8 +832,16 @@
         </div>
       </details>
     </div>
+    <div class="accordion">
+      <details>
+        <summary>우종학 — 서울대 물리천문학부 교수(천문학자), '과학과 신학의 대화' 대표</summary>
+        <div class="acc-body">
+          거대 블랙홀과 은하를 연구하는 천문학자. 과학과 신앙의 관계를 연구하고 가르치는 단체 '과학과 신학의 대화'(과신대)를 세움. 저서 <em>『무신론 기자, 크리스천 과학자에게 따지다』</em>, <em>『과학시대의 도전과 기독교의 응답』</em> 등에서 하나님이 진화를 창조의 방법으로 쓰셨을 수 있다는 관점을 한국 교회에 소개. 본인은 '유신진화론자'라는 호칭 대신 '창조론자'라고 밝힘.
+        </div>
+      </details>
+    </div>
     <div class="highlight hl-blue mt">
-      <strong>BioLogos:</strong> 프랜시스 콜린스가 세운 단체. "생물학(Biology)"과 "하나님의 말씀(Logos)"을 합친 이름. 과학과 신앙의 통합을 연구하는 기독교인 과학자들의 커뮤니티. (<a href="https://biologos.org" target="_blank">biologos.org</a>)
+      <strong>BioLogos:</strong> 프랜시스 콜린스가 세운 단체. "생물학(Biology)"과 "하나님의 말씀(Logos)"을 합친 이름. 과학과 신앙의 통합을 연구하는 기독교인 과학자들의 커뮤니티. (<a href="https://biologos.org" target="_blank" rel="noopener">biologos.org</a>)
     </div>
   </div>
 
@@ -1640,7 +1652,7 @@
 
 <footer>
   <p>Made by Isaac with Claude |진화적 창조 교육자료 — 청소년 버전</p>
-  <p style="margin-top:6px;"><a href="index.html">← 버전 선택으로</a> &nbsp;|&nbsp; 참고: <a href="https://biologos.org" target="_blank">BioLogos.org</a> &nbsp;|&nbsp; <a href="https://faithreason.kr/Faith_Reason/privacy.html">개인정보처리방침</a></p>
+  <p style="margin-top:6px;"><a href="index.html">← 버전 선택으로</a> &nbsp;|&nbsp; 참고: <a href="https://biologos.org" target="_blank" rel="noopener">BioLogos.org</a> &nbsp;|&nbsp; <a href="https://faithreason.kr/Faith_Reason/privacy.html">개인정보처리방침</a></p>
 </footer>
 
 <script>
@@ -1731,12 +1743,21 @@ window.addEventListener('scroll', () => {
     const h = a.getAttribute('href');
     if (h && h.charAt(0) === '#') map[h.slice(1)] = a;
   });
+  // 현재 섹션의 링크가 nav 화면 밖에 있으면 nav만 가로로 움직여 보이게 한다(페이지 세로 스크롤은 건드리지 않음)
+  function showInNav(a) {
+    let box = a.parentElement;
+    while (box && box !== document.body && !(/(auto|scroll)/.test(getComputedStyle(box).overflowX) && box.scrollWidth > box.clientWidth + 1)) box = box.parentElement;
+    if (!box || box === document.body) return;
+    const r = a.getBoundingClientRect(), b = box.getBoundingClientRect();
+    if (r.left < b.left + 8 || r.right > b.right - 8) box.scrollLeft += (r.left - b.left) - (b.width - r.width) / 2;
+  }
   if (!('IntersectionObserver' in window)) return;
   const obs = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting && map[e.target.id]) {
         navLinks.forEach(function (a) { a.classList.remove('active'); });
         map[e.target.id].classList.add('active');
+        showInNav(map[e.target.id]);
       }
     });
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });

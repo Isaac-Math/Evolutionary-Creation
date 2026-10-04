@@ -207,6 +207,10 @@ footer a { color:rgba(255,255,255,.9); }
   .section-title { font-size:1.35rem; }
   .tab-btn { padding:12px 12px; font-size:.82rem; }
 }
+/* 상단 바: 알약 버튼은 한 줄로 유지하고, 경로 문구는 좁은 화면에서 숨긴다 */
+.top-bar a { white-space: nowrap; flex-shrink: 0; }
+.top-bar > span:last-child { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 480px) { .top-bar > span:nth-last-child(-n+2) { display: none; } }
 </style>
 </head>
 <body>

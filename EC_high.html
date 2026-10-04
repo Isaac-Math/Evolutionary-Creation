@@ -32,7 +32,7 @@
   --primary:#2d6a4f; --primary-light:#52b788; --primary-xlight:#d8f3dc;
   --accent:#e76f51; --sky:#4895ef; --sky-light:#cce5ff;
   --gold:#f4a261; --gold-light:#fde9d4; --purple:#7b2d8b; --purple-light:#e8d5ed;
-  --bg:#f9fafb; --card:#ffffff; --text:#1a1a2e; --muted:#6c757d;
+  --bg:#f9fafb; --card:#ffffff; --text:#1a1a2e; --muted:#5c636a;
   --border:#dee2e6; --radius:12px; --shadow:0 2px 12px rgba(0,0,0,0.08);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -179,11 +179,17 @@ li{margin-bottom:4px;}
 
 footer{background:var(--primary);color:rgba(255,255,255,.75);text-align:center;padding:20px;font-size:.82rem;}
 footer a{color:rgba(255,255,255,.9);}
+/* 상단 바: 알약 버튼은 한 줄로 유지하고, 경로 문구는 좁은 화면에서 숨긴다 */
+.top-bar a{white-space:nowrap;flex-shrink:0;}
+.top-bar>span:last-child{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+@media(max-width:480px){.top-bar>span:nth-last-child(-n+2){display:none;}}
+/* nav로 이동했을 때 섹션 제목이 고정 nav 밑에 가리지 않게 */
+section[id]{scroll-margin-top:60px;}
 </style>
 </head>
 <body>
 
-<div style="background:#1b4332;padding:10px 20px;display:flex;align-items:center;gap:10px;">
+<div class="top-bar" style="background:#1b4332;padding:10px 20px;display:flex;align-items:center;gap:10px;">
   <a href="https://faithreason.kr/Faith_Reason/" style="color:#fff;text-decoration:none;font-size:.83rem;font-weight:600;display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:4px 12px;">← 전체 시리즈</a>
   <span style="color:rgba(255,255,255,.35);font-size:.8rem;">|</span>
   <a href="index.html" style="color:#fff;text-decoration:none;font-size:.83rem;font-weight:600;display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:16px;padding:4px 12px;">🏠 홈으로</a>
@@ -221,7 +227,7 @@ footer a{color:rgba(255,255,255,.9);}
 
 <!-- ══════════════ S0 소개 ══════════════ -->
 <section id="s0">
-  <div class="section-title">🎯 이 자료의 목표</div>
+  <h2 class="section-title">🎯 이 자료의 목표</h2>
   <div class="section-subtitle">학술적 방법론으로 신앙과 과학의 통합을 탐구합니다</div>
 
   <div class="card green-card">
@@ -262,7 +268,7 @@ footer a{color:rgba(255,255,255,.9);}
 
 <!-- ══════════════ S1 창세기 본문 분석 ══════════════ -->
 <section id="s1">
-  <div class="section-title">📜 창세기 본문 분석</div>
+  <h2 class="section-title">📜 창세기 본문 분석</h2>
   <div class="section-subtitle">히브리어 원문과 문서 가설</div>
 
   <div class="tab-bar">
@@ -392,7 +398,7 @@ footer a{color:rgba(255,255,255,.9);}
 
 <!-- ══════════════ S2 해석학 이론 ══════════════ -->
 <section id="s2">
-  <div class="section-title">🔭 해석학 이론</div>
+  <h2 class="section-title">🔭 해석학 이론</h2>
   <div class="section-subtitle">본문을 어떻게 읽을 것인가? — 해석학 방법론의 비교</div>
 
   <p>해석학(Hermeneutics)은 본문 해석의 원리와 방법을 연구하는 학문입니다. 창세기를 어떻게 읽느냐는 어떤 해석학 방법론을 적용하느냐에 달려 있습니다.</p>
@@ -449,7 +455,7 @@ footer a{color:rgba(255,255,255,.9);}
 
 <!-- ══════════════ S3 창조과학 비판 ══════════════ -->
 <section id="s3">
-  <div class="section-title">⚗️ 창조과학 비판 — 학술적 분석</div>
+  <h2 class="section-title">⚗️ 창조과학 비판 — 학술적 분석</h2>
   <div class="section-subtitle">과학적·철학적·신학적 문제점</div>
 
   <div class="tab-bar">
@@ -524,7 +530,7 @@ footer a{color:rgba(255,255,255,.9);}
 
 <!-- ══════════════ S4 진화론의 증거 ══════════════ -->
 <section id="s4">
-  <div class="section-title">🧬 진화론의 증거 — 인구유전학까지</div>
+  <h2 class="section-title">🧬 진화론의 증거 — 인구유전학까지</h2>
   <div class="section-subtitle">분자 생물학과 인구유전학이 말하는 인류의 기원</div>
 
   <div class="tab-bar">
@@ -613,7 +619,7 @@ footer a{color:rgba(255,255,255,.9);}
 
 <!-- ══════════════ S5 고대근동 문맥 ══════════════ -->
 <section id="s5">
-  <div class="section-title">🏛️ 고대근동 문맥</div>
+  <h2 class="section-title">🏛️ 고대근동 문맥</h2>
   <div class="section-subtitle">창세기를 이해하기 위한 역사·문화적 배경</div>
 
   <div class="card">
@@ -663,7 +669,7 @@ footer a{color:rgba(255,255,255,.9);}
 
 <!-- ══════════════ S6 아담과 하와 심화 ══════════════ -->
 <section id="s6">
-  <div class="section-title">👥 아담과 하와 — 심화 탐구</div>
+  <h2 class="section-title">👥 아담과 하와 — 심화 탐구</h2>
   <div class="section-subtitle">역사성, 인구유전학, 그리고 다양한 해석 모델</div>
 
   <div class="accordion">
@@ -721,7 +727,7 @@ footer a{color:rgba(255,255,255,.9);}
 
 <!-- ══════════════ S7 Imago Dei 심화 ══════════════ -->
 <section id="s7">
-  <div class="section-title">✨ Imago Dei — 심화 탐구</div>
+  <h2 class="section-title">✨ Imago Dei — 심화 탐구</h2>
   <div class="section-subtitle">하나님의 형상은 무엇인가? — 세 가지 전통적 입장과 ANE 왕 이데올로기</div>
 
   <div class="card-grid">
@@ -758,7 +764,7 @@ footer a{color:rgba(255,255,255,.9);}
 
 <!-- ══════════════ S8 죽음과 고통 심화 ══════════════ -->
 <section id="s8">
-  <div class="section-title">💀 죽음과 고통 — 고급 신정론</div>
+  <h2 class="section-title">💀 죽음과 고통 — 고급 신정론</h2>
   <div class="section-subtitle">케노시스, 열린신론, 과정신학, 종말론적 응답</div>
 
   <div class="tab-bar">
@@ -840,7 +846,7 @@ footer a{color:rgba(255,255,255,.9);}
 
 <!-- ══════════════ S9 과학-종교 관계 ══════════════ -->
 <section id="s9">
-  <div class="section-title">⚖️ 과학-종교 관계</div>
+  <h2 class="section-title">⚖️ 과학-종교 관계</h2>
   <div class="section-subtitle">드레이퍼-화이트 테제 비판과 아이언 바버의 4모델</div>
 
   <div class="card accent-card">
@@ -889,7 +895,7 @@ footer a{color:rgba(255,255,255,.9);}
 
 <!-- ══════════════ S10 주요 학자 ══════════════ -->
 <section id="s10">
-  <div class="section-title">👤 주요 학자</div>
+  <h2 class="section-title">👤 주요 학자</h2>
   <div class="section-subtitle">진화적 창조 분야의 핵심 인물들</div>
 
   <div class="person-grid">
@@ -938,7 +944,7 @@ footer a{color:rgba(255,255,255,.9);}
 
 <!-- ══════════════ S11 용어 사전 ══════════════ -->
 <section id="s11">
-  <div class="section-title">📖 심화 용어 사전</div>
+  <h2 class="section-title">📖 심화 용어 사전</h2>
   <div class="section-subtitle">학문적 논의에 필요한 핵심 개념들</div>
 
   <div class="gloss-grid">
@@ -1011,7 +1017,7 @@ footer a{color:rgba(255,255,255,.9);}
 
 <!-- ══════════════ S12 토론 논제 ══════════════ -->
 <section id="s12">
-  <div class="section-title">💬 토론 논제</div>
+  <h2 class="section-title">💬 토론 논제</h2>
   <div class="section-subtitle">깊이 생각하고 논증해보세요</div>
 
   <div class="discuss-card">
@@ -1053,7 +1059,7 @@ footer a{color:rgba(255,255,255,.9);}
 
 <!-- ══════════════ S13 레퍼런스 ══════════════ -->
 <section id="s13">
-  <div class="section-title">📎 학술 레퍼런스</div>
+  <h2 class="section-title">📎 학술 레퍼런스</h2>
   <div class="section-subtitle">이 자료에서 참고한 주요 문헌</div>
 
   <div class="ref-group">
@@ -1116,7 +1122,7 @@ footer a{color:rgba(255,255,255,.9);}
 
 <!-- ══════════════ 퀴즈 ══════════════ -->
 <section id="quiz">
-  <div class="section-title">📝 심화 퀴즈 — 12문제</div>
+  <h2 class="section-title">📝 심화 퀴즈 — 12문제</h2>
   <div class="section-subtitle">학술적 이해를 확인합니다</div>
 
   <div class="quiz-wrap">
@@ -1277,7 +1283,7 @@ footer a{color:rgba(255,255,255,.9);}
 
 <footer>
   <p>Made by Isaac with Claude |진화적 창조 교육자료 — 대학생 버전</p>
-  <p style="margin-top:6px;"><a href="index.html">← 버전 선택으로</a> &nbsp;|&nbsp; 참고: <a href="https://biologos.org" target="_blank">BioLogos.org</a> &nbsp;|&nbsp; <a href="https://faithreason.kr/Faith_Reason/privacy.html">개인정보처리방침</a></p>
+  <p style="margin-top:6px;"><a href="index.html">← 버전 선택으로</a> &nbsp;|&nbsp; 참고: <a href="https://biologos.org" target="_blank" rel="noopener">BioLogos.org</a> &nbsp;|&nbsp; <a href="https://faithreason.kr/Faith_Reason/privacy.html">개인정보처리방침</a></p>
 </footer>
 
 <script>
@@ -1364,12 +1370,21 @@ function showScore() {
     const h = a.getAttribute('href');
     if (h && h.charAt(0) === '#') map[h.slice(1)] = a;
   });
+  // 현재 섹션의 링크가 nav 화면 밖에 있으면 nav만 가로로 움직여 보이게 한다(페이지 세로 스크롤은 건드리지 않음)
+  function showInNav(a) {
+    let box = a.parentElement;
+    while (box && box !== document.body && !(/(auto|scroll)/.test(getComputedStyle(box).overflowX) && box.scrollWidth > box.clientWidth + 1)) box = box.parentElement;
+    if (!box || box === document.body) return;
+    const r = a.getBoundingClientRect(), b = box.getBoundingClientRect();
+    if (r.left < b.left + 8 || r.right > b.right - 8) box.scrollLeft += (r.left - b.left) - (b.width - r.width) / 2;
+  }
   if (!('IntersectionObserver' in window)) return;
   const obs = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting && map[e.target.id]) {
         navLinks.forEach(function (a) { a.classList.remove('active'); });
         map[e.target.id].classList.add('active');
+        showInNav(map[e.target.id]);
       }
     });
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
